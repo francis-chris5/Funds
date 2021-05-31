@@ -86,14 +86,8 @@ public class Account {
     public void findRunningBalance(){
         double runningTotal = 0.0;
         for(int i = 0; i < entries.size(); i++){
-            if(i == 0){
-                entries.get(i).setBalance(isNormalDebit() ? entries.get(i).getDebit() : entries.get(i).getCredit());
-                runningTotal += isNormalDebit() ? entries.get(i).getDebit() : entries.get(i).getCredit();
-            }
-            else{
-                entries.get(i).setBalance(isNormalDebit() ? entries.get(i).getDebit() + runningTotal : entries.get(i).getCredit() + runningTotal);
-                runningTotal += isNormalDebit() ? entries.get(i).getDebit() : entries.get(i).getCredit();
-            }
+            runningTotal += isNormalDebit() ? entries.get(i).getDebit() - entries.get(i).getCredit() : entries.get(i).getCredit() - entries.get(i).getDebit();
+            entries.get(i).setBalance(runningTotal);
         }
     }//end findRunningBalance()
 

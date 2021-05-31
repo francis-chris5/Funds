@@ -12,6 +12,8 @@ A small accounting application, more for tracking a project (go with Routines) t
 
 
 *********************************************
+Trying to pick a local relational database for this:
+
 
 sqlite-jdbc 3.34.0 for relational database
 get from https://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.34.0/sqlite-jdbc-3.34.0.jar 
