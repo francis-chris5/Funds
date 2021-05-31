@@ -1,0 +1,32 @@
+
+*{
+    -fx-font-family: "Times New Roman";
+}
+
+
+.table-view .column-header{
+    -fx-background-color: #618257;
+    -fx-border-color: #434343;
+}
+
+.table-view .column-header-background .label{
+    -fx-text-fill: #c1d9ba;
+}
+
+.table-view .table-cell{
+    -fx-border-color: #737373;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: #ddfad4;
+}
+
+.table-row-cell:even{
+    -fx-background-color: #9bc78d;
+}
+
+.table-row-cell:selected{
+    -fx-background-color: #f0f05ddd;
+    -fx-text-background-color: #b5a264;
+}
+
