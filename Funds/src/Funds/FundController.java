@@ -27,15 +27,7 @@ public class FundController implements Initializable{
     
     public void showAccount(){
         Account cash = new Account("cash", true);
-        Account revenue = new Account("revenue", false);
-        Account expense = new Account("expense", true);
-        
-        cash.getEntries().add(new Entry(LocalDate.now(), 1, "paycheck", revenue, 222.22, 0.0));
-        cash.getEntries().add(new Entry(LocalDate.now(), 2, "buy cigarettes", expense,0.0,  25.43));
-        cash.getEntries().add(new Entry(LocalDate.now(), 3, "buy coffee", expense,0.0, 12.12));
-        cash.getEntries().add(new Entry(LocalDate.now(), 4, "buy dinner", expense,0.0, 7.48));
-        cash.getEntries().add(new Entry(LocalDate.now(), 5, "buy shoes", expense,0.0, 84.39));
-        cash.findRunningBalance();
+
         
         AccountDialog temp = new AccountDialog(cash);
     }

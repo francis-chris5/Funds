@@ -2,6 +2,8 @@
 package Funds;
 
 import java.time.LocalDate;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 
 public class Entry {
@@ -10,7 +12,7 @@ public class Entry {
     private int number;
     private String Description;
     private Account transfer;
-    private boolean reconcile;
+    private BooleanProperty reconcile;
     private double debit;
     private double credit;
     
@@ -21,11 +23,12 @@ public class Entry {
     public Entry() {
     }//end default constructor
 
-    public Entry(LocalDate date, int number, String Description, Account transfer, double debit, double credit) {
+    public Entry(LocalDate date, int number, String Description, Account transfer, boolean reconcile, double debit, double credit) {
         this.date = date;
         this.number = number;
         this.Description = Description;
         this.transfer = transfer;
+        this.reconcile = new SimpleBooleanProperty(reconcile);
         this.debit = debit;
         this.credit = credit;
     }//end full constructor
@@ -65,19 +68,24 @@ public class Entry {
         this.transfer = transfer;
     }
 
-    public boolean getReconcile() {
+    public boolean isReconcile() {
+        return reconcile.getValue();
+    }
+    
+    public BooleanProperty reconcileProperty(){
         return reconcile;
     }
+    
 
-    public void setR(boolean reconcile) {
-        this.reconcile = reconcile;
+    public void setReconcile(boolean reconcile) {
+        this.reconcile = new SimpleBooleanProperty(reconcile);
     }
 
     public double getDebit() {
         return debit;
     }
 
-    public void setDebit(double debit) {
+    public void setDebit(Double debit) {
         this.debit = debit;
     }
 
@@ -85,17 +93,10 @@ public class Entry {
         return credit;
     }
 
-    public void setCredit(double credit) {
+    public void setCredit(Double credit) {
         this.credit = credit;
     }
 
-    public boolean isReconcile() {
-        return reconcile;
-    }
-
-    public void setReconcile(boolean reconcile) {
-        this.reconcile = reconcile;
-    }
 
     public double getBalance() {
         return balance;
@@ -120,7 +121,7 @@ public class Entry {
     
     @Override
     public String toString() {
-        return "Posted on " + this.getDate().toString() + " was " + this.getDescription() + " for " + (normalDebit ? this.getDebit() : this.getCredit()) + (reconcile ?  "has been" : "has not been") + " reconciled";
+        return "Posted on " + this.getDate().toString() + " was " + this.getDescription() + " for " + (normalDebit ? this.getDebit() : this.getCredit()) + (isReconcile() ?  " has been" : " has not been") + " reconciled";
     }
 
     @Override
