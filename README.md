@@ -1,5 +1,5 @@
 # ![FundsIcon_small](https://user-images.githubusercontent.com/50467171/120141218-12445000-c1aa-11eb-853c-358a5b205e33.png) Funds
-An upcoming project I've been thinking about for a while, some accounting software, it will be a while before it's ready though... Uhh, really all I have in mind starting out here is a logo and idea of how I wanted the ledger dialogs to look... and obviously years of rattling around in the back of my mind features i want or don't want included...
+An upcoming project I've been thinking about for a while, some accounting software, it will be a while before it's ready though... Uhh, really all I have starting out the repository here on day one is a logo and idea of how I wanted the ledger dialogs to look... and obviously years of rattling around in the back of my mind features i want or don't want included...
 
 ![pic_for_github_ledger](https://user-images.githubusercontent.com/50467171/120141050-bbd71180-c1a9-11eb-8e6b-043e49299d98.jpg)
 
