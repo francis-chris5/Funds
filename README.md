@@ -1,8 +1,7 @@
 # ![FundsIcon_small](https://user-images.githubusercontent.com/50467171/120141218-12445000-c1aa-11eb-853c-358a5b205e33.png) Funds
 An upcoming project I've been thinking about for a while, some accounting software, it will be a while before it's ready though... Uhh, really all I have starting out the repository here on day one is a logo and idea of how I wanted the ledger dialogs to look... and obviously years of rattling around in the back of my mind features i want or don't want included...
 
-![pic_for_github_ledger](https://user-images.githubusercontent.com/50467171/120141050-bbd71180-c1a9-11eb-8e6b-043e49299d98.jpg)
-
+![pic_for_github_ledger](https://user-images.githubusercontent.com/50467171/120143007-55ec8900-c1ad-11eb-8a0b-45bd936ba69c.jpg)
 
 Much like the project management software I've been working on the past couple weeks verses what I have been using for a while, the accounting software I've been using doesn't exactly fit my needs: only a few features actually get used and it those in conjunction with a spreadsheet as it doesn't have a good place for general calculations, a couple other thoughts i've had for accounting stuff too. Oh yeah, it also seemed a great place to give the project management thing I just finished the prototype version 1 of a thorough test run (that's the file in the design folder)
 
