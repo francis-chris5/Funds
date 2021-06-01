@@ -1,7 +1,7 @@
 
 package Funds;
 
-import java.util.LinkedList;
+import java.text.NumberFormat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -12,6 +12,7 @@ public class Account {
     private String number;
     private String code;
     private String description;
+    private AccountType type;
     private boolean normalDebit;
     private ObservableList<Entry> entries = FXCollections.observableArrayList();
 
@@ -62,6 +63,14 @@ public class Account {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    public AccountType getType() {
+        return type;
+    }
+
+    public void setType(AccountType type) {
+        this.type = type;
+    }
 
     public boolean isNormalDebit() {
         return normalDebit;
@@ -90,6 +99,15 @@ public class Account {
             entries.get(i).setBalance(runningTotal);
         }
     }//end findRunningBalance()
+    
+    
+    public double findBalance(){
+        double balance = 0.0;
+        for(int i = 0; i < entries.size(); i++){
+            balance = isNormalDebit() ? entries.get(i).getDebit() - entries.get(i).getCredit() : entries.get(i).getCredit() - entries.get(i).getDebit();
+        }
+        return balance;
+    }
 
     
     
@@ -98,14 +116,8 @@ public class Account {
     
     @Override
     public String toString() {
-        return getName();
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+        return getName() + ": " + currencyFormat.format(getEntries().isEmpty()? 0.0 : findBalance());
     }//end toString()
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-    
+ 
 }//end Account
