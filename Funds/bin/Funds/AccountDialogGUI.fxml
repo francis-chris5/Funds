@@ -10,19 +10,20 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<DialogPane stylesheets="@Stylesheets/FundStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<DialogPane stylesheets="@Stylesheets/FundStyle.css" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <AnchorPane prefHeight="400.0" prefWidth="825.0">
          <children>
             <VBox prefHeight="400.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <VBox fx:id="vbxLedger" prefHeight="400.0" prefWidth="805.0" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <VBox fx:id="vbxLedger" onContextMenuRequested="#editTransaction" prefHeight="400.0" prefWidth="805.0" />
+                  <HBox onKeyPressed="#checkKeyboardEvents" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <DatePicker fx:id="dtDate" prefWidth="75.0" styleClass="ledger-input" />
-                        <TextField fx:id="txtNumber" editable="false" prefWidth="40.0" styleClass="ledger-input" />
+                        <TextField fx:id="txtTransactionID" prefWidth="40.0" styleClass="ledger-input" />
                         <TextField fx:id="txtDescription" prefWidth="200.0" styleClass="ledger-input" />
                         <ComboBox fx:id="cmbTransfer" prefWidth="200.0" styleClass="ledger-input" />
                         <CheckBox fx:id="chkReconcile" mnemonicParsing="false" prefWidth="25.0" styleClass="ledger-input">
@@ -46,7 +47,10 @@
                         </Button>
                         <Button fx:id="btnRemove" mnemonicParsing="false" onAction="#removeTransactions" prefWidth="32.0" text="rem" textOverrun="CLIP">
                            <tooltip>
-                              <Tooltip text="Remove Transaction From Account" />
+                              <Tooltip text="Remove Transaction From Account">
+                                 <graphic>
+                                    <Pane prefHeight="200.0" prefWidth="200.0" />
+                                 </graphic></Tooltip>
                            </tooltip>
                         </Button>
                      </children>

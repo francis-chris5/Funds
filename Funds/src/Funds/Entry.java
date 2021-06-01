@@ -9,7 +9,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 public class Entry {
     
     private LocalDate date;
-    private int number;
+    private String transactionID;
     private String Description;
     private Account transfer;
     private BooleanProperty reconcile;
@@ -23,9 +23,9 @@ public class Entry {
     public Entry() {
     }//end default constructor
 
-    public Entry(LocalDate date, int number, String Description, Account transfer, boolean reconcile, double debit, double credit) {
+    public Entry(LocalDate date, String number, String Description, Account transfer, boolean reconcile, double debit, double credit) {
         this.date = date;
-        this.number = number;
+        this.transactionID = number;
         this.Description = Description;
         this.transfer = transfer;
         this.reconcile = new SimpleBooleanProperty(reconcile);
@@ -44,12 +44,12 @@ public class Entry {
         this.date = date;
     }
 
-    public int getNumber() {
-        return number;
+    public String getTransactionID() {
+        return transactionID;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setTransactionID(String transactionID) {
+        this.transactionID = transactionID;
     }
 
     public String getDescription() {

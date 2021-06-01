@@ -4,16 +4,14 @@ package Funds;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -26,8 +24,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -38,7 +36,7 @@ public class AccountDialog extends Dialog implements Initializable {
     @FXML
     DatePicker dtDate;
     @FXML
-    TextField txtNumber;
+    TextField txtTransactionID;
     @FXML
     TextField txtDescription;
     @FXML
@@ -75,9 +73,11 @@ public class AccountDialog extends Dialog implements Initializable {
         setAccountChoices();
         clearTransaction();
         vbxLedger.getChildren().addAll(ledger);
-        this.getDialogPane().getButtonTypes().addAll(ButtonType.FINISH, ButtonType.CANCEL);
+        ButtonType btnFinished = new ButtonType("Finish", ButtonData.OTHER);
+        this.getDialogPane().getButtonTypes().addAll(btnFinished, ButtonType.CANCEL);
+        dtDate.requestFocus();
         Optional<ButtonType> clicked = this.showAndWait();
-        if(clicked.get() == ButtonType.FINISH){
+        if(clicked.get() == btnFinished){
             //save changes and close dialog
         }
         else if(clicked.get() == ButtonType.CANCEL){
@@ -96,9 +96,9 @@ public class AccountDialog extends Dialog implements Initializable {
         clmDate.setPrefWidth(75);
         clmDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         
-        TableColumn<Entry, Integer> clmNumber = new TableColumn("Num");
+        TableColumn<Entry, String> clmNumber = new TableColumn("ID");
         clmNumber.setPrefWidth(40);
-        clmNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
+        clmNumber.setCellValueFactory(new PropertyValueFactory<>("transactionID"));
         
         TableColumn<Entry, String> clmDescription = new TableColumn<>("Description");
         clmDescription.setPrefWidth(200);
@@ -164,7 +164,7 @@ public class AccountDialog extends Dialog implements Initializable {
     @FXML
     public void clearTransaction(){
         dtDate.setValue(LocalDate.now());
-        txtNumber.setText("" + (account.getEntries().size() + 1));
+        txtTransactionID.setText("");
         txtDescription.setText("");
         txtDescription.setPromptText("Enter a description");
         cmbTransfer.setValue(null);
@@ -180,7 +180,7 @@ public class AccountDialog extends Dialog implements Initializable {
         try{
             Entry entry = new Entry();
             entry.setDate(dtDate.getValue());
-            entry.setNumber(Integer.parseInt(txtNumber.getText()));
+            entry.setTransactionID(txtTransactionID.getText());
             entry.setDescription(txtDescription.getText());
             entry.setTransfer((Account)cmbTransfer.getValue());
             entry.setReconcile(chkReconcile.isSelected());
@@ -223,6 +223,44 @@ public class AccountDialog extends Dialog implements Initializable {
         loadAccountLedger();
     }//end removeTransactions()
     
+    
+    
+    @FXML
+    public void editTransaction(){
+        ObservableList<Entry> choice = ledger.getSelectionModel().getSelectedItems();
+        try{
+            choice.forEach(c -> {
+                EditTransaction editor = new EditTransaction(c);
+                Entry revised = editor.edit();
+                if(revised != null){
+                    for(int i = 0; i < account.getEntries().size(); i++){
+                        if(account.getEntries().get(i) == c){
+                            account.getEntries().set(i, revised);
+                            account.findRunningBalance();
+                            break;
+                        }
+                    }
+                }
+            });
+            loadAccountLedger();
+        }
+        catch(Exception e){
+            //above changes the selected value but then throws error in javafx objects --my part seems to work fine like this
+        }
+    }//end editTransaction()
+    
+    
+    
+    @FXML
+    public void checkKeyboardEvents(KeyEvent event){
+        switch(event.getCode()){
+            case ENTER:
+                addTransaction();
+                break;
+            default:
+                break;
+        }
+    }//end keyboardEvents
     
     
     @Override

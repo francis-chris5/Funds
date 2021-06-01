@@ -1,0 +1,31 @@
+
+
+
+
+
+
+Account Ledger
+
+    At the bottom of the table is a yellow row for inputting a new transaction. The only required field is the amount, enter a positive (money in) or negative (money out) and the posting will set it appropriately as a debit or credit based on the account type.
+
+        (Optional) enter a date for the transaction (the default is current date) --Optional
+
+        (Optional) an id for the transaction (the transfer account for balancing will receive the same ID) --Optional
+
+        (Optional) a short description of the transaction
+
+        (Optional) choose another account to transfer the balance to (if no account is selected there will be an imbalance account created to accept the balance). A debit in the posted transaction will automatically apply as a credit in the transfer and vice-versa. The transfer account will also receive all other fields automatically.
+
+        (Optional) check the box in the reconcile column if necessary (traditionally this column was marked after the fact once a check had cleared, but I don't think this applies much in our modern instant-banking world, I chose to leave it in case a user has another purpose in mind for a yes/no value: I personally use it checked for work expenses that may be reimbursed and unchecked for regular expenses).
+
+        (Required) enter a positive amount for money coming into the account and a negative amount for money leaving the account, the software will handle balancing the books.
+
+    click the add button (leftmost button on the right side of the input row) to post the transaction
+
+    click the clear button (center button on the right side of the input row) to reset the input fields and place focus back on the date input field
+
+    To edit a transaction that has already been posted right click on it and an edit transaction dialog box will open, make the changes and click the okay button, or cancel out of the dialog to keep the transaction as it was.
+
+    To delete a transaction select it from the account ledger and click the delete button (rightmost button on the right side of the input row) --eventually this will delete the balance transfer as well
+
+
