@@ -46,7 +46,7 @@ I've got the ledger dialogs set up, and a start on the main gui. The first tab i
 
 I still haven't figured out how to convince the Scenebuilder software that I really am using javafx version 11, not 16, so those warning messages will keep showing up until I'm finished with the GUI's and remove the version checks it's determined to put in the code.
 
-It's a start, still a long way to go... The next step is to tie all the accounts together so that each double entry only needs made once with a reference of where it transfers the balance to...
+
 
 
 ![pic_for_github_main](https://user-images.githubusercontent.com/50467171/120409284-9881a300-c31e-11eb-9a39-bec475879e54.jpg)
@@ -58,3 +58,6 @@ It's a start, still a long way to go... The next step is to tie all the accounts
 ![pic_for_github_details](https://user-images.githubusercontent.com/50467171/120410259-a20c0a80-c320-11eb-9f4a-f3b9d08be6f4.jpg)
 
 
+
+
+It's a start, still a long way to go... The next step is to tie all the accounts together so that each double entry only needs made once with a reference of where it transfers the balance to...
