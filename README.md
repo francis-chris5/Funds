@@ -46,6 +46,8 @@ I've got the ledger dialogs set up, and a start on the main gui. The first tab i
 
 I still haven't figured out how to convince the Scenebuilder software that I really am using javafx version 11, not 16, so those warning messages will keep showing up until I'm finished with the GUI's and remove the version checks it's determined to put in the code.
 
+Also note that these images were not all taken on the same test run, I'll do a image pass to update them together soon.
+
 
 
 
