@@ -42,7 +42,7 @@ The relational dataabase is mostly to make it compatible with other accounting s
 
 <h2>Project Progress</h2>
 
-I've got the ledger dialogs set up, and a start on the main gui. The first tab in the main content section of the GUI looks like a balance sheet, clicking on an account opens it in a ledger dialog to enter/edit/remove transactions. Total debits and credits are calculated correctly, but I don't have a good spot to call that recalculation yet (I've been opening and closing the Book details dialog (oh yeah, that works too). For testing I set up a cash, credit card, revenue, and expense account, but once I saw them on the screen I thought this should be the default new book accounts -so I'll probably leave those here.
+I've got the ledger dialogs set up, and a start on the main gui. The first tab in the main content section of the GUI looks like a balance sheet (or it will when I get around to styling it), clicking on an account opens it in a ledger dialog to enter/edit/remove transactions. Total debits and credits are calculated correctly, but I don't have a good spot to call that recalculation yet (I've been opening and closing the Book details dialog (oh yeah, that works too). For testing I set up a cash, credit card, revenue, and expense account, but once I saw them on the screen I thought this should be the default new book accounts -so I'll probably leave those here.
 
 I still haven't figured out how to convince the Scenebuilder software that I really am using javafx version 11, not 16, so those warning messages will keep showing up until I'm finished with the GUI's and remove the version checks it's determined to put in the code.
 
