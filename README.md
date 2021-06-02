@@ -39,6 +39,8 @@ get from https://downloads.apache.org//db/derby/db-derby-10.14.2.0/db-derby-10.1
 The relational dataabase is mostly to make it compatible with other accounting software, and I've been keeping that in mind since the initial mockup of my objects, so no hurry on that part though.
 
 
+Since this is intended to be an open-source project other developers can find the javadoc pages here https://francis-chris5.github.io/Funds/ to help find your way around the code when customizing it to fit your needs.
+
 
 <h2>Project Progress</h2>
 
