@@ -5,9 +5,16 @@ import java.time.LocalDate;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
-
+/**
+ * <h2>Summary</h2>
+ * <p>An Entry is the basic building block of the whole thing. It is a collection of datafields representing a single real-world monetary transaction.</p>
+ * <p>Every Entry made will have a corresponding Transfer -another entry with debits and credits reversed for the GAAP standard double-entry method of "balancing the books."</p>
+ * <p>The early stages of the plan have the Entry object corresponding to a single record in a relational database for compatibility with other accounting software concerns.</p>
+ * @author Chris
+ */
 public class Entry {
     
+        ////////////////////////////////////////////////  DATAFIELDS  /////////
     private LocalDate date;
     private String transactionID;
     private String Description;
@@ -19,22 +26,52 @@ public class Entry {
     private double balance;
     private boolean normalDebit; //how can i get this from parent instead???
     
-
+    
+    
+    
+    
+    
+    
+    
+        ///////////////////////////////////////////  CONSTRUCTORS  //////////
+    
+    /**
+     * The default constructor to be used in conjunction with getter and setter methods
+     */
     public Entry() {
     }//end default constructor
-
-    public Entry(LocalDate date, String number, String Description, Account transfer, boolean reconcile, double debit, double credit) {
+    
+    
+    
+    
+    /**
+     * The full constructor to be used when all fields for a transaction are known (such as pulling from a relational database table)
+     * @param date The date on which the transaction was recognized
+     * @param transactionID A human usable id for the transactions, may be different than database id
+     * @param Description A brief description of the transaction
+     * @param transfer The account into which the transaction will also be recorded for double-entry method of accounting
+     * @param reconcile Traditionally this column was marked after the fact once a check had cleared the bank, I don't think this applies much in the modern world, but there's still plenty of ways a particular user could use a boolean value to mark or not in the transaction (personally I check this for expenses that may be reimbursed and unchecked for regular expenses, among other things)
+     * @param debit The left column of the ledger: assets, dividends, and expenses are normal (increase with) debit accounts
+     * @param credit The right column of the ledger: liabilities, revenue, and most equity are normal (increase with) credit accounts
+     */
+    public Entry(LocalDate date, String transactionID, String Description, Account transfer, boolean reconcile, double debit, double credit) {
         this.date = date;
-        this.transactionID = number;
+        this.transactionID = transactionID;
         this.Description = Description;
         this.transfer = transfer;
         this.reconcile = new SimpleBooleanProperty(reconcile);
         this.debit = debit;
         this.credit = credit;
     }//end full constructor
-
     
     
+    
+    
+    
+    
+    
+    
+        //////////////////////////////////////  GETTERS AND SETTERS  /////////
     
     public LocalDate getDate() {
         return date;
@@ -113,22 +150,23 @@ public class Entry {
     public void setNormalDebit(boolean normalDebit) {
         this.normalDebit = normalDebit;
     }
-
     
     
     
     
     
+    
+    
+    
+        //////////////////////////////////////////////  JAVA OBJECT  //////////
+    
+    /**
+     * default override method
+     * @return <b>String</b> representing the transaction in sentence form.
+     */
     @Override
     public String toString() {
         return "Posted on " + this.getDate().toString() + " was " + this.getDescription() + ", debited for " + this.getDebit() + ", and credited for " + this.getCredit() + (isReconcile() ?  " has been" : " has not been") + " reconciled";
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
-    
 }//end Entry

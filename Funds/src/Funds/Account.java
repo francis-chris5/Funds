@@ -6,32 +6,82 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
+/**
+ * <h2>Summary</h2>
+ * <p>The Account class will be the primary working tool for organizing the transactions in terms of money coming in or money going out using the standard accounting practice of double-entry method. All transactions are recorded in two accounts, once as a debit and once as a credit, and in the end all debits and credits will balance out.</p>
+ * <p>Entries (transactions) are the small scale and Books are the big picture which leaves Accounts as that nice middle-ground where we get the whole picture without getting bogged down in, but can still see, the finer details.</p>
+ * @author Chris Francis
+ */
 public class Account {
+    
+        //////////////////////////////////////////////  DATAFIELDS  /////////
     
     private String name;
     private String number;
+    private String routing;
     private String code;
     private String description;
     private AccountType type;
     private boolean normalDebit;
     private ObservableList<Entry> entries = FXCollections.observableArrayList();
-
+    
+    
+    
+    
+    
+    
+    
+    
+        //////////////////////////////////////////  CONSTRUCTORS  ///////////
+    /**
+     * the default constructor to be used in conjunction with getters and setters
+     */
     public Account() {
     }//end default constructor
-
+    
+    
+    
+    
+    /**
+     * For general usage when creating a new account the most important things to know are the name (how to recognize it on the charts) and the normal (which column in the ledger represents an increase), the two-arg constructor implements only this information at creation.
+     * @param name The nickname for this account
+     * @param normalDebit A boolean value of true if the account increases with debit entries or false if the account increases with credit entries
+     */
     public Account(String name, boolean normalDebit) {
         this.name = name;
         this.normalDebit = normalDebit;
     }//end two-arg constructor
-
-    public Account(String name, String number, String code, String description, boolean normalDebit) {
+    
+    
+    
+    
+    /**
+     * The full constructor is for creating an account with all the common details, this constructor is intended to be used with a new account dialog interface
+     * @param name The nickname for this account
+     * @param number The account number as issued by the bank
+     * @param routing The routing number referring to the bank holding the account
+     * @param code A alpha-numerical code to be used in local book keeping records
+     * @param description A plain language description of the account
+     * @param normalDebit A boolean value of true if the account increases with debit entries or false if the account increases with credit entries
+     */
+    public Account(String name, String number, String routing, String code, String description, boolean normalDebit) {
         this.name = name;
         this.number = number;
+        this.routing = routing;
         this.code = code;
         this.description = description;
         this.normalDebit = normalDebit;
     }//end full constructor
-
+    
+    
+    
+    
+    
+    
+    
+    
+        //////////////////////////////////////////  GETTERS AND SETTERS  ////////
+    
     public String getName() {
         return name;
     }
@@ -46,6 +96,14 @@ public class Account {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+    
+    public String getRouting() {
+        return routing;
+    }
+
+    public void setRouting(String routing) {
+        this.routing = routing;
     }
 
     public String getCode() {
@@ -92,6 +150,14 @@ public class Account {
     
     
     
+    
+    
+    
+        ///////////////////////////////////////  ACCOUNT METHODS  ///////////
+    
+    /**
+     * The recalculated balance for every Entry (transaction) recorded in this account
+     */
     public void findRunningBalance(){
         double runningTotal = 0.0;
         for(int i = 0; i < entries.size(); i++){
@@ -101,6 +167,12 @@ public class Account {
     }//end findRunningBalance()
     
     
+    
+    
+    /**
+     * The total balance for the account
+     * @return <b>double</b> representing the total balance not formatted
+     */
     public double findBalance(){
         double balance = 0.0;
         for(int i = 0; i < entries.size(); i++){
@@ -108,12 +180,20 @@ public class Account {
         }
         return balance;
     }
-
     
     
     
     
     
+    
+    
+    
+        ///////////////////////////////////////////////  JAVA OBJECT  ////////
+    
+    /**
+     * override of default method
+     * @return <b>String</b> containing the account nickname and total balance formatted as currency
+     */
     @Override
     public String toString() {
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
