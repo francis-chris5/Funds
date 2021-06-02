@@ -121,7 +121,7 @@ public class Entry {
     
     @Override
     public String toString() {
-        return "Posted on " + this.getDate().toString() + " was " + this.getDescription() + " for " + (normalDebit ? this.getDebit() : this.getCredit()) + (isReconcile() ?  " has been" : " has not been") + " reconciled";
+        return "Posted on " + this.getDate().toString() + " was " + this.getDescription() + ", debited for " + this.getDebit() + ", and credited for " + this.getCredit() + (isReconcile() ?  " has been" : " has not been") + " reconciled";
     }
 
     @Override

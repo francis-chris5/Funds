@@ -65,11 +65,7 @@
     </MenuBar>
     <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="222.0">
-               <children>
-                  <Button fx:id="btnClicker" alignment="CENTER" layoutX="71.0" layoutY="368.0" mnemonicParsing="false" onAction="#showAccount" text="Click Me" />
-               </children>
-        </AnchorPane>
+        <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="222.0" />
       <AnchorPane id="Content" fx:id="apnMain" minHeight="-1.0" minWidth="-1.0" prefHeight="561.0" prefWidth="447.0">
                <children>
                   <TabPane tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">

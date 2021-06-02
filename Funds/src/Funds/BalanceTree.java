@@ -1,6 +1,7 @@
 
 package Funds;
 
+import javafx.application.Platform;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
@@ -11,11 +12,27 @@ import javafx.scene.layout.StackPane;
 public class BalanceTree extends StackPane{
     
     private Book book;
+    private AccountType type;
     private TreeView tree;
     private AccountDialog accountDialog;
     
+    private int clickCounter = 0;
+    
     public BalanceTree(Book book, AccountType type){
         this.book = book;
+        this.type = type;
+        refreshTree();
+        tree.getSelectionModel().selectedItemProperty().addListener(cl -> {
+            launchAccountDialog();
+        });
+        this.getChildren().add(tree);
+        
+    }//end constructor
+    
+    
+    
+    public void refreshTree(){
+        tree = null;
         switch(type){
             case ASSET:
                 tree = loadAssetTree();
@@ -27,10 +44,7 @@ public class BalanceTree extends StackPane{
                 tree = loadEquityTree();
                 break;
         }
-        //StackPane root = new StackPane();
-        this.getChildren().add(tree);
-    }//end constructor
-    
+    }//end refreshTree()
     
     
     public TreeView loadAssetTree(){
@@ -39,14 +53,10 @@ public class BalanceTree extends StackPane{
         icon.setFitWidth(16);
         icon.setFitHeight(16);
         TreeItem root = new TreeItem("Assets", icon);
+        root.setExpanded(true);
         
         if(!book.getAssets().isEmpty()){
             for(int i = 0; i < book.getAssets().size(); i++){
-//                Hyperlink leaf = new Hyperlink(book.getAssets().get(i).toString());
-//                leaf.setGraphic(new ImageView(pic));
-//                leaf.setOnAction(click -> {
-//                    //launchAccountDialog(book.getAssets().get(i));
-//                });
                 TreeItem<Account> branch = new TreeItem(book.getAssets().get(i));
                 root.getChildren().add(branch);
             }
@@ -62,8 +72,14 @@ public class BalanceTree extends StackPane{
         icon.setFitWidth(16);
         icon.setFitHeight(16);
         TreeItem root = new TreeItem("Liabilities", icon);
+        root.setExpanded(true);
         
-        //get liability accounts from the book
+         if(!book.getLiabilities().isEmpty()){
+            for(int i = 0; i < book.getLiabilities().size(); i++){
+                TreeItem<Account> branch = new TreeItem(book.getLiabilities().get(i));
+                root.getChildren().add(branch);
+            }
+        }
         
         TreeView liabilityTree = new TreeView(root);
         return liabilityTree;
@@ -75,8 +91,14 @@ public class BalanceTree extends StackPane{
         icon.setFitWidth(16);
         icon.setFitHeight(16);
         TreeItem root = new TreeItem("Equity", icon);
+        root.setExpanded(true);
         
-        //get equity accounts from the book
+        if(!book.getEquities().isEmpty()){
+            for(int i = 0; i < book.getEquities().size(); i++){
+                TreeItem<Account> branch = new TreeItem(book.getEquities().get(i));
+                root.getChildren().add(branch);
+            }
+        }
         
         TreeView equityTree = new TreeView(root);
         return equityTree;
@@ -84,8 +106,15 @@ public class BalanceTree extends StackPane{
     
     
     
-    public void launchAccountDialog(Account account){
-            //this will be called when an account is double clicked on tree
-        accountDialog = new AccountDialog(account);
+    public void launchAccountDialog(){
+        TreeItem selected = (TreeItem)tree.getSelectionModel().getSelectedItem();
+        try{
+            Account acc = (Account)selected.getValue();
+            accountDialog = new AccountDialog(acc);
+            Platform.runLater(() -> tree.getSelectionModel().clearSelection());
+        }
+        catch(Exception e){
+            //probably clicked a label then
+        }
     }//end launchAccountDialog()
 }//end BalanceTree

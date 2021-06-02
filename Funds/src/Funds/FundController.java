@@ -17,9 +17,8 @@ import javafx.scene.text.Text;
 
 public class FundController implements Initializable{
 
-    @FXML
-    Button btnClicker;
-
+        /////////////////////////////////////////////  GUI  /////////////////
+    
         //right pane
     @FXML
     Button btnBookDetails;
@@ -38,6 +37,16 @@ public class FundController implements Initializable{
     @FXML
     TextField txtTotalEquity;
     
+    
+    
+    
+    
+    
+    
+    
+    
+        ////////////////////////////////////////////  DATAFIELDS  ///////////
+    
     private Book book = new Book("untitled");
     
     
@@ -49,6 +58,7 @@ public class FundController implements Initializable{
     
     public void displayDetails(){
         btnBookDetails.setText(book.toString());
+        displayTotals();
     }//end displayDetails()
     
     
@@ -70,7 +80,37 @@ public class FundController implements Initializable{
         vbxAsset.getChildren().add(asset);
         vbxLiability.getChildren().add(liability);
         vbxEquity.getChildren().add(equity);
+        displayTotals();
     }//end showBalanceSheet()
+    
+    
+    public void displayTotals(){
+        double total = 0.0;
+        for(int i = 0; i < book.getAssets().size(); i++){
+            Account acc = book.getAssets().get(i);
+            for(int j = 0; j < acc.getEntries().size(); j++){
+                total += acc.getEntries().get(j).getDebit() - acc.getEntries().get(j).getCredit();
+            }
+        }
+        txtTotalAssets.setText(Double.toString(total));
+        total = 0.0;
+        for(int i = 0; i < book.getLiabilities().size(); i++){
+            Account acc = book.getLiabilities().get(i);
+            for(int j = 0; j < acc.getEntries().size(); j++){
+                total += acc.getEntries().get(j).getCredit() - acc.getEntries().get(j).getDebit();
+            }
+        }
+        txtTotalLiabilities.setText(Double.toString(total));
+        total = 0.0;
+        for(int i = 0; i < book.getEquities().size(); i++){
+            Account acc = book.getEquities().get(i);
+            for(int j = 0; j < acc.getEntries().size(); j++){
+                total += acc.getEntries().get(j).getCredit() - acc.getEntries().get(j).getDebit();
+            }
+        }
+        txtTotalEquity.setText(Double.toString(total));
+        total = 0.0;
+    }//end displayTotals()
     
     
     
@@ -82,18 +122,17 @@ public class FundController implements Initializable{
     
         ///////////////////////////////////////////  OTHER  ////////////////
     
-    public void showAccount(){
-        Account cash = new Account("cash", true);
-
-        
-        AccountDialog temp = new AccountDialog(cash);
-    }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //I rarely use this, just need it here
         Account cash = new Account("Cash", true);
+        Account card = new Account("Credit Card", false);
+        Account rev = new Account("Revenue", false);
+        Account exp = new Account("Expense", true);
         book.getAssets().add(cash);
+        book.getLiabilities().add(card);
+        book.getEquities().add(rev);
+        book.getEquities().add(exp);
         showBalanceSheet(); //holy cow... I finally did someting at startup...
     }//end initialize()
     

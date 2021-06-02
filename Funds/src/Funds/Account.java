@@ -104,7 +104,7 @@ public class Account {
     public double findBalance(){
         double balance = 0.0;
         for(int i = 0; i < entries.size(); i++){
-            balance = isNormalDebit() ? entries.get(i).getDebit() - entries.get(i).getCredit() : entries.get(i).getCredit() - entries.get(i).getDebit();
+            balance += isNormalDebit() ? entries.get(i).getDebit() - entries.get(i).getCredit() : entries.get(i).getCredit() - entries.get(i).getDebit();
         }
         return balance;
     }

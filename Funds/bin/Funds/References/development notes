@@ -1,0 +1,20 @@
+
+
+STRUCTURE:
+    a book is what users will open/save/work-with...
+
+    a book is a collection of Accounts
+    an account is a collection of Entries
+    an entry is a collection of datafields describing a transaction
+
+
+
+NOTES:
+    since debit/credit is a boolean I chose debit == true, credit == false for normals (i.e. which side of ledger positive/increase goes on)
+
+    a book will have the save/open features, .fabk --"Funds Accounting Book"
+
+
+
+
+
