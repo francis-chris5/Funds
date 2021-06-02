@@ -62,10 +62,10 @@ I still haven't figured out how to convince the Scenebuilder software that I rea
 
 If the transfer spot on an account is left blank (the books don't balance) then it will automatically create a liability account to handle the imbalance, so the accounts should remain balanced at all times.
 
-![pic_for_github_imbalance](https://user-images.githubusercontent.com/50467171/120424362-2f0f8d80-c33a-11eb-898f-c502577bca51.jpg)
-
 
 ![pic_for_github_main_2](https://user-images.githubusercontent.com/50467171/120424363-2f0f8d80-c33a-11eb-80db-d0c760c661dd.jpg)
+
+![pic_for_github_imbalance](https://user-images.githubusercontent.com/50467171/120424362-2f0f8d80-c33a-11eb-898f-c502577bca51.jpg)
 
 
 It's a start, still a long way to go... The next step is figure out how to transfer the balance when editing an already existing transaction...
