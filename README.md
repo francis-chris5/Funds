@@ -52,7 +52,7 @@ I still haven't figured out how to convince the Scenebuilder software that I rea
 ![pic_for_github_main](https://user-images.githubusercontent.com/50467171/120409284-9881a300-c31e-11eb-9a39-bec475879e54.jpg)
 
 
-![pic_for_github_ledger](https://user-images.githubusercontent.com/50467171/120409295-9d465700-c31e-11eb-9870-ef808b5b277e.jpg)
+![pic_for_github_ledger](https://user-images.githubusercontent.com/50467171/120425430-2fa92380-c33c-11eb-9738-655d2527ded1.jpg)
 
 
 ![pic_for_github_details](https://user-images.githubusercontent.com/50467171/120410259-a20c0a80-c320-11eb-9f4a-f3b9d08be6f4.jpg)
