@@ -2,6 +2,7 @@ package Funds;
 
 
 import java.net.URL;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ResourceBundle;
@@ -49,8 +50,7 @@ public class FundController implements Initializable{
     
     private Book book = new Book("untitled");
     
-    
-    
+    private NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
     
     
     
@@ -58,6 +58,7 @@ public class FundController implements Initializable{
     
     public void displayDetails(){
         btnBookDetails.setText(book.toString());
+        showBalanceSheet();
         displayTotals();
     }//end displayDetails()
     
@@ -74,6 +75,9 @@ public class FundController implements Initializable{
     
     @FXML
     public void showBalanceSheet(){
+        vbxAsset.getChildren().clear();
+        vbxLiability.getChildren().clear();
+        vbxEquity.getChildren().clear();
         BalanceTree asset = new BalanceTree(book, AccountType.ASSET);
         BalanceTree liability = new BalanceTree(book, AccountType.LIABILITY);
         BalanceTree equity = new BalanceTree(book, AccountType.EQUITY);

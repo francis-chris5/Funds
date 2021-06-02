@@ -1,6 +1,7 @@
 
 package Funds;
 
+import java.text.NumberFormat;
 import javafx.application.Platform;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -17,6 +18,7 @@ public class BalanceTree extends StackPane{
     private AccountDialog accountDialog;
     
     private int clickCounter = 0;
+    private NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
     
     public BalanceTree(Book book, AccountType type){
         this.book = book;
@@ -110,7 +112,7 @@ public class BalanceTree extends StackPane{
         TreeItem selected = (TreeItem)tree.getSelectionModel().getSelectedItem();
         try{
             Account acc = (Account)selected.getValue();
-            accountDialog = new AccountDialog(acc);
+            accountDialog = new AccountDialog(book, acc);
             Platform.runLater(() -> tree.getSelectionModel().clearSelection());
         }
         catch(Exception e){

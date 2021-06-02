@@ -17,6 +17,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -53,9 +55,11 @@ public class AccountDialog extends Dialog implements Initializable {
     Button btnRemove;
     
     private Account account;
+    private Book book;
     private TableView<Entry> ledger = new TableView<>();
     
-    public AccountDialog(Account account){
+    public AccountDialog(Book book, Account account){
+        this.book = book;
         this.account = account;
         this.setTitle("Funds: " + account.getName());
         Image icon = new Image(getClass().getResourceAsStream("Images/FundsIcon.png"));
@@ -71,6 +75,7 @@ public class AccountDialog extends Dialog implements Initializable {
         }
         loadAccountLedger();
         setAccountChoices();
+        cmbTransfer.setVisibleRowCount(5);
         clearTransaction();
         vbxLedger.getChildren().addAll(ledger);
         ButtonType btnFinished = new ButtonType("Finish", ButtonData.OTHER);
@@ -155,8 +160,20 @@ public class AccountDialog extends Dialog implements Initializable {
     
     
     public void setAccountChoices(){
+            //TODO: strip the chart names off the 
         cmbTransfer.getItems().clear();
-        cmbTransfer.getItems().addAll(new Account("revenue", false), new Account("expense", true));
+        cmbTransfer.getItems().add("<----  ASSET  ---->");
+        for(int i = 0; i < book.getAssets().size(); i++){
+            cmbTransfer.getItems().add(book.getAssets().get(i));
+        }
+        cmbTransfer.getItems().add("<----  LIABILITY  ---->");
+        for(int i = 0; i < book.getLiabilities().size(); i++){
+            cmbTransfer.getItems().add(book.getLiabilities().get(i));
+        }
+        cmbTransfer.getItems().add("<----  EQUITY  ---->");
+        for(int i = 0; i < book.getEquities().size(); i++){
+            cmbTransfer.getItems().add(book.getEquities().get(i));
+        }
     }//end setAccountChoices()
     
     
@@ -202,6 +219,24 @@ public class AccountDialog extends Dialog implements Initializable {
             }
             account.getEntries().add(entry);
             account.findRunningBalance();
+            if(entry.getTransfer() != null){
+                addTransfer(entry.getTransfer(), account.isNormalDebit());
+            }
+            else{
+                Account imbalance = new Account();
+                boolean exists = false;
+                for(int i = 0; i < book.getLiabilities().size(); i++){
+                    if(book.getLiabilities().get(i).getName().equals("IMBALANCE")){
+                        exists = true;
+                        imbalance = book.getLiabilities().get(i);
+                    }
+                }
+                if(!exists){
+                    imbalance = new Account("IMBALANCE", false);
+                    book.getLiabilities().add(imbalance);
+                }
+                addTransfer(imbalance, account.isNormalDebit());
+            }
             loadAccountLedger();
             clearTransaction();
         }
@@ -209,6 +244,40 @@ public class AccountDialog extends Dialog implements Initializable {
             //probbaly nothing to add: blank amount, rest are fine
         }
     }//end addTransaction()
+    
+    
+    
+    
+    public void addTransfer(Account transfer, boolean notNormal){
+        try{
+            Entry entry = new Entry();
+            entry.setDate(dtDate.getValue());
+            entry.setTransactionID(txtTransactionID.getText());
+            entry.setDescription(txtDescription.getText());
+            entry.setTransfer(account);
+            entry.setReconcile(chkReconcile.isSelected());
+            if(!notNormal){
+                if(Double.parseDouble(txtAmount.getText()) < 0){
+                    entry.setCredit(-Double.parseDouble(txtAmount.getText()));
+                }
+                else{
+                    entry.setDebit(Double.parseDouble(txtAmount.getText()));
+                }
+            }
+            else{
+                if(Double.parseDouble(txtAmount.getText()) < 0){
+                    entry.setDebit(-Double.parseDouble(txtAmount.getText()));
+                }
+                else{
+                    entry.setCredit(Double.parseDouble(txtAmount.getText()));
+                }
+            }
+            transfer.getEntries().add(entry);
+        }
+        catch(Exception e){
+            //probbaly nothing to add: blank amount, rest are fine
+        }
+    }//end addTransfer()
     
     
     
