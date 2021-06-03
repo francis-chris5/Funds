@@ -45,7 +45,7 @@ The relational dataabase is mostly to make it compatible with other accounting s
 
 <h2>Project Progress</h2>
 
-I've got the ledger dialogs set up, and a start on the main gui. The first tab in the main content section of the GUI looks like a balance sheet (or it will when I get around to styling it), clicking on an account opens it in a ledger dialog to enter/edit/remove transactions. Total debits and credits are calculated correctly, but I don't have a good spot to call that recalculation yet (I've been opening and closing the Book details dialog to force a refresh --oh yeah, that works too). For testing I set up a cash, credit card, revenue, and expense account, but once I saw them on the screen I thought this should be the default new book accounts -so I'll probably leave those here.
+I've got the ledger dialogs set up, and a start on the main gui. The first tab in the main content section of the GUI looks like a balance sheet (or it will when I get around to styling it), clicking on an account opens it in a ledger dialog to enter/edit/remove transactions. Total debits and credits are calculated correctly, but I don't have a good spot to call that recalculation yet so I just stuck in a temporary refresh button to use until I come up with one. For testing I set up a cash, credit card, revenue, and expense account, but once I saw them on the screen I thought this should be the default new book accounts -so I'll probably leave those here.
 
 I still haven't figured out how to convince the Scenebuilder software that I really am using javafx version 11, not 16, so those warning messages will keep showing up until I'm finished with the GUI's and remove the version checks it's determined to put in the code.
 
@@ -54,7 +54,7 @@ Also note that these images were not all taken on the same test run, I'll do a i
 
 
 
-![pic_for_github_main](https://user-images.githubusercontent.com/50467171/120409284-9881a300-c31e-11eb-9a39-bec475879e54.jpg)
+![pic_for_github_main](https://user-images.githubusercontent.com/50467171/120580216-cafecf00-c3f6-11eb-8d26-28186d270451.jpg)
 
 
 ![pic_for_github_ledger](https://user-images.githubusercontent.com/50467171/120425430-2fa92380-c33c-11eb-9738-655d2527ded1.jpg)
