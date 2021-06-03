@@ -3,11 +3,15 @@ package Funds;
 
 import java.text.NumberFormat;
 import javafx.application.Platform;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.util.Callback;
 
 
 public class BalanceTree extends StackPane{
@@ -24,9 +28,11 @@ public class BalanceTree extends StackPane{
         this.book = book;
         this.type = type;
         refreshTree();
+        tree.setEditable(true);
         tree.getSelectionModel().selectedItemProperty().addListener(cl -> {
             launchAccountDialog();
         });
+        tree.setContextMenu(new BalanceTreeContextMenu());
         this.getChildren().add(tree);
         
     }//end constructor
@@ -119,4 +125,49 @@ public class BalanceTree extends StackPane{
             //probably clicked a label then
         }
     }//end launchAccountDialog()
+    
+    
+    
+    
+    
+    
+    
+    
+        ////////////////////////////////////////////////  INNER CLASSES  //////////
+    
+    /**
+     * Context menu for functions related to each particular type of account on the balance sheet
+     */
+    public class BalanceTreeContextMenu extends ContextMenu{
+        
+            /////////////////////////////////////////////////  DATAFIELDS  ///////
+        
+        private MenuItem miNewAccount = new MenuItem("New " + type.toString() + " Account");
+        private MenuItem miRemoveAccount = new MenuItem("Remove " + type.toString() + " Account");
+        
+        
+        
+        
+        
+        
+        
+            ////////////////////////////////////////////////  CONSTRUCTORS  //////
+        /**
+         * Since this is a single purpose object the constructor handles all the work: which methods get called when a menu item is clicked on
+         */
+        public BalanceTreeContextMenu(){
+            miNewAccount.setOnAction(m -> {
+                NewAccountDialog temp = new NewAccountDialog(book, tree.getRoot().getValue().toString());
+            });
+            miRemoveAccount.setOnAction(m -> {
+                RemoveAccountDialog temp = new RemoveAccountDialog(book, tree.getRoot().getValue().toString());
+            });
+            this.getItems().addAll(miNewAccount, miRemoveAccount);
+        }//end constructor()
+        
+        
+    }//end BalanceTreeContextMenu
+    
 }//end BalanceTree
+
+

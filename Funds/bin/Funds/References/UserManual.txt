@@ -1,6 +1,18 @@
 
 
 
+Accounts (Balance Sheet Access)
+
+    The first tab on the Main Graphical User Interface (GUI) appears as a balance sheet listing all available accounts. 
+
+    Clicking an account name will open the ledger for that account -see account ledger instructions to proceed from there
+
+    To create a new account right-click in the white space for one of the categories (Assets, Liabilities, or Equity) and select "New <TYPE> Account" from the context menu --see create account instructions to proceed
+
+    To remove an account from the book right click in the white space for one of the categories (Assets, Liabilities, or Equity) and select "Remove <TYPE> Account" from the context menu, select the account(s) to remove (hold ctrl while clicking to make multiple selections) and click the ok button when ready. NOTE: An account can only be removed if it's balance is $0.00, if not please transfer the balance to another existing account and try again to remove it.
+
+
+
 
 
 
@@ -28,4 +40,21 @@ Account Ledger
 
     To delete a transaction select it from the account ledger and click the delete button (rightmost button on the right side of the input row) --eventually this will delete the balance transfer as well
 
+
+
+
+
+
+
+Create Account
+
+    To create a new account choose a parent chart for it (Assets, Liabilities, or Equity) from the drop down menu
+
+    Give the account a useful nickname to identify it in the books: the account nickname and balance will show anywhere it is listed
+
+    Use the "Normal" radio buttons to select whether this is to be a normal debit (increases on left column of ledger) or a normal credit (increases on right column of ledger) account
+
+    Fill in the text fields for account number, routing number, account code, and account description as needed
+
+    Click ok button to create the new account
 

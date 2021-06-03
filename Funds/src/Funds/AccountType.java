@@ -17,5 +17,22 @@ public enum AccountType {
                 return true;
         }
     }//end setNormal()
+
+    @Override
+    public String toString() {
+        switch(this){
+            case ASSET:
+                return "Asset";
+            case LIABILITY:
+                return "Liability";
+            case EQUITY:
+                return "Equity";
+            default:
+                return "";
+        }
+    }//end toString()
+    
+    
+    
     
 }//end AccountType

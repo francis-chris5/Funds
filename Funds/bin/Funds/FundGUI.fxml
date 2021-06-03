@@ -22,7 +22,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@Stylesheets/FundStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Funds.FundController">
+<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@Stylesheets/FundStyle.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Funds.FundController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -65,7 +65,10 @@
     </MenuBar>
     <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="222.0" />
+        <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="222.0">
+               <children>
+                  <Button layoutX="85.0" layoutY="189.0" mnemonicParsing="false" onAction="#displayDetails" text="refresh" />
+               </children></AnchorPane>
       <AnchorPane id="Content" fx:id="apnMain" minHeight="-1.0" minWidth="-1.0" prefHeight="561.0" prefWidth="447.0">
                <children>
                   <TabPane tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">

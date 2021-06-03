@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<DialogPane stylesheets="@Stylesheets/FundStyle.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
+<DialogPane stylesheets="@Stylesheets/FundStyle.css" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <AnchorPane prefHeight="67.0" prefWidth="270.0">
          <children>
