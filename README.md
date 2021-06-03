@@ -71,10 +71,11 @@ I still haven't figured out how to convince the Scenebuilder software that I rea
 
 If the transfer spot on an account is left blank (the books don't balance) then it will automatically create a liability account to handle the imbalance, so the accounts should remain balanced at all times.
 
+![pic_for_github_imbalance](https://user-images.githubusercontent.com/50467171/120670646-9e7e9d80-c45e-11eb-8828-06fd6aa3ce21.jpg)
+
 
 ![pic_for_github_main_2](https://user-images.githubusercontent.com/50467171/120670610-97f02600-c45e-11eb-8b6b-3ee9bddf878d.jpg)
 
-![pic_for_github_imbalance](https://user-images.githubusercontent.com/50467171/120670646-9e7e9d80-c45e-11eb-8828-06fd6aa3ce21.jpg)
 
 
 There is a context menu when right clicking the white space on the balance sheet view port that has options to create a new account or to remove an account for that particular category of accounts. Like most things in this software it is handled via dialog boxes (see images below), however, an ACCOUNT CANNOT BE DELETED WITH A NONZERO BALANCE, so all funds must be transferred to another account before removing one, a warning dialog will pop up if you try to remove an account that has a nonzero balance.
