@@ -74,10 +74,10 @@ If the transfer spot on an account is left blank (the books don't balance) then 
 
 There is a context menu when right clicking the white space on the balance sheet view port that has options to create a new account or to remove an account for that particular category of accounts. Like most things in this software it is handled via dialog boxes (see images below), however, an ACCOUNT CANNOT BE DELETED WITH A NONZERO BALANCE, so all funds must be transferred to another account before removing one, a warning dialog will pop up if you try to remove an account that has a nonzero balance.
 
-![pic_for_github_removeAccount](https://user-images.githubusercontent.com/50467171/120576076-2f6a6000-c3f0-11eb-8ae4-26825e9e02d3.jpg)
-
 
 ![pic_for_github_newAccount](https://user-images.githubusercontent.com/50467171/120576078-3002f680-c3f0-11eb-8cfa-691a1b3fdbbd.jpg)
+
+![pic_for_github_removeAccount](https://user-images.githubusercontent.com/50467171/120576589-08f8f480-c3f1-11eb-987b-63308aca9cfe.jpg)
 
 
 It's a start, still a long way to go...
