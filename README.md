@@ -83,8 +83,7 @@ There is a context menu when right clicking the white space on the balance sheet
 
 ![pic_for_github_newAccount](https://user-images.githubusercontent.com/50467171/120576078-3002f680-c3f0-11eb-8cfa-691a1b3fdbbd.jpg)
 
-![pic_for_github_removeAccount](https://user-images.githubusercontent.com/50467171/120576589-08f8f480-c3f1-11eb-987b-63308aca9cfe.jpg)
-
+![pic_for_github_removeAccount](https://user-images.githubusercontent.com/50467171/120672186-13060c00-c460-11eb-9dc4-58d4fa708017.jpg)
 
 It's a start, still a long way to go...
 
