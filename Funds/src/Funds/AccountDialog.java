@@ -18,8 +18,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -32,8 +30,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
+/**
+ * The controller class for the similarly named FXML dialog.
+ * @author Chris Francis
+ */
 public class AccountDialog extends Dialog implements Initializable {
 
+        ///////////////////////////////////////////  DATAFIELDS  ////////////
+    
     @FXML
     VBox vbxLedger;
     @FXML
@@ -59,6 +63,20 @@ public class AccountDialog extends Dialog implements Initializable {
     private Book book;
     private TableView<Entry> ledger = new TableView<>();
     
+    
+    
+    
+    
+    
+    
+    
+        //////////////////////////////////////////////////  CONSTRUCTORS  //////////
+    
+    /**
+     * In order to interact with the account two fields are necessary:
+     * @param book The book this account is recorded in
+     * @param account  The account to do stuff with
+     */
     public AccountDialog(Book book, Account account){
         this.book = book;
         this.account = account;
@@ -95,6 +113,17 @@ public class AccountDialog extends Dialog implements Initializable {
     }//end constructor
     
     
+    
+    
+    
+    
+    
+    
+        ////////////////////////////////////////////  CLASS METHODS  ///////////
+    
+    /**
+     * Internal method that uses cell factories to create columns for the ledger based off Entry objects
+     */
     public void loadAccountLedger(){
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
         ledger.getColumns().clear();
@@ -160,6 +189,10 @@ public class AccountDialog extends Dialog implements Initializable {
     
     
     
+    
+    /**
+     * internal method to set up the options in the ComboBox on the GUI
+     */
     public void setAccountChoices(){
         cmbTransfer.getItems().clear();
         cmbTransfer.getItems().add(new ComboBoxItem(new Account("-----  ASSET  -----", true), true));
@@ -189,6 +222,10 @@ public class AccountDialog extends Dialog implements Initializable {
     
     
     
+    
+    /**
+     * Clears the input fields for a new transaction
+     */
     @FXML
     public void clearTransaction(){
         dtDate.setValue(LocalDate.now());
@@ -203,6 +240,11 @@ public class AccountDialog extends Dialog implements Initializable {
     }//end clearTransaction()
     
     
+    
+    
+    /**
+     * uses the values selected/entered for the input fields to create a new Entry object to represent the details of a real world transaction
+     */
     @FXML
     public void addTransaction(){
         try{
@@ -228,6 +270,7 @@ public class AccountDialog extends Dialog implements Initializable {
                     entry.setCredit(Double.parseDouble(txtAmount.getText()));
                 }
             }
+            entry.setLedgerID(book.getLedgerID());
             account.getEntries().add(entry);
             account.findRunningBalance();
             if(entry.getTransfer() != null){
@@ -250,6 +293,7 @@ public class AccountDialog extends Dialog implements Initializable {
             }
             loadAccountLedger();
             clearTransaction();
+            book.incrementLedgerID();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -260,6 +304,11 @@ public class AccountDialog extends Dialog implements Initializable {
     
     
     
+    /**
+     * Internal method to implement double entry method accounting
+     * @param transfer The account to counter balance the changes from the new transaction entry
+     * @param notNormal The debit/credit status of the transfer account is automatically the opposite from the initial entry
+     */
     public void addTransfer(Account transfer, boolean notNormal){
         try{
             Entry entry = new Entry();
@@ -284,6 +333,7 @@ public class AccountDialog extends Dialog implements Initializable {
                     entry.setCredit(Double.parseDouble(txtAmount.getText()));
                 }
             }
+            entry.setLedgerID(book.getLedgerID());
             transfer.getEntries().add(entry);
         }
         catch(Exception e){
@@ -294,6 +344,9 @@ public class AccountDialog extends Dialog implements Initializable {
     
     
     
+    /**
+     * Method to remove selected transaction entries from this account's ledger
+     */
     @FXML
     public void removeTransactions(){
         ObservableList<Entry> remove = ledger.getSelectionModel().getSelectedItems();
@@ -306,12 +359,16 @@ public class AccountDialog extends Dialog implements Initializable {
     
     
     
+    
+    /**
+     * opens the EditTransaction dialog with the transaction selected from the ledger
+     */
     @FXML
     public void editTransaction(){
         ObservableList<Entry> choice = ledger.getSelectionModel().getSelectedItems();
         try{
             choice.forEach(c -> {
-                EditTransaction editor = new EditTransaction(c);
+                EditTransaction editor = new EditTransaction(book, account, c);
                 Entry revised = editor.edit();
                 if(revised != null){
                     for(int i = 0; i < account.getEntries().size(); i++){
@@ -332,6 +389,11 @@ public class AccountDialog extends Dialog implements Initializable {
     
     
     
+    
+    /**
+     * Method to listen for and react to keyboard events, currently the only one is to try and add the new transaction when the enter key is pressed
+     * @param event The keyboard event detected
+     */
     @FXML
     public void checkKeyboardEvents(KeyEvent event){
         switch(event.getCode()){
@@ -344,6 +406,19 @@ public class AccountDialog extends Dialog implements Initializable {
     }//end keyboardEvents
     
     
+    
+    
+    
+    
+    
+    
+        ////////////////////////////////////////////  JAVA OBJECT  //////////
+    
+    /**
+     * I rarely use this, just in interfacing requirements
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //I rarely use this, just in interfacing requirements
@@ -359,15 +434,24 @@ public class AccountDialog extends Dialog implements Initializable {
         ////////////////////////////////////////////  INNER CLASSES  //////////
     
     /**
-     * list item for combo box so that category labels can be included
+     * list item for combo box so that category labels can be included which requires a factory
      */
     public class ComboBoxItem{
+        
+            /////////////////////////////  DATAFIELDS  /////////
+        
         private Account account;
         private boolean isLabel;
+        
+        
+            ///////////////////////////  CONSTRUCTORS  /////////
         public ComboBoxItem(Account account, boolean isLabel){
             this.account = account;
             this.isLabel = isLabel;
-        }
+        }//end constructor
+        
+        
+            ///////////////////////  CLASS METHODS  //////////
         public String getName(){
             if(isLabel){
                 return account.getName();
@@ -375,10 +459,14 @@ public class AccountDialog extends Dialog implements Initializable {
             else{
                 return account.toString();
             }
-        }
+        }//end getName()
+        
+        
         public boolean isLabel(){
             return isLabel;
-        }
+        }//end isLabel()
+        
+        
         public Account toAccount(){
             if(isLabel){
                 return null;
@@ -386,12 +474,17 @@ public class AccountDialog extends Dialog implements Initializable {
             else{
                 return account;
             }
-        }
+        }//end toAccount()
+        
+        
+        
+            ///////////////////////////  JAVA OBJECT  //////////////
         @Override
         public String toString(){
             return account.toString();
-        }
-    }
+        }//end toString()
+        
+    }//end ComboBoxItem
     
     
 }//end AccountDialog

@@ -11,6 +11,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 
+
+/**
+ * The controller class for the software's main GUI
+ * @author Chris Francis
+ */
 public class FundController implements Initializable{
 
         /////////////////////////////////////////////  GUI  /////////////////
@@ -51,6 +56,10 @@ public class FundController implements Initializable{
     
         //////////////////////////////////////////////  BOOK METHODS  /////////
     
+    /**
+     * This is basically the refresh method for what's showing on the GUI
+     * loads book details in button text, refreshes the balance sheet trees, updates the account totals in the balancing equation listing
+     */
     public void displayDetails(){
         btnBookDetails.setText(book.toString());
         showBalanceSheet();
@@ -59,6 +68,10 @@ public class FundController implements Initializable{
     
     
     
+    
+    /**
+     * Opens the details dialog with the current Book object for editing
+     */
     @FXML
     public void launchBookDetails(){
         DetailsDialog temp = new DetailsDialog(book);
@@ -68,6 +81,9 @@ public class FundController implements Initializable{
     
     
     
+    /**
+     * clears the balance sheet, creates a new one, and loads it in
+     */
     @FXML
     public void showBalanceSheet(){
         vbxAsset.getChildren().clear();
@@ -83,6 +99,10 @@ public class FundController implements Initializable{
     }//end showBalanceSheet()
     
     
+    
+    /**
+     * calculates and displays the total values from all of the current Book's accounts into the balancing equation listing
+     */
     public void displayTotals(){
         double total = 0.0;
         for(int i = 0; i < book.getAssets().size(); i++){
@@ -121,6 +141,12 @@ public class FundController implements Initializable{
     
         ///////////////////////////////////////////  OTHER  ////////////////
     
+    
+    /**
+     * holy cow... I finally did something at startup... I created some default accounts (cash, credit card, revenue, and expense), this may not last past early development stages
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //I rarely use this, just need it here

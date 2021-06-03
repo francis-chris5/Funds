@@ -23,6 +23,8 @@ public class Book {
     private String description;
     private String notes;
     
+    private int ledgerID = 0;
+    
     private LinkedList<Account> assets = new LinkedList<>();
     private LinkedList<Account> liabilities = new LinkedList<>();
     private LinkedList<Account> equities = new LinkedList<>();
@@ -111,6 +113,14 @@ public class Book {
         this.notes = notes;
     }
 
+    public int getLedgerID(){
+        return ledgerID;
+    }
+    
+    public void incrementLedgerID(){
+        ledgerID++;
+    }
+    
     public LinkedList<Account> getAssets() {
         return assets;
     }

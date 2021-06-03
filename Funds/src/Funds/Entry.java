@@ -26,6 +26,8 @@ public class Entry {
     private double balance;
     private boolean normalDebit; //how can i get this from parent instead???
     
+    private int ledgerID;
+    
     
     
     
@@ -151,6 +153,13 @@ public class Entry {
         this.normalDebit = normalDebit;
     }
     
+    public int getLedgerID(){
+        return ledgerID;
+    }
+    
+    public void setLedgerID(int ledgerID){
+        this.ledgerID = ledgerID;
+    }
     
     
     
@@ -166,7 +175,7 @@ public class Entry {
      */
     @Override
     public String toString() {
-        return "Posted on " + this.getDate().toString() + " was " + this.getDescription() + ", debited for " + this.getDebit() + ", and credited for " + this.getCredit() + (isReconcile() ?  " has been" : " has not been") + " reconciled";
+        return "Posted on " + this.getDate().toString() + " was " + this.getDescription() + ", debited for " + this.getDebit() + ", and credited for " + this.getCredit() + (isReconcile() ?  " has been" : " has not been") + " reconciled, ans is at " + getLedgerID();
     }
 
 }//end Entry

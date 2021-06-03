@@ -5,16 +5,20 @@ import java.text.NumberFormat;
 import javafx.application.Platform;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.util.Callback;
 
 
+/**
+ * Class to create and fill the TreeView objects for the balance sheet
+ * @author Chris Francis
+ */
 public class BalanceTree extends StackPane{
+    
+        ///////////////////////////////////////////  DATAFIELDS  /////////////
     
     private Book book;
     private AccountType type;
@@ -24,6 +28,20 @@ public class BalanceTree extends StackPane{
     private int clickCounter = 0;
     private NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
     
+    
+    
+    
+    
+    
+    
+    
+        ////////////////////////////////////////////////  CONSTRUCTORS  ////////
+    
+    /**
+     * The two-arg constructor needs the book holding the records and the enumerated type of account
+     * @param book book where the account is recorded
+     * @param type enumerated available account types (ASSET, LIABILITY, EQUITY)
+     */
     public BalanceTree(Book book, AccountType type){
         this.book = book;
         this.type = type;
@@ -39,6 +57,16 @@ public class BalanceTree extends StackPane{
     
     
     
+    
+    
+    
+    
+    
+        /////////////////////////////////////////  CLASS METHODS  /////////
+    
+    /**
+     * deletes the tree and loads in a new one based off the enumerated account type
+     */
     public void refreshTree(){
         tree = null;
         switch(type){
@@ -55,6 +83,12 @@ public class BalanceTree extends StackPane{
     }//end refreshTree()
     
     
+    
+    
+    /**
+     * creates and fills the asset tree
+     * @return <b>TreeView</b> ready to be loaded into the balance sheet
+     */
     public TreeView loadAssetTree(){
         Image bag = new Image(getClass().getResourceAsStream("Images/MoneyBagIcon.png"));
         ImageView bagIcon = new ImageView(bag);
@@ -74,6 +108,12 @@ public class BalanceTree extends StackPane{
     }//end loadAssetTree()
     
     
+    
+    
+    /**
+     * creates and fills the liability tree
+     * @return <b>TreeView</b> ready to be loaded into the balance sheet
+     */
     public TreeView loadLiabilityTree(){
         Image scale = new Image(getClass().getResourceAsStream("Images/ScaleIcon.png"));
         ImageView scaleIcon = new ImageView(scale);
@@ -93,6 +133,12 @@ public class BalanceTree extends StackPane{
     }//end loadLiabilityTree()
     
     
+    
+    
+    /**
+     * creates and fills the equity tree
+     * @return <b>TreeView</b> ready to be loaded into the balance sheet
+     */
     public TreeView loadEquityTree(){
         Image building = new Image(getClass().getResourceAsStream("Images/BuildingIcon.png"));
         ImageView buildingIcon = new ImageView(building);
@@ -113,6 +159,9 @@ public class BalanceTree extends StackPane{
     
     
     
+    /**
+     * method to open the selected account's ledger dialog
+     */
     public void launchAccountDialog(){
         TreeItem selected = (TreeItem)tree.getSelectionModel().getSelectedItem();
         try{

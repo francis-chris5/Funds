@@ -9,8 +9,17 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
+/**
+ * The main class for this application
+ * @author Chris Francis
+ */
 public class FundMain extends Application{
 
+    /**
+     * default start method for a JavaFX application
+     * @param stgMain the primary window, comes from operating system
+     * @throws Exception --reading from a file to get GUI information, so I'm not sure what's supposed to catch this: it is the top level
+     */
     @Override
     public void start(Stage stgMain) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FundGUI.fxml"));
@@ -23,6 +32,11 @@ public class FundMain extends Application{
     }//end start()
     
     
+    
+    /**
+     * default main for a JavaFX application
+     * @param args 
+     */
     public static void main(String[] args){
         Application.launch(args);
     }
