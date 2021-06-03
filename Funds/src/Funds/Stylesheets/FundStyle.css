@@ -64,6 +64,10 @@
     -fx-prompt-text-fill: #FF0000a2;
 }
 
+.ledger-input .list-view .list-cell:hover, .ledger-input .list-view .list-cell:selected, .ledger-input .date-picker-popup > * > .day-cell:hover, .ledger-input .date-picker-popup > * > .selected{
+    -fx-background-color: #618257;
+}
+
 .ledger-input > .box{
     -fx-background-color: #f0f05ddd;
     -fx-border-color: #b5a264;

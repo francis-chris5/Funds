@@ -17,6 +17,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
@@ -160,20 +161,30 @@ public class AccountDialog extends Dialog implements Initializable {
     
     
     public void setAccountChoices(){
-            //TODO: strip the chart names off the 
         cmbTransfer.getItems().clear();
-        cmbTransfer.getItems().add("<----  ASSET  ---->");
+        cmbTransfer.getItems().add(new ComboBoxItem(new Account("-----  ASSET  -----", true), true));
         for(int i = 0; i < book.getAssets().size(); i++){
-            cmbTransfer.getItems().add(book.getAssets().get(i));
+            cmbTransfer.getItems().add(new ComboBoxItem(book.getAssets().get(i), false));
         }
-        cmbTransfer.getItems().add("<----  LIABILITY  ---->");
+        cmbTransfer.getItems().add(new ComboBoxItem(new Account("-----  LIABILITY  -----", false), true));
         for(int i = 0; i < book.getLiabilities().size(); i++){
-            cmbTransfer.getItems().add(book.getLiabilities().get(i));
+            cmbTransfer.getItems().add(new ComboBoxItem(book.getLiabilities().get(i), false));
         }
-        cmbTransfer.getItems().add("<----  EQUITY  ---->");
+        cmbTransfer.getItems().add(new ComboBoxItem(new Account("-----  EQUITY  -----", false), true));
         for(int i = 0; i < book.getEquities().size(); i++){
-            cmbTransfer.getItems().add(book.getEquities().get(i));
+            cmbTransfer.getItems().add(new ComboBoxItem(book.getEquities().get(i), false));
         }
+        cmbTransfer.setCellFactory(cell -> new ListCell<ComboBoxItem>(){
+            @Override
+            public void updateItem(ComboBoxItem account, boolean empty){
+                super.updateItem(account, empty);
+                if(!empty){
+                    setText(account.getName());
+                    setDisable(account.isLabel());
+                    setStyle(account.isLabel ? "-fx-text-fill: #FF0000a2;" : "-fx-text-fill: #b5a264;");
+                }
+            }
+        });
     }//end setAccountChoices()
     
     
@@ -199,7 +210,7 @@ public class AccountDialog extends Dialog implements Initializable {
             entry.setDate(dtDate.getValue());
             entry.setTransactionID(txtTransactionID.getText());
             entry.setDescription(txtDescription.getText());
-            entry.setTransfer((Account)cmbTransfer.getValue());
+            entry.setTransfer(cmbTransfer.getValue() != null ? ((ComboBoxItem)cmbTransfer.getValue()).toAccount() : null);
             entry.setReconcile(chkReconcile.isSelected());
             if(account.isNormalDebit()){
                 if(Double.parseDouble(txtAmount.getText()) < 0){
@@ -241,6 +252,7 @@ public class AccountDialog extends Dialog implements Initializable {
             clearTransaction();
         }
         catch(Exception e){
+            e.printStackTrace();
             //probbaly nothing to add: blank amount, rest are fine
         }
     }//end addTransaction()
@@ -336,5 +348,50 @@ public class AccountDialog extends Dialog implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //I rarely use this, just in interfacing requirements
     }
+    
+    
+    
+    
+    
+    
+    
+    
+        ////////////////////////////////////////////  INNER CLASSES  //////////
+    
+    /**
+     * list item for combo box so that category labels can be included
+     */
+    public class ComboBoxItem{
+        private Account account;
+        private boolean isLabel;
+        public ComboBoxItem(Account account, boolean isLabel){
+            this.account = account;
+            this.isLabel = isLabel;
+        }
+        public String getName(){
+            if(isLabel){
+                return account.getName();
+            }
+            else{
+                return account.toString();
+            }
+        }
+        public boolean isLabel(){
+            return isLabel;
+        }
+        public Account toAccount(){
+            if(isLabel){
+                return null;
+            }
+            else{
+                return account;
+            }
+        }
+        @Override
+        public String toString(){
+            return account.toString();
+        }
+    }
+    
     
 }//end AccountDialog
