@@ -2,6 +2,7 @@
 
 An upcoming project I've been thinking about for a while, some accounting software, it will be a while before it's ready though... Uhh, really all I have starting out the repository here on day one is a logo and idea of how I wanted the ledger dialogs to look... and obviously years of rattling around in the back of my mind features i want or don't want included...
 
+Since this is intended to be an open-source project other developers can find the javadoc pages here https://francis-chris5.github.io/Funds/ to help find your way around the code when customizing it to fit your needs.
 
 Much like the project management software I've been working on the past couple weeks verses what I have been using for a while, the accounting software I've been using doesn't exactly fit my needs: only a few features actually get used and it those in conjunction with a spreadsheet as it doesn't have a good place for general calculations, a couple other thoughts i've had for accounting stuff too. Oh yeah, it also seemed a great place to give the project management thing I just finished the prototype version 1 of a thorough test run (that's the file in the design folder)
 
@@ -39,7 +40,7 @@ get from https://downloads.apache.org//db/derby/db-derby-10.14.2.0/db-derby-10.1
 The relational dataabase is mostly to make it compatible with other accounting software, and I've been keeping that in mind since the initial mockup of my objects, so no hurry on that part though.
 
 
-Since this is intended to be an open-source project other developers can find the javadoc pages here https://francis-chris5.github.io/Funds/ to help find your way around the code when customizing it to fit your needs.
+
 
 
 <h2>Project Progress</h2>
