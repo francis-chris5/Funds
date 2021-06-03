@@ -50,7 +50,7 @@ public class RemoveAccountDialog extends Dialog implements Initializable{
     public RemoveAccountDialog(Book book, String type){
         this.book = book;
         setType(type);
-        this.setTitle("Funds: New Account");
+        this.setTitle("Funds: Remove Account");
         Image icon = new Image(getClass().getResourceAsStream("Images/FundsIcon.png"));
         Stage stage = (Stage)this.getDialogPane().getScene().getWindow();
         stage.getIcons().add(icon);

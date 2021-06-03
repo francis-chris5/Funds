@@ -56,16 +56,19 @@ public class BalanceTree extends StackPane{
     
     
     public TreeView loadAssetTree(){
-        Image pic = new Image(getClass().getResourceAsStream("Images/tempIcon.png"));
-        ImageView icon = new ImageView(pic);
-        icon.setFitWidth(16);
-        icon.setFitHeight(16);
-        TreeItem root = new TreeItem("Assets", icon);
+        Image scale = new Image(getClass().getResourceAsStream("Images/ScaleIcon.png"));
+        Image bag = new Image(getClass().getResourceAsStream("Images/MoneyBagIcon.png"));
+        ImageView scaleIcon = new ImageView(scale);
+        scaleIcon.setFitWidth(32);
+        scaleIcon.setFitHeight(32);
+        TreeItem root = new TreeItem("Assets", scaleIcon);
         root.setExpanded(true);
-        
         if(!book.getAssets().isEmpty()){
             for(int i = 0; i < book.getAssets().size(); i++){
-                TreeItem<Account> branch = new TreeItem(book.getAssets().get(i));
+                ImageView bagIcon = new ImageView(bag);
+                bagIcon.setFitWidth(16);
+                bagIcon.setFitHeight(16);
+                TreeItem<Account> branch = new TreeItem(book.getAssets().get(i), bagIcon);
                 root.getChildren().add(branch);
             }
         }
@@ -76,15 +79,19 @@ public class BalanceTree extends StackPane{
     
     
     public TreeView loadLiabilityTree(){
-        ImageView icon = new ImageView(new Image(getClass().getResourceAsStream("Images/tempIcon.png")));
-        icon.setFitWidth(16);
-        icon.setFitHeight(16);
-        TreeItem root = new TreeItem("Liabilities", icon);
+        Image scale = new Image(getClass().getResourceAsStream("Images/ScaleIcon.png"));
+        Image bag = new Image(getClass().getResourceAsStream("Images/MoneyBagIcon.png"));
+        ImageView scaleIcon = new ImageView(scale);
+        scaleIcon.setFitWidth(32);
+        scaleIcon.setFitHeight(32);
+        TreeItem root = new TreeItem("Liabilities", scaleIcon);
         root.setExpanded(true);
-        
          if(!book.getLiabilities().isEmpty()){
             for(int i = 0; i < book.getLiabilities().size(); i++){
-                TreeItem<Account> branch = new TreeItem(book.getLiabilities().get(i));
+                ImageView bagIcon = new ImageView(bag);
+                bagIcon.setFitWidth(16);
+                bagIcon.setFitHeight(16);
+                TreeItem<Account> branch = new TreeItem(book.getLiabilities().get(i), bagIcon);
                 root.getChildren().add(branch);
             }
         }
@@ -95,15 +102,19 @@ public class BalanceTree extends StackPane{
     
     
     public TreeView loadEquityTree(){
-        ImageView icon = new ImageView(new Image(getClass().getResourceAsStream("Images/tempIcon.png")));
-        icon.setFitWidth(16);
-        icon.setFitHeight(16);
-        TreeItem root = new TreeItem("Equity", icon);
+        Image scale = new Image(getClass().getResourceAsStream("Images/ScaleIcon.png"));
+        Image bag = new Image(getClass().getResourceAsStream("Images/MoneyBagIcon.png"));
+        ImageView scaleIcon = new ImageView(scale);
+        scaleIcon.setFitWidth(32);
+        scaleIcon.setFitHeight(32);
+        TreeItem root = new TreeItem("Equity", scaleIcon);
         root.setExpanded(true);
-        
         if(!book.getEquities().isEmpty()){
             for(int i = 0; i < book.getEquities().size(); i++){
-                TreeItem<Account> branch = new TreeItem(book.getEquities().get(i));
+                ImageView bagIcon = new ImageView(bag);
+                bagIcon.setFitWidth(16);
+                bagIcon.setFitHeight(16);
+                TreeItem<Account> branch = new TreeItem(book.getEquities().get(i), bagIcon);
                 root.getChildren().add(branch);
             }
         }
