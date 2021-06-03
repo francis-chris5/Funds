@@ -54,10 +54,15 @@ Also note that these images were not all taken on the same test run, I'll do a i
 
 
 
-![pic_for_github_main](https://user-images.githubusercontent.com/50467171/120580216-cafecf00-c3f6-11eb-8d26-28186d270451.jpg)
+![pic_for_github_main](https://user-images.githubusercontent.com/50467171/120670749-ba823f00-c45e-11eb-84b1-a2ae98a84a4a.jpg)
 
 
-![pic_for_github_ledger](https://user-images.githubusercontent.com/50467171/120425430-2fa92380-c33c-11eb-9738-655d2527ded1.jpg)
+
+![pic_for_github_ledger](https://user-images.githubusercontent.com/50467171/120670694-aa6a5f80-c45e-11eb-83b6-bad7086c3dc9.jpg)
+
+![pic_for_github_ledger_1](https://user-images.githubusercontent.com/50467171/120670693-aa6a5f80-c45e-11eb-91be-0a26e592990c.jpg)
+
+![pic_for_github_ledger_2](https://user-images.githubusercontent.com/50467171/120670689-a9d1c900-c45e-11eb-98b6-003577c32bee.jpg)
 
 
 ![pic_for_github_details](https://user-images.githubusercontent.com/50467171/120410259-a20c0a80-c320-11eb-9f4a-f3b9d08be6f4.jpg)
@@ -68,9 +73,9 @@ Also note that these images were not all taken on the same test run, I'll do a i
 If the transfer spot on an account is left blank (the books don't balance) then it will automatically create a liability account to handle the imbalance, so the accounts should remain balanced at all times.
 
 
-![pic_for_github_main_2](https://user-images.githubusercontent.com/50467171/120424363-2f0f8d80-c33a-11eb-80db-d0c760c661dd.jpg)
+![pic_for_github_main_2](https://user-images.githubusercontent.com/50467171/120670610-97f02600-c45e-11eb-8b6b-3ee9bddf878d.jpg)
 
-![pic_for_github_imbalance](https://user-images.githubusercontent.com/50467171/120424362-2f0f8d80-c33a-11eb-898f-c502577bca51.jpg)
+![pic_for_github_imbalance](https://user-images.githubusercontent.com/50467171/120670646-9e7e9d80-c45e-11eb-8828-06fd6aa3ce21.jpg)
 
 
 There is a context menu when right clicking the white space on the balance sheet view port that has options to create a new account or to remove an account for that particular category of accounts. Like most things in this software it is handled via dialog boxes (see images below), however, an ACCOUNT CANNOT BE DELETED WITH A NONZERO BALANCE, so all funds must be transferred to another account before removing one, a warning dialog will pop up if you try to remove an account that has a nonzero balance.
@@ -82,3 +87,5 @@ There is a context menu when right clicking the white space on the balance sheet
 
 
 It's a start, still a long way to go...
+
+
