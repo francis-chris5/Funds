@@ -47,7 +47,6 @@ The relational dataabase is mostly to make it compatible with other accounting s
 
 I've got the ledger dialogs set up, and a start on the main gui. The first tab in the main content section of the GUI looks like a balance sheet (or it will when I get around to styling it), clicking on an account opens it in a ledger dialog to enter/edit/remove transactions. Total debits and credits are calculated correctly, but I don't have a good spot to call that recalculation yet so I just stuck in a temporary refresh button to use until I come up with one. For testing I set up a cash, credit card, revenue, and expense account, but once I saw them on the screen I thought this should be the default new book accounts -so I'll probably leave those here.
 
-I still haven't figured out how to convince the Scenebuilder software that I really am using javafx version 11, not 16, so those warning messages will keep showing up until I'm finished with the GUI's and remove the version checks it's determined to put in the code.
 
 
 
@@ -84,6 +83,12 @@ There is a context menu when right clicking the white space on the balance sheet
 ![pic_for_github_newAccount](https://user-images.githubusercontent.com/50467171/120576078-3002f680-c3f0-11eb-8cfa-691a1b3fdbbd.jpg)
 
 ![pic_for_github_removeAccount](https://user-images.githubusercontent.com/50467171/120672186-13060c00-c460-11eb-9dc4-58d4fa708017.jpg)
+
+
+
+right clicking on a transaction entry in one of the ledgers opens that for editing
+
+![pic_for_github_edit_entry](https://user-images.githubusercontent.com/50467171/120716224-ba506680-c493-11eb-8e84-9204faecde0d.jpg)
 
 It's a start, still a long way to go...
 
