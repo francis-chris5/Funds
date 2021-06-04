@@ -47,7 +47,7 @@ The relational dataabase is mostly to make it compatible with other accounting s
 
 I've got the ledger dialogs set up, and a start on the main gui. The first tab in the main content section of the GUI looks like a balance sheet (or it will when I get around to styling it), clicking on an account opens it in a ledger dialog to enter/edit/remove transactions. Total debits and credits are calculated correctly, but I don't have a good spot to call that recalculation yet so I just stuck in a temporary refresh button to use until I come up with one. For testing I set up a cash, credit card, revenue, and expense account, but once I saw them on the screen I thought this should be the default new book accounts -so I might leave those here.
 
-Finally got around to working in a couple file operations, so can save and reopen files now: that makes development/debugging so much easier as I won't have to recreate everything for every test run now, and I spotted a large bug in editing a transaction that needs to be the next thing to do after lunch.
+Finally got around to working in a couple file operations, so can save and reopen files now: that makes development/debugging so much easier as I won't have to recreate everything for every test run now.
 
 
 
