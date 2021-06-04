@@ -82,11 +82,11 @@ public class EditTransaction extends Dialog implements Initializable {
         cmbTransfer.setValue(original.getTransfer() != null ? new ComboBoxItem(original.getTransfer(), false) : null);
         chkReconcile.setSelected(original.isReconcile());
         if(original.getDebit() == 0.0){
-            txtAmount.setText(Double.toString(original.getCredit()));
+            txtAmount.setText(account.isNormalDebit() ? Double.toString(-original.getCredit()) : Double.toString(original.getCredit()));
             revised.setNormalDebit(false);
         }
         else{
-            txtAmount.setText(Double.toString(original.getDebit()));
+            txtAmount.setText(account.isNormalDebit() ? Double.toString(original.getDebit()) : Double.toString(-original.getDebit()));
             revised.setNormalDebit(true);
         }
         this.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
@@ -170,7 +170,7 @@ public class EditTransaction extends Dialog implements Initializable {
             }
         }
         transaction.setTransfer(((ComboBoxItem)cmbTransfer.getValue()).toAccount());
-        editTransfer(transaction.getTransfer(), !transaction.getTransfer().isNormalDebit(), transaction.getLedgerID());
+        editTransfer(transaction.getTransfer(), account.isNormalDebit(), transaction.getLedgerID());
         return transaction;
     }//end edit()
     
@@ -184,7 +184,6 @@ public class EditTransaction extends Dialog implements Initializable {
      * @param ledgerID The background ID the computer uses to track the transactions --different than the human readable transactionID that shows on the ledger
      */
     public void editTransfer(Account transfer, boolean notNormal, int ledgerID){
-        System.out.println(ledgerID);
         try{
             Transaction transaction = new Transaction();
             transaction.setLedgerID(revised.getLedgerID());
