@@ -111,3 +111,12 @@
 .ledger-input .list-view .list-cell{
     -fx-text-fill: #232323;
 }
+
+
+/*.balance-sheet{
+    -fx-background-color: #ffffff;
+}
+
+.balance-sheet .tree-view{
+    -fx-border-color: #ffffff;
+}*/

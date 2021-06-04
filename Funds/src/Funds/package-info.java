@@ -5,10 +5,10 @@
  * 
  * <h4>STRUCTURE:</h4>
  * <ul>
- * <li>a book is what users will open/save/work-with...</li>
- * <li>a book is a collection of Accounts</li>
- * <li>an account is a collection of Entries</li>
- * <li>an entry is a collection of datafields describing a transaction</li>
+ * <li>a Book is what users will open/save/work-with...</li>
+ * <li>a Book is a collection of Accounts</li>
+ * <li>an Account is a collection of Transactions</li>
+ * <li>a Transaction is a collection of datafields describing a real world exchange of currency/equity/other-items-of-value</li>
  * </ul>
  * 
  * <p>entering a transaction will automatically enter it in the corresponding transfer account</p>

@@ -41,7 +41,7 @@ public class EditTransaction extends Dialog implements Initializable {
     
     private Book book = new Book();
     private Account account = new Account();
-    private Entry revised = new Entry();
+    private Transaction revised = new Transaction();
     
     
     
@@ -56,9 +56,9 @@ public class EditTransaction extends Dialog implements Initializable {
      * The three-arg constructor needs all the information to edit details about a transaction:
      * @param book what book it's recorded in
      * @param account what account's ledger the edit was called from
-     * @param original what entry is being edited
+     * @param original what transaction is being edited
      */
-    public EditTransaction(Book book, Account account, Entry original){
+    public EditTransaction(Book book, Account account, Transaction original){
         this.book = book;
         this.account = account;
         this.revised = original;
@@ -79,7 +79,7 @@ public class EditTransaction extends Dialog implements Initializable {
         dtDate.setValue(original.getDate());
         txtTransactionID.setText(original.getTransactionID());
         txtDescription.setText(original.getDescription());
-        cmbTransfer.setValue(new ComboBoxItem(original.getTransfer(), false));
+        cmbTransfer.setValue(original.getTransfer() != null ? new ComboBoxItem(original.getTransfer(), false) : null);
         chkReconcile.setSelected(original.isReconcile());
         if(original.getDebit() == 0.0){
             txtAmount.setText(Double.toString(original.getCredit()));
@@ -142,35 +142,36 @@ public class EditTransaction extends Dialog implements Initializable {
     
     
     /**
-     * A new Entry object is created with the values input into the EditTransactionGUI.fxml form, and replaces an old entry
-     * @return <b>Entry</b> the updated (edited) transaction details
+     * A new Transaction object is created with the values input into the EditTransactionGUI.fxml form, and replaces an old transaction
+     * @return <b>Transaction</b> the updated (edited) transaction details
      */
-    public Entry edit(){
-        Entry entry = new Entry();
-        entry.setDate(dtDate.getValue());
-        entry.setTransactionID(txtTransactionID.getText());
-        entry.setDescription(txtDescription.getText());
+    public Transaction edit(){
+        Transaction transaction = new Transaction();
+        transaction.setLedgerID(revised.getLedgerID());
+        transaction.setDate(dtDate.getValue());
+        transaction.setTransactionID(txtTransactionID.getText());
+        transaction.setDescription(txtDescription.getText());
         //revised.setTransfer((Account)cmbTransfer.getValue());
-        entry.setReconcile(chkReconcile.isSelected());
+        transaction.setReconcile(chkReconcile.isSelected());
         if(account.isNormalDebit()){
             if(Double.parseDouble(txtAmount.getText()) < 0){
-                entry.setCredit(-Double.parseDouble(txtAmount.getText()));
+                transaction.setCredit(-Double.parseDouble(txtAmount.getText()));
             }
             else{
-                entry.setDebit(Double.parseDouble(txtAmount.getText()));
+                transaction.setDebit(Double.parseDouble(txtAmount.getText()));
             }
         }
         else{
             if(Double.parseDouble(txtAmount.getText()) < 0){
-                entry.setDebit(-Double.parseDouble(txtAmount.getText()));
+                transaction.setDebit(-Double.parseDouble(txtAmount.getText()));
             }
             else{
-                entry.setCredit(Double.parseDouble(txtAmount.getText()));
+                transaction.setCredit(Double.parseDouble(txtAmount.getText()));
             }
         }
-        entry.setTransfer(((ComboBoxItem)cmbTransfer.getValue()).toAccount());
-        editTransfer(entry.getTransfer(), !entry.getTransfer().isNormalDebit(), entry.getLedgerID());
-        return entry;
+        transaction.setTransfer(((ComboBoxItem)cmbTransfer.getValue()).toAccount());
+        editTransfer(transaction.getTransfer(), !transaction.getTransfer().isNormalDebit(), transaction.getLedgerID());
+        return transaction;
     }//end edit()
     
     
@@ -179,57 +180,58 @@ public class EditTransaction extends Dialog implements Initializable {
     /**
      * Edits details into the other account used to balance the books, if necessary deletes the old balance transfer and creates a new one (i.e. the transfer column was edited) 
      * @param transfer The account used to balance the books with this transaction
-     * @param notNormal Balance means the values are automatically the opposite of the orginal entry's debit/credit status
+     * @param notNormal Balance means the values are automatically the opposite of the original transaction's debit/credit status
      * @param ledgerID The background ID the computer uses to track the transactions --different than the human readable transactionID that shows on the ledger
      */
     public void editTransfer(Account transfer, boolean notNormal, int ledgerID){
+        System.out.println(ledgerID);
         try{
-            Entry entry = new Entry();
-            entry.setDate(dtDate.getValue());
-            entry.setTransactionID(txtTransactionID.getText());
-            entry.setDescription(txtDescription.getText());
-            entry.setTransfer(account);
-            entry.setReconcile(chkReconcile.isSelected());
+            Transaction transaction = new Transaction();
+            transaction.setLedgerID(revised.getLedgerID());
+            transaction.setDate(dtDate.getValue());
+            transaction.setTransactionID(txtTransactionID.getText());
+            transaction.setDescription(txtDescription.getText());
+            transaction.setTransfer(account);
+            transaction.setReconcile(chkReconcile.isSelected());
             if(!notNormal){
                 if(Double.parseDouble(txtAmount.getText()) < 0){
-                    entry.setCredit(-Double.parseDouble(txtAmount.getText()));
+                    transaction.setCredit(-Double.parseDouble(txtAmount.getText()));
                 }
                 else{
-                    entry.setDebit(Double.parseDouble(txtAmount.getText()));
+                    transaction.setDebit(Double.parseDouble(txtAmount.getText()));
                 }
             }
             else{
                 if(Double.parseDouble(txtAmount.getText()) < 0){
-                    entry.setDebit(-Double.parseDouble(txtAmount.getText()));
+                    transaction.setDebit(-Double.parseDouble(txtAmount.getText()));
                 }
                 else{
-                    entry.setCredit(Double.parseDouble(txtAmount.getText()));
+                    transaction.setCredit(Double.parseDouble(txtAmount.getText()));
                 }
             }
             boolean sameAccount = false;
-            for(int i = 0; i < ((ComboBoxItem)cmbTransfer.getValue()).toAccount().getEntries().size(); i++){
-                if(((ComboBoxItem)cmbTransfer.getValue()).toAccount().getEntries().get(i).getLedgerID() == ledgerID){
+            for(int i = 0; i < ((ComboBoxItem)cmbTransfer.getValue()).toAccount().getTransactions().size(); i++){
+                if(((ComboBoxItem)cmbTransfer.getValue()).toAccount().getTransactions().get(i).getLedgerID() == ledgerID){
                     sameAccount = true;
                 }
             }
             if(sameAccount){
-                for(int i = 0; i < transfer.getEntries().size(); i++){
-                    if(transfer.getEntries().get(i).getLedgerID() == ledgerID){
-                        transfer.getEntries().set(i, entry);
+                for(int i = 0; i < transfer.getTransactions().size(); i++){
+                    if(transfer.getTransactions().get(i).getLedgerID() == ledgerID){
+                        transfer.getTransactions().set(i, transaction);
                     }
                 }
             }
             else{
-                ((ComboBoxItem)cmbTransfer.getValue()).toAccount().getEntries().add(entry);
-                for(int i = 0; i < revised.getTransfer().getEntries().size(); i++){
-                    if(revised.getTransfer().getEntries().get(i).getLedgerID() == ledgerID){
-                        revised.getTransfer().getEntries().remove(i);
+                ((ComboBoxItem)cmbTransfer.getValue()).toAccount().getTransactions().add(transaction);
+                for(int i = 0; i < revised.getTransfer().getTransactions().size(); i++){
+                    if(revised.getTransfer().getTransactions().get(i).getLedgerID() == ledgerID){
+                        revised.getTransfer().getTransactions().remove(i);
                     }
                 }
             }
         }
         catch(Exception e){
-            e.printStackTrace();
             //probbaly nothing to add: blank amount, rest are fine
         }
     }//end addTransfer()

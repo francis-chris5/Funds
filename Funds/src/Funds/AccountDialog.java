@@ -6,6 +6,7 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,8 +62,8 @@ public class AccountDialog extends Dialog implements Initializable {
     
     private Account account;
     private Book book;
-    private TableView<Entry> ledger = new TableView<>();
-    
+    private TableView<Transaction> ledger = new TableView<>();
+    private ObservableList<Transaction> transactions = FXCollections.observableArrayList();
     
     
     
@@ -122,36 +123,36 @@ public class AccountDialog extends Dialog implements Initializable {
         ////////////////////////////////////////////  CLASS METHODS  ///////////
     
     /**
-     * Internal method that uses cell factories to create columns for the ledger based off Entry objects
+     * Internal method that uses cell factories to create columns for the ledger based off Transaction objects
      */
     public void loadAccountLedger(){
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
         ledger.getColumns().clear();
-        TableColumn<Entry, LocalDate> clmDate = new TableColumn<>("Date");
+        TableColumn<Transaction, LocalDate> clmDate = new TableColumn<>("Date");
         clmDate.setPrefWidth(75);
         clmDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         
-        TableColumn<Entry, String> clmNumber = new TableColumn("ID");
+        TableColumn<Transaction, String> clmNumber = new TableColumn("ID");
         clmNumber.setPrefWidth(40);
         clmNumber.setCellValueFactory(new PropertyValueFactory<>("transactionID"));
         
-        TableColumn<Entry, String> clmDescription = new TableColumn<>("Description");
+        TableColumn<Transaction, String> clmDescription = new TableColumn<>("Description");
         clmDescription.setPrefWidth(200);
         clmDescription.setCellValueFactory(new PropertyValueFactory("description"));
         
-        TableColumn<Entry, Account> clmTransfer = new TableColumn("Transfer");
+        TableColumn<Transaction, Account> clmTransfer = new TableColumn("Transfer");
         clmTransfer.setPrefWidth(200);
         clmTransfer.setCellValueFactory(new PropertyValueFactory("transfer"));
         
-        TableColumn<Entry, Boolean> clmReconcile = new TableColumn<>("R");
+        TableColumn<Transaction, Boolean> clmReconcile = new TableColumn<>("R");
         clmReconcile.setPrefWidth(25);
         clmReconcile.setCellValueFactory(new PropertyValueFactory<>("reconcile"));
         clmReconcile.setCellFactory(chk -> new CheckBoxTableCell());
         
-        TableColumn<Entry, Double> clmDebit = new TableColumn<>("Debit");
+        TableColumn<Transaction, Double> clmDebit = new TableColumn<>("Debit");
         clmDebit.setPrefWidth(75);
         clmDebit.setCellValueFactory(new PropertyValueFactory<>("debit"));
-        clmDebit.setCellFactory(cell -> new TableCell<Entry, Double>(){
+        clmDebit.setCellFactory(cell -> new TableCell<Transaction, Double>(){
             @Override
             protected void updateItem(Double item, boolean empty){
                 super.updateItem(item, empty);
@@ -159,10 +160,10 @@ public class AccountDialog extends Dialog implements Initializable {
             }
         });
         
-        TableColumn<Entry, Double> clmCredit = new TableColumn<>("Credit");
+        TableColumn<Transaction, Double> clmCredit = new TableColumn<>("Credit");
         clmCredit.setPrefWidth(75);
         clmCredit.setCellValueFactory(new PropertyValueFactory<>("credit"));
-        clmCredit.setCellFactory(cell -> new TableCell<Entry, Double>(){
+        clmCredit.setCellFactory(cell -> new TableCell<Transaction, Double>(){
             @Override
             protected void updateItem(Double item, boolean empty){
                 super.updateItem(item, empty);
@@ -170,10 +171,10 @@ public class AccountDialog extends Dialog implements Initializable {
             }
         });
         
-        TableColumn<Entry, Double> clmBalance = new TableColumn<>("Balance");
+        TableColumn<Transaction, Double> clmBalance = new TableColumn<>("Balance");
         clmBalance.setPrefWidth(95);
         clmBalance.setCellValueFactory(new PropertyValueFactory<>("balance"));
-        clmBalance.setCellFactory(cell -> new TableCell<Entry, Double>(){
+        clmBalance.setCellFactory(cell -> new TableCell<Transaction, Double>(){
             @Override
             protected void updateItem(Double item, boolean empty){
                 super.updateItem(item, empty);
@@ -181,7 +182,9 @@ public class AccountDialog extends Dialog implements Initializable {
             }
         });
         
-        ledger.setItems(account.getEntries());
+        transactions.clear();
+        transactions.addAll(account.getTransactions());
+        ledger.setItems(transactions);
         ledger.getColumns().addAll(clmDate, clmNumber, clmDescription, clmTransfer, clmReconcile, clmDebit, clmCredit, clmBalance);
 
         
@@ -243,38 +246,38 @@ public class AccountDialog extends Dialog implements Initializable {
     
     
     /**
-     * uses the values selected/entered for the input fields to create a new Entry object to represent the details of a real world transaction
+     * uses the values selected/entered for the input fields to create a new Transaction object to represent the details of a real world transaction
      */
     @FXML
     public void addTransaction(){
         try{
-            Entry entry = new Entry();
-            entry.setDate(dtDate.getValue());
-            entry.setTransactionID(txtTransactionID.getText());
-            entry.setDescription(txtDescription.getText());
-            entry.setTransfer(cmbTransfer.getValue() != null ? ((ComboBoxItem)cmbTransfer.getValue()).toAccount() : null);
-            entry.setReconcile(chkReconcile.isSelected());
+            Transaction transaction = new Transaction();
+            transaction.setDate(dtDate.getValue());
+            transaction.setTransactionID(txtTransactionID.getText());
+            transaction.setDescription(txtDescription.getText());
+            transaction.setTransfer(cmbTransfer.getValue() != null ? ((ComboBoxItem)cmbTransfer.getValue()).toAccount() : null);
+            transaction.setReconcile(chkReconcile.isSelected());
             if(account.isNormalDebit()){
                 if(Double.parseDouble(txtAmount.getText()) < 0){
-                    entry.setCredit(-Double.parseDouble(txtAmount.getText()));
+                    transaction.setCredit(-Double.parseDouble(txtAmount.getText()));
                 }
                 else{
-                    entry.setDebit(Double.parseDouble(txtAmount.getText()));
+                    transaction.setDebit(Double.parseDouble(txtAmount.getText()));
                 }
             }
             else{
                 if(Double.parseDouble(txtAmount.getText()) < 0){
-                    entry.setDebit(-Double.parseDouble(txtAmount.getText()));
+                    transaction.setDebit(-Double.parseDouble(txtAmount.getText()));
                 }
                 else{
-                    entry.setCredit(Double.parseDouble(txtAmount.getText()));
+                    transaction.setCredit(Double.parseDouble(txtAmount.getText()));
                 }
             }
-            entry.setLedgerID(book.getLedgerID());
-            account.getEntries().add(entry);
+            transaction.setLedgerID(book.getLedgerID());
+            account.getTransactions().add(transaction);
             account.findRunningBalance();
-            if(entry.getTransfer() != null){
-                addTransfer(entry.getTransfer(), account.isNormalDebit());
+            if(transaction.getTransfer() != null){
+                addTransfer(transaction.getTransfer(), account.isNormalDebit());
             }
             else{
                 Account imbalance = new Account();
@@ -289,6 +292,7 @@ public class AccountDialog extends Dialog implements Initializable {
                     imbalance = new Account("IMBALANCE", false);
                     book.getLiabilities().add(imbalance);
                 }
+                transaction.setTransfer(imbalance);
                 addTransfer(imbalance, account.isNormalDebit());
             }
             loadAccountLedger();
@@ -296,7 +300,6 @@ public class AccountDialog extends Dialog implements Initializable {
             book.incrementLedgerID();
         }
         catch(Exception e){
-            e.printStackTrace();
             //probbaly nothing to add: blank amount, rest are fine
         }
     }//end addTransaction()
@@ -305,36 +308,36 @@ public class AccountDialog extends Dialog implements Initializable {
     
     
     /**
-     * Internal method to implement double entry method accounting
-     * @param transfer The account to counter balance the changes from the new transaction entry
-     * @param notNormal The debit/credit status of the transfer account is automatically the opposite from the initial entry
+     * Internal method to implement double transaction method accounting
+     * @param transfer The account to counter balance the changes from the new transaction transaction
+     * @param notNormal The debit/credit status of the transfer account is automatically the opposite from the initial transaction
      */
     public void addTransfer(Account transfer, boolean notNormal){
         try{
-            Entry entry = new Entry();
-            entry.setDate(dtDate.getValue());
-            entry.setTransactionID(txtTransactionID.getText());
-            entry.setDescription(txtDescription.getText());
-            entry.setTransfer(account);
-            entry.setReconcile(chkReconcile.isSelected());
+            Transaction transaction = new Transaction();
+            transaction.setDate(dtDate.getValue());
+            transaction.setTransactionID(txtTransactionID.getText());
+            transaction.setDescription(txtDescription.getText());
+            transaction.setTransfer(account);
+            transaction.setReconcile(chkReconcile.isSelected());
             if(!notNormal){
                 if(Double.parseDouble(txtAmount.getText()) < 0){
-                    entry.setCredit(-Double.parseDouble(txtAmount.getText()));
+                    transaction.setCredit(-Double.parseDouble(txtAmount.getText()));
                 }
                 else{
-                    entry.setDebit(Double.parseDouble(txtAmount.getText()));
+                    transaction.setDebit(Double.parseDouble(txtAmount.getText()));
                 }
             }
             else{
                 if(Double.parseDouble(txtAmount.getText()) < 0){
-                    entry.setDebit(-Double.parseDouble(txtAmount.getText()));
+                    transaction.setDebit(-Double.parseDouble(txtAmount.getText()));
                 }
                 else{
-                    entry.setCredit(Double.parseDouble(txtAmount.getText()));
+                    transaction.setCredit(Double.parseDouble(txtAmount.getText()));
                 }
             }
-            entry.setLedgerID(book.getLedgerID());
-            transfer.getEntries().add(entry);
+            transaction.setLedgerID(book.getLedgerID());
+            transfer.getTransactions().add(transaction);
         }
         catch(Exception e){
             //probbaly nothing to add: blank amount, rest are fine
@@ -349,9 +352,11 @@ public class AccountDialog extends Dialog implements Initializable {
      */
     @FXML
     public void removeTransactions(){
-        ObservableList<Entry> remove = ledger.getSelectionModel().getSelectedItems();
+        ObservableList<Transaction> remove = ledger.getSelectionModel().getSelectedItems();
         remove.forEach(r -> ledger.getItems().remove(r));
-        account.setEntries(ledger.getItems());
+        for(int i = 0; i < ledger.getItems().size(); i++){
+            account.getTransactions().add(ledger.getItems().get(i));
+        }
         account.findRunningBalance();
         ledger.getSelectionModel().clearSelection();
         loadAccountLedger();
@@ -365,15 +370,15 @@ public class AccountDialog extends Dialog implements Initializable {
      */
     @FXML
     public void editTransaction(){
-        ObservableList<Entry> choice = ledger.getSelectionModel().getSelectedItems();
+        ObservableList<Transaction> choice = ledger.getSelectionModel().getSelectedItems();
         try{
             choice.forEach(c -> {
                 EditTransaction editor = new EditTransaction(book, account, c);
-                Entry revised = editor.edit();
+                Transaction revised = editor.edit();
                 if(revised != null){
-                    for(int i = 0; i < account.getEntries().size(); i++){
-                        if(account.getEntries().get(i) == c){
-                            account.getEntries().set(i, revised);
+                    for(int i = 0; i < account.getTransactions().size(); i++){
+                        if(account.getTransactions().get(i) == c){
+                            account.getTransactions().set(i, revised);
                             account.findRunningBalance();
                             break;
                         }

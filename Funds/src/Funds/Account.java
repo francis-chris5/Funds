@@ -1,18 +1,19 @@
 
 package Funds;
 
+import java.io.Serializable;
 import java.text.NumberFormat;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.util.LinkedList;
+
 
 
 /**
  * <h2>Summary</h2>
  * <p>The Account class will be the primary working tool for organizing the transactions in terms of money coming in or money going out using the standard accounting practice of double-entry method. All transactions are recorded in two accounts, once as a debit and once as a credit, and in the end all debits and credits will balance out.</p>
- * <p>Entries (transactions) are the small scale and Books are the big picture which leaves Accounts as that nice middle-ground where we get the whole picture without getting bogged down in, but can still see, the finer details.</p>
+ * <p>Transactions are the small scale and Books are the big picture which leaves Accounts as that nice middle-ground where we get the whole picture without getting bogged down in, but can still see, the finer details.</p>
  * @author Chris Francis
  */
-public class Account {
+public class Account implements Serializable {
     
         //////////////////////////////////////////////  DATAFIELDS  /////////
     
@@ -23,7 +24,7 @@ public class Account {
     private String description;
     private AccountType type;
     private boolean normalDebit;
-    private ObservableList<Entry> entries = FXCollections.observableArrayList();
+    private LinkedList<Transaction> transactions = new LinkedList<>();
     
     
     
@@ -45,7 +46,7 @@ public class Account {
     /**
      * For general usage when creating a new account the most important things to know are the name (how to recognize it on the charts) and the normal (which column in the ledger represents an increase), the two-arg constructor implements only this information at creation.
      * @param name The nickname for this account
-     * @param normalDebit A boolean value of true if the account increases with debit entries or false if the account increases with credit entries
+     * @param normalDebit A boolean value of true if the account increases with debit transactions or false if the account increases with credit transactions
      */
     public Account(String name, boolean normalDebit) {
         this.name = name;
@@ -62,7 +63,7 @@ public class Account {
      * @param routing The routing number referring to the bank holding the account
      * @param code A alpha-numerical code to be used in local book keeping records
      * @param description A plain language description of the account
-     * @param normalDebit A boolean value of true if the account increases with debit entries or false if the account increases with credit entries
+     * @param normalDebit A boolean value of true if the account increases with debit transactions or false if the account increases with credit transactions
      */
     public Account(String name, String number, String routing, String code, String description, boolean normalDebit) {
         this.name = name;
@@ -138,12 +139,12 @@ public class Account {
         this.normalDebit = normalDebit;
     }
 
-    public ObservableList<Entry> getEntries() {
-        return entries;
+    public LinkedList<Transaction> getTransactions() {
+        return transactions;
     }
 
-    public void setEntries(ObservableList<Entry> entries) {
-        this.entries = entries;
+    public void setTransactions(LinkedList<Transaction> transactions) {
+        this.transactions = transactions;
     }
     
     
@@ -156,13 +157,13 @@ public class Account {
         ///////////////////////////////////////  ACCOUNT METHODS  ///////////
     
     /**
-     * The recalculated balance for every Entry (transaction) recorded in this account
+     * The recalculated balance for every Transaction (transaction) recorded in this account
      */
     public void findRunningBalance(){
         double runningTotal = 0.0;
-        for(int i = 0; i < entries.size(); i++){
-            runningTotal += isNormalDebit() ? entries.get(i).getDebit() - entries.get(i).getCredit() : entries.get(i).getCredit() - entries.get(i).getDebit();
-            entries.get(i).setBalance(runningTotal);
+        for(int i = 0; i < transactions.size(); i++){
+            runningTotal += isNormalDebit() ? transactions.get(i).getDebit() - transactions.get(i).getCredit() : transactions.get(i).getCredit() - transactions.get(i).getDebit();
+            transactions.get(i).setBalance(runningTotal);
         }
     }//end findRunningBalance()
     
@@ -175,8 +176,8 @@ public class Account {
      */
     public double findBalance(){
         double balance = 0.0;
-        for(int i = 0; i < entries.size(); i++){
-            balance += isNormalDebit() ? entries.get(i).getDebit() - entries.get(i).getCredit() : entries.get(i).getCredit() - entries.get(i).getDebit();
+        for(int i = 0; i < transactions.size(); i++){
+            balance += isNormalDebit() ? transactions.get(i).getDebit() - transactions.get(i).getCredit() : transactions.get(i).getCredit() - transactions.get(i).getDebit();
         }
         return balance;
     }
@@ -197,7 +198,7 @@ public class Account {
     @Override
     public String toString() {
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
-        return getName() + ": " + currencyFormat.format(getEntries().isEmpty()? 0.0 : findBalance());
+        return getName() + ": " + currencyFormat.format(getTransactions().isEmpty()? 0.0 : findBalance());
     }//end toString()
  
 }//end Account

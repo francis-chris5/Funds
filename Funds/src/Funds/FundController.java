@@ -3,12 +3,18 @@ package Funds;
 
 import java.net.URL;
 import java.text.NumberFormat;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 
 
@@ -57,6 +63,124 @@ public class FundController implements Initializable{
         //////////////////////////////////////////////  BOOK METHODS  /////////
     
     /**
+     * opens a previously saved book of accounts to work with
+     */
+    @FXML
+    public void openBook(){
+        //closeBook();
+        Book another = new Book().openBook();
+        if(another != null){
+            book = another;
+            displayDetails();
+            book.setSaved(true);
+        }
+        Stage stgMain = (Stage)btnBookDetails.getScene().getWindow();
+        stgMain.setTitle(book.getFilepath() != null? "Funds:\t\t" + book.getFilepath(): "Funds: \t\tunsaved book");
+    }//end openBook()
+    
+    
+    
+    
+    /**
+     * Checks if it has been saved, closes the current book, and resets everything on the GUI
+     */
+    public void closeBook(){
+        boolean close = true;
+        if(!book.isSaved()){
+            Alert wantSave = new Alert(Alert.AlertType.CONFIRMATION);
+            Image icon = new Image(getClass().getResourceAsStream("Images/FundsIcon.png"));
+            Stage stage = (Stage)wantSave.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(icon);
+            wantSave.setTitle("Funds");
+            wantSave.setHeaderText("Current book has not been saved");
+            wantSave.setContentText("Do you want to save the changes to this book before closing?");
+            wantSave.getDialogPane().getStylesheets().add(getClass().getResource("Stylesheets/FundStyle.css").toExternalForm());
+            wantSave.getDialogPane().getStyleClass().add("FundStyle");
+            
+            ButtonType save = new ButtonType("Save");
+            ButtonType noSave = new ButtonType("Close Without Saving");
+            ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+            wantSave.getButtonTypes().setAll(save, noSave, cancel);
+            Optional<ButtonType> result = wantSave.showAndWait();
+            if(result.get() == save){
+                if(book.getFilename() == null){
+                    book.saveAsBook();
+                }
+                else{
+                    close = book.saveBook();
+                }
+                if(!close){
+                    Alert fail = new Alert(Alert.AlertType.ERROR);
+                    fail.setTitle("Book");
+                    fail.setHeaderText("Unable to save file");
+                    fail.setContentText("Please try again to save the book.");
+                }
+            }
+            else if(result.get() == noSave){
+                book.setSaved(true);
+                
+            }
+            else{
+                close = false;
+            }
+        }
+        if(close){
+            book = new Book();
+            vbxAsset.getChildren().clear();
+            vbxLiability.getChildren().clear();
+            vbxEquity.getChildren().clear();
+            txtTotalAssets.setText(Double.toString(0.0));
+            txtTotalLiabilities.setText(Double.toString(0.0));
+            txtTotalEquity.setText(Double.toString(0.0));
+            displayDetails();
+            btnBookDetails.setText("Book Details");
+            Stage stgMain = (Stage)btnBookDetails.getScene().getWindow();
+            stgMain.setTitle("Funds");
+        }
+    }//end closeRoutine();
+    
+    
+    
+    
+    
+    /**
+     * serializes current working data to a file: calls save as if it hasn't been saved yet, otherwise overwrites the saved version
+     */
+    @FXML
+    public void saveBook(){
+        if(book.getFilename() == null){
+            book.saveAsBook();
+        }
+        else{
+            book.saveBook();
+        }
+        Stage stgMain = (Stage)btnBookDetails.getScene().getWindow();
+        stgMain.setTitle(book.getFilepath() != null? "Funds:\t\t" + book.getFilepath(): "Book: \t\tunsaved book");
+    }//end saveBook()
+    
+    
+    
+    
+    /**
+     * creates a new saved file to serialize current working data to
+     */
+    @FXML
+     public void saveAsBook(){
+        book.saveAsBook();
+        Stage stgMain = (Stage)btnBookDetails.getScene().getWindow();
+        stgMain.setTitle(book.getFilepath() != null? "Funds:\t\t" + book.getFilepath(): "Funds: \t\tunsaved book");
+    }//end saveAsBook()
+    
+    
+    
+    
+     
+     
+     
+    
+        ///////////////////////////////////////////  GUI OPERATIONS  //////////
+     
+    /**
      * This is basically the refresh method for what's showing on the GUI
      * loads book details in button text, refreshes the balance sheet trees, updates the account totals in the balancing equation listing
      */
@@ -81,6 +205,7 @@ public class FundController implements Initializable{
     
     
     
+    
     /**
      * clears the balance sheet, creates a new one, and loads it in
      */
@@ -100,6 +225,7 @@ public class FundController implements Initializable{
     
     
     
+    
     /**
      * calculates and displays the total values from all of the current Book's accounts into the balancing equation listing
      */
@@ -107,24 +233,24 @@ public class FundController implements Initializable{
         double total = 0.0;
         for(int i = 0; i < book.getAssets().size(); i++){
             Account acc = book.getAssets().get(i);
-            for(int j = 0; j < acc.getEntries().size(); j++){
-                total += acc.getEntries().get(j).getDebit() - acc.getEntries().get(j).getCredit();
+            for(int j = 0; j < acc.getTransactions().size(); j++){
+                total += acc.getTransactions().get(j).getDebit() - acc.getTransactions().get(j).getCredit();
             }
         }
         txtTotalAssets.setText(Double.toString(total));
         total = 0.0;
         for(int i = 0; i < book.getLiabilities().size(); i++){
             Account acc = book.getLiabilities().get(i);
-            for(int j = 0; j < acc.getEntries().size(); j++){
-                total += acc.getEntries().get(j).getCredit() - acc.getEntries().get(j).getDebit();
+            for(int j = 0; j < acc.getTransactions().size(); j++){
+                total += acc.getTransactions().get(j).getCredit() - acc.getTransactions().get(j).getDebit();
             }
         }
         txtTotalLiabilities.setText(Double.toString(total));
         total = 0.0;
         for(int i = 0; i < book.getEquities().size(); i++){
             Account acc = book.getEquities().get(i);
-            for(int j = 0; j < acc.getEntries().size(); j++){
-                total += acc.getEntries().get(j).getCredit() - acc.getEntries().get(j).getDebit();
+            for(int j = 0; j < acc.getTransactions().size(); j++){
+                total += acc.getTransactions().get(j).getCredit() - acc.getTransactions().get(j).getDebit();
             }
         }
         txtTotalEquity.setText(Double.toString(total));
@@ -139,7 +265,7 @@ public class FundController implements Initializable{
     
     
     
-        ///////////////////////////////////////////  OTHER  ////////////////
+        ///////////////////////////////////////////  JAVA OBJECT  ////////////////
     
     
     /**

@@ -1,5 +1,10 @@
 
 
 
-in edit account got a null pointer when transfer field was blank (should be able to ignore initially loading that)
+don't allow transfer to self, that caused a big issue when trying to remove it
+
+editing transactions loses track of positive and negative (check normal debit to load in +- amount)
+
+
+set saved to false everytime a change is made
 

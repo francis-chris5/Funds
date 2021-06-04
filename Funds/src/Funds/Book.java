@@ -1,8 +1,15 @@
 
 package Funds;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.LinkedList;
+import javafx.stage.FileChooser;
 
 
 /**
@@ -11,12 +18,13 @@ import java.util.LinkedList;
  * <p>The Book object is what will be saved/opened/worked-with by users for ongoing concerns in accounting.</p>
  * @author Chris Francis
  */
-public class Book {
+public class Book implements Serializable {
     
     
         //////////////////////////////////////////////////  DATAFIELDS  //////
     private String filename;
     private String filepath;
+    private boolean saved;
     
     private String name;
     private LocalDate initialized;
@@ -29,6 +37,7 @@ public class Book {
     private LinkedList<Account> liabilities = new LinkedList<>();
     private LinkedList<Account> equities = new LinkedList<>();
     
+
     
     
     
@@ -144,6 +153,96 @@ public class Book {
     public void setEquities(LinkedList<Account> equities) {
         this.equities = equities;
     }
+    
+    public boolean isSaved() {
+        return saved;
+    }
+
+    public void setSaved(boolean saved) {
+        this.saved = saved;
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    //
+    
+    /**
+     * Serializes the current Book to a binary file
+     * @return <b>boolean</b> indicating whether or not the Book was successfully saved
+     */
+    public boolean saveBook() {
+        try{
+            File file = new File(this.filepath);
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this);
+            oos.close();
+            this.saved = true;
+            return this.saved;
+        }
+        catch(Exception e){
+            return false;
+        }
+    } //end saveBook()
+    
+    
+    
+    
+    /**
+     * Serializes the current Book to a binary file
+     * @return <b>boolean</b> indicating whether or not the Book was successfully saved
+     */
+    public boolean saveAsBook(){
+        try{
+            FileChooser choose = new FileChooser();
+            FileChooser.ExtensionFilter bookFilter = new FileChooser.ExtensionFilter("Book, .fabk", "*.fabk");
+            choose.getExtensionFilters().add(bookFilter);
+            File file = choose.showSaveDialog(null);
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this);
+            oos.close();
+            this.filepath = file.getPath();
+            this.filename = file.getName();
+            this.saved = true;
+            return this.saved;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }//end saveAsBook()
+    
+    
+    
+    
+    /**
+     * Retrieves a serialized Book object from a binary file
+     * @return <b>Book</b> requested from the file chooser
+     */
+    public Book openBook(){
+        try{
+            FileChooser choose = new FileChooser();
+            FileChooser.ExtensionFilter bookFilter = new FileChooser.ExtensionFilter("Book, .fabk", "*.fabk");
+            choose.getExtensionFilters().add(bookFilter);
+            File file = choose.showOpenDialog(null);
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Book book = (Book)ois.readObject();
+            book.filename = file.getName();
+            book.filepath = file.getPath();
+            book.saved = true;
+            ois.close();
+            return book;
+        }
+        catch(Exception e){
+            return null;
+        }
+    }//end openBook()
     
     
     
