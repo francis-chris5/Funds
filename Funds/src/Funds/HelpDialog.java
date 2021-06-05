@@ -58,9 +58,9 @@ public class HelpDialog extends Dialog implements Initializable{
         String helpString = new String();
         try{
                 ////use this in netbeans
-            File file = new File("src/" + filepath);
+            //File file = new File("src/" + filepath);
                 ////use this in build
-            //File file = new File(Paths.get("").toAbsolutePath().toString() + "/bin/" + filepath);
+            File file = new File(Paths.get("").toAbsolutePath().toString() + "/bin/" + filepath);
             Scanner readFile = new Scanner(file);
             while(readFile.hasNextLine()){
                 helpString += readFile.nextLine();

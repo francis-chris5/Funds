@@ -172,6 +172,7 @@ public class RemoveAccountDialog extends Dialog implements Initializable{
                             }
                         }
                 }
+                book.setSaved(false);
             }
             else{
                 Alert noRemove = new Alert(AlertType.WARNING);

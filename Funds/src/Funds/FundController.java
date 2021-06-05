@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  * The controller class for the software's main GUI
  * @author Chris Francis
  */
-public class FundController implements Initializable{
+public class FundController implements Initializable, Book.AccountController {
 
         /////////////////////////////////////////////  GUI  /////////////////
 
@@ -97,10 +97,11 @@ public class FundController implements Initializable{
      */
     @FXML
     public void openBook(){
-        //closeBook();
+        closeBook();
         Book another = new Book().openBook();
         if(another != null){
             book = another;
+            book.setAccountController(this);
             displayDetails();
             book.setSaved(true);
         }
@@ -156,6 +157,7 @@ public class FundController implements Initializable{
         }
         if(close){
             book = new Book();
+            book.setAccountController(this);
             vbxAsset.getChildren().clear();
             vbxLiability.getChildren().clear();
             vbxEquity.getChildren().clear();
@@ -178,6 +180,7 @@ public class FundController implements Initializable{
      */
     @FXML
     public void saveBook(){
+        book.setAccountController(null);
         if(book.getFilename() == null){
             book.saveAsBook();
         }
@@ -196,6 +199,7 @@ public class FundController implements Initializable{
      */
     @FXML
     public void saveAsBook(){
+        book.setAccountController(null);
         book.saveAsBook();
         Stage stgMain = (Stage)btnBookDetails.getScene().getWindow();
         stgMain.setTitle(book.getFilepath() != null? "Funds:\t\t" + book.getFilepath(): "Funds: \t\tunsaved book");
@@ -227,6 +231,7 @@ public class FundController implements Initializable{
      * This is basically the refresh method for what's showing on the GUI
      * loads book details in button text, refreshes the balance sheet trees, updates the account totals in the balancing equation listing
      */
+    @Override
     public void displayDetails(){
         btnBookDetails.setText(book.toString());
         showBalanceSheet();
@@ -338,6 +343,7 @@ public class FundController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //I rarely use this, just need it here
+        book.setAccountController(this);
         Account cash = new Account("Cash", true);
         Account card = new Account("Credit Card", false);
         Account rev = new Account("Revenue", false);

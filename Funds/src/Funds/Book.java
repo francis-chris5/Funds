@@ -20,6 +20,15 @@ import javafx.stage.FileChooser;
  */
 public class Book implements Serializable {
     
+        ////////////////////////////////////  INTERFACING REQUIREMENTS  ///////
+    
+    /**
+     * A java object must have a dispalyDetails() method to refresh the balance sheet to serve as a FXML controller for this class
+     */
+    public interface AccountController{
+        void displayDetails();
+    }//end interfacing requirements
+    
     
         //////////////////////////////////////////////////  DATAFIELDS  //////
     private String filename;
@@ -37,6 +46,7 @@ public class Book implements Serializable {
     private LinkedList<Account> liabilities = new LinkedList<>();
     private LinkedList<Account> equities = new LinkedList<>();
     
+    private AccountController accountController;
 
     
     
@@ -162,6 +172,15 @@ public class Book implements Serializable {
         this.saved = saved;
     }
 
+    public AccountController getAccountController(){
+        return accountController;
+    }
+    
+    public void setAccountController(AccountController accountController){
+        this.accountController = accountController;
+    }
+    
+ 
     
     
     
@@ -169,7 +188,23 @@ public class Book implements Serializable {
     
     
     
-    //
+    
+        //////////////////////////////////////  CLASS METHODS  /////////////
+    
+    /**
+     * Method to update the balance sheet displayed to the user with every change to a ledger, requires the Book.AccountController interface
+     */
+    public void displayDetails(){
+        try{
+            AccountController ac = (AccountController)getAccountController();
+            ac.displayDetails();
+        }
+        catch(Exception e){
+            //just move on then
+        }
+    }
+    
+
     
     /**
      * Serializes the current Book to a binary file
@@ -186,6 +221,7 @@ public class Book implements Serializable {
             return this.saved;
         }
         catch(Exception e){
+            e.printStackTrace();
             return false;
         }
     } //end saveBook()
@@ -213,6 +249,7 @@ public class Book implements Serializable {
             return this.saved;
         }
         catch(Exception e){
+            e.printStackTrace();
             return false;
         }
     }//end saveAsBook()
@@ -240,6 +277,7 @@ public class Book implements Serializable {
             return book;
         }
         catch(Exception e){
+            e.printStackTrace();
             return null;
         }
     }//end openBook()
@@ -261,11 +299,5 @@ public class Book implements Serializable {
     public String toString() {
         return "The " + getName() + " book was opened on " + getInitialized() + " and is described as " + getDescription();
     }//end toString()
-    
-    
-    
-    
-    
-    
-    
+
 }//end Book

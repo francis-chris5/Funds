@@ -1,6 +1,24 @@
 
 
 
+Book
+
+    To create a new book select [File -> New] from the main menu and select the a starting template for the book (more coming soon...)
+
+    To open an existing book select [File -> Open] from the main menu and browse to where the .fabk file is stored
+
+    To save a book select [File -> Save] or [File -> Save As...] from the main menu and browse to the location where you wish to store the book and give it a meaningful name
+
+    To close the current book but keep the Funds Application running select [File -> Close] from the main menu
+
+    To exit the Funds Application select [File -> Quit] from the main menu
+
+
+
+
+
+
+
 Accounts (Balance Sheet Access)
 
     The first tab on the Main Graphical User Interface (GUI) appears as a balance sheet listing all available accounts. 
@@ -10,6 +28,7 @@ Accounts (Balance Sheet Access)
     To create a new account right-click in the white space for one of the categories (Assets, Liabilities, or Equity) and select "New <TYPE> Account" from the context menu --see create account instructions to proceed
 
     To remove an account from the book right click in the white space for one of the categories (Assets, Liabilities, or Equity) and select "Remove <TYPE> Account" from the context menu, select the account(s) to remove (hold ctrl while clicking to make multiple selections) and click the ok button when ready. NOTE: An account can only be removed if it's balance is $0.00, if not please transfer the balance to another existing account and try again to remove it.
+
 
 
 

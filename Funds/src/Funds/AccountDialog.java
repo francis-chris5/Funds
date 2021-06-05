@@ -304,6 +304,8 @@ public class AccountDialog extends Dialog implements Initializable {
             loadAccountLedger();
             clearTransaction();
             book.incrementLedgerID();
+            book.setSaved(false);
+            book.displayDetails();
         }
         catch(Exception e){
             //probbaly nothing to add: blank amount, rest are fine
@@ -366,6 +368,8 @@ public class AccountDialog extends Dialog implements Initializable {
         account.findRunningBalance();
         ledger.getSelectionModel().clearSelection();
         loadAccountLedger();
+        book.setSaved(false);
+        book.displayDetails();
     }//end removeTransactions()
     
     
@@ -392,6 +396,8 @@ public class AccountDialog extends Dialog implements Initializable {
                 }
             });
             loadAccountLedger();
+            book.setSaved(false);
+            book.displayDetails();
         }
         catch(Exception e){
             //above changes the selected value but then throws error in javafx objects --my part seems to work fine like this

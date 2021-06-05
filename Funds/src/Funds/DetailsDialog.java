@@ -130,6 +130,7 @@ public class DetailsDialog extends Dialog implements Initializable {
         book.setInitialized(dtInitialized.getValue());
         book.setDescription(txtDescription.getText());
         book.setNotes(txtNotes.getHtmlText());
+        book.setSaved(false);
     }//end editDetails()
     
     

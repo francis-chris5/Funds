@@ -206,9 +206,11 @@ public class BalanceTree extends StackPane{
         public BalanceTreeContextMenu(){
             miNewAccount.setOnAction(m -> {
                 NewAccountDialog temp = new NewAccountDialog(book, tree.getRoot().getValue().toString());
+                book.displayDetails();
             });
             miRemoveAccount.setOnAction(m -> {
                 RemoveAccountDialog temp = new RemoveAccountDialog(book, tree.getRoot().getValue().toString());
+                book.displayDetails();
             });
             this.getItems().addAll(miNewAccount, miRemoveAccount);
         }//end constructor()
