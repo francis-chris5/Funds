@@ -45,7 +45,7 @@ The relational dataabase is mostly to make it compatible with other accounting s
 
 <h2>Project Progress</h2>
 
-I've got the ledger dialogs set up, and a start on the main gui. The first tab in the main content section of the GUI looks like a balance sheet (or it will when I get around to styling it), clicking on an account opens it in a ledger dialog to enter/edit/remove transactions. Total debits and credits are calculated correctly, but I don't have a good spot to call that recalculation yet so I just stuck in a temporary refresh button to use until I come up with one. 
+I've got the ledger dialogs set up, and a start on the main gui. The first tab in the main content section of the GUI looks like a balance sheet (or it will when I get around to styling it), clicking on an account opens it in a ledger dialog to enter/edit/remove transactions. Total debits and credits are calculated correctly when transactions are entered and when transactions are edited (still an issue with the delete transaction button throwing the balance way off...)
 
 Finally got around to working in a couple menu operations, so can save and reopen files now along with a couple options for new, and the rough drafts of a user manual and about file is available in a dialog launched from the help menu.
 
@@ -53,8 +53,7 @@ Finally got around to working in a couple menu operations, so can save and reope
 
 
 
-
-![pic_for_github_main](https://user-images.githubusercontent.com/50467171/120670749-ba823f00-c45e-11eb-84b1-a2ae98a84a4a.jpg)
+![pic_for_github_main](https://user-images.githubusercontent.com/50467171/120878604-9f611d80-c58b-11eb-91ec-37dc649150de.jpg)
 
 
 
