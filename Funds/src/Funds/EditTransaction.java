@@ -115,15 +115,21 @@ public class EditTransaction extends Dialog implements Initializable {
         cmbTransfer.getItems().clear();
         cmbTransfer.getItems().add(new ComboBoxItem(new Account("-----  ASSET  -----", true), true));
         for(int i = 0; i < book.getAssets().size(); i++){
-            cmbTransfer.getItems().add(new ComboBoxItem(book.getAssets().get(i), false));
+            if(!book.getAssets().get(i).toString().equals(account.toString())){
+                cmbTransfer.getItems().add(new ComboBoxItem(book.getAssets().get(i), false));
+            }
         }
         cmbTransfer.getItems().add(new ComboBoxItem(new Account("-----  LIABILITY  -----", false), true));
         for(int i = 0; i < book.getLiabilities().size(); i++){
-            cmbTransfer.getItems().add(new ComboBoxItem(book.getLiabilities().get(i), false));
+            if(!book.getLiabilities().get(i).toString().equals(account.toString())){
+                cmbTransfer.getItems().add(new ComboBoxItem(book.getLiabilities().get(i), false));
+            }
         }
         cmbTransfer.getItems().add(new ComboBoxItem(new Account("-----  EQUITY  -----", false), true));
         for(int i = 0; i < book.getEquities().size(); i++){
-            cmbTransfer.getItems().add(new ComboBoxItem(book.getEquities().get(i), false));
+            if(!book.getEquities().get(i).toString().equals(account.toString())){
+                cmbTransfer.getItems().add(new ComboBoxItem(book.getEquities().get(i), false));
+            }
         }
         cmbTransfer.setCellFactory(cell -> new ListCell<ComboBoxItem>(){
             @Override

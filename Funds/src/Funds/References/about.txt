@@ -1,5 +1,20 @@
 
-So the idea here is some accounting software to sort of accompany the Routines application.
+
+
+Funds: Accounting Software
+
+    Version 0.0.1 (the zero means it's still in initial development, hopefully version 1 is coming soon)
+
+Developed By: Christopher S. Francis
+    &copy; 2021
+
+
+(initial thought, more refined summary coming soon...)
+
+So the idea here is some accounting software to sort of accompany the Routines application. Just like the Routines Project Management Application the accounting software I've been using personally doesn't exactly fit my needs: it's designed for a large corporation which means there is way more there than I need, small input issues -I am constantly editing transactions by accident so trying to make that less likely to happen without making it difficult to edit transactions, I was also thinking that the standard accounting statements should be the primary appearance of the GUI not an afterthought to an overly fancy interface then tacked on and hidden a couple menus deep
+
+
+DESIGN THOUGHTS SUMMARY:
 
 A small accounting application, more for tracking a project (go with Routines) than for running an entire business (at least to start with)
 
@@ -8,19 +23,7 @@ A small accounting application, more for tracking a project (go with Routines) t
     balance sheet, cash flows, and a few other standard accounting reports
 
     a number of charts and graphs tracking the flow of a projects budget as time progresses
+
         (maybe some projection things to compare to)
-
-
-*********************************************
-Trying to pick a local relational database for this:
-
-
-sqlite-jdbc 3.34.0 for relational database
-get from https://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.34.0/sqlite-jdbc-3.34.0.jar 
-
-
-apache derby 10.14.2.0
-get from https://downloads.apache.org//db/derby/db-derby-10.14.2.0/db-derby-10.14.2.0-bin.zip  
-
 
 

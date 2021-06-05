@@ -22,25 +22,26 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@Stylesheets/FundStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Funds.FundController">
+<VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@Stylesheets/FundStyle.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Funds.FundController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem disable="true" mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" onAction="#newBook" text="New" />
             <MenuItem mnemonicParsing="false" onAction="#openBook" text="Open…" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" onAction="#closeBook" text="Close" />
             <MenuItem mnemonicParsing="false" onAction="#saveBook" text="Save" />
             <MenuItem mnemonicParsing="false" onAction="#saveAsBook" text="Save As…" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem disable="true" mnemonicParsing="false" text="Quit" />
+            <MenuItem mnemonicParsing="false" onAction="#exit" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem disable="true" mnemonicParsing="false" text="About MyHelloApp" />
+            <MenuItem mnemonicParsing="false" onAction="#getHelp" text="User Manual" />
+                  <MenuItem mnemonicParsing="false" onAction="#getAbout" text="about" />
           </items>
         </Menu>
       </menus>
