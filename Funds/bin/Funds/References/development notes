@@ -1,10 +1,6 @@
 
 
+update all changes automatically on the balance sheet page
 
-don't allow transfer to self, that caused a big issue when trying to remove it
-
-editing transactions loses track of positive and negative (check normal debit to load in +- amount)
-
-
-set saved to false everytime a change is made
+set saved to false every place a change could be made
 

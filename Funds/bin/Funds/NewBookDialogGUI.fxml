@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane stylesheets="@Stylesheets/FundStyle.css" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <VBox layoutX="42.0" layoutY="15.0" prefHeight="150.0" prefWidth="247.0" spacing="3.0">
+               <children>
+                  <RadioButton fx:id="rdEmpty" mnemonicParsing="false" text="Empty">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="StartTypeToggleGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <Label alignment="TOP_LEFT" prefHeight="57.0" prefWidth="208.0" text="Asset, Liability, and Equity charts but no accounts" wrapText="true">
+                     <VBox.margin>
+                        <Insets left="16.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="rdBasicPersonal" mnemonicParsing="false" text="Basic Personal" toggleGroup="$StartTypeToggleGroup">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <Label alignment="TOP_LEFT" prefHeight="49.0" prefWidth="208.0" text="Asset, Liability, and Equity charts containing Cash, Credit Card, Revenue, and Expense accounts" wrapText="true">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="16.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </content>
+</DialogPane>

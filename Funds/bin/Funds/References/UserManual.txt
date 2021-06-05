@@ -20,9 +20,9 @@ Account Ledger
 
     At the bottom of the table is a yellow row for inputting a new transaction. The only required field is the amount, enter a positive (money in) or negative (money out) and the posting will set it appropriately as a debit or credit based on the account type.
 
-        (Optional) enter a date for the transaction (the default is current date) --Optional
+        (Optional) enter a date for the transaction (the default is current date)
 
-        (Optional) an id for the transaction (the transfer account for balancing will receive the same ID) --Optional
+        (Optional) an id for the transaction (the transfer account for balancing will receive the same ID)
 
         (Optional) a short description of the transaction
 
