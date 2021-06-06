@@ -49,6 +49,7 @@ I've got the ledger dialogs set up, and a start on the main gui. The first tab i
 
 Finally got around to working in a couple menu operations, so can save and reopen files now along with a couple options for new, and the rough drafts of a user manual and about file is available in a dialog launched from the help menu.
 
+Got subcategories going to organize the accounts better instead of throwing them all right in one of the three main types. I'll get the pictures updated for that once the first template for a categorized book is ready (after some sleep).
 
 
 
