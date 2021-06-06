@@ -35,7 +35,7 @@ Everything is tied together via a nested assortment of Linked Lists
 
 <br><br><br>
 
-
+<br><br>
 
 <h2>User Manual</h2>
 
@@ -55,7 +55,7 @@ To exit the Funds Application select [File -> Quit] from the main menu
 
 
 
-
+<br><br>
 
 
 
@@ -75,7 +75,7 @@ To remove an account from the book right click in the white space for one of the
 
 
 
-
+<br><br>
 
 
 
@@ -105,7 +105,7 @@ To delete a transaction select it from the account ledger and click the delete b
 
 
 
-
+<br><br>
 
 
 
@@ -116,7 +116,7 @@ To create a new category for accounts to be organized in choose a type (Assets, 
 
 
 
-
+<br><br>
 
 
 Create Account
@@ -133,7 +133,7 @@ Click ok button to create the new account
 
 
 
-
+<br><br>
 
 
 
@@ -149,7 +149,7 @@ NOTE: An account can only be moved up or down among the category it is organized
 
 
 
-
+<br><br>
 
 
 Change Category Account is organized in
@@ -158,7 +158,7 @@ I'm still working on a graceful way to do this, so unfortunately it currently in
     
 
 
-
+<br><br>
 
 
 Remove Categories/Accounts
@@ -172,7 +172,7 @@ NOTE: An account cannot be deleted if it has a non-zero balance and a category c
 
 
 
-
+<br><br>
 
 
 
@@ -198,7 +198,7 @@ Keyboard Shortcuts
 
 
 
-
+<br><br>
 
 
 <br><br><br>
