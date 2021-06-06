@@ -47,9 +47,11 @@ The relational dataabase is mostly to make it compatible with other accounting s
 
 I've got the ledger dialogs set up, and a start on the main gui. The first tab in the main content section of the GUI looks like a balance sheet (or it will when I get around to styling it), clicking on an account opens it in a ledger dialog to enter/edit/remove transactions. Total debits and credits are calculated correctly when transactions are entered and when transactions are edited (still an issue with the delete transaction button throwing the balance way off...)
 
-Finally got around to working in a couple menu operations, so can save and reopen files now along with a couple options for new, and the rough drafts of a user manual and about file is available in a dialog launched from the help menu.
+Finally got around to working in a couple menu operations, so can save and reopen files now along with a couple template options for new, and the rough drafts of a user manual and about file are available in a dialog launched from the help menu.
 
-Got subcategories going to organize the accounts better instead of throwing them all right in one of the three main types. I'll get the pictures updated for that once the first template for a categorized book is ready (after some sleep).
+Got subcategories going to organize the accounts better instead of throwing them all right in one of the three main types. Not updating the pictures here yet since there's nothing significant to see: the trees have more entries with arrows beside them... 
+
+In general everything seems to be moving along nicely with this, certianly still have a lot to do just to get the basics that should be required in accounting software... but creating, organizing, and removing accounts; filling in, editing, or removing items on the ledgers for those accounts; and automated double entry to balance out the books is working as intended at this early stage of the project.
 
 
 
