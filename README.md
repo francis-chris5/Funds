@@ -56,7 +56,7 @@ In general everything seems to be moving along nicely with this, certianly still
 
 
 
-![pic_for_github_main](https://user-images.githubusercontent.com/50467171/120878604-9f611d80-c58b-11eb-91ec-37dc649150de.jpg)
+![pic_for_github_main](https://user-images.githubusercontent.com/50467171/120943668-5b425a00-c6fe-11eb-920f-65a9517ce138.jpg)
 
 
 
@@ -74,10 +74,8 @@ In general everything seems to be moving along nicely with this, certianly still
 
 If the transfer spot on an account is left blank (the books don't balance) then it will automatically create a liability account to handle the imbalance, so the accounts should remain balanced at all times.
 
-![pic_for_github_imbalance](https://user-images.githubusercontent.com/50467171/120670646-9e7e9d80-c45e-11eb-8828-06fd6aa3ce21.jpg)
 
-
-![pic_for_github_main_2](https://user-images.githubusercontent.com/50467171/120670610-97f02600-c45e-11eb-8b6b-3ee9bddf878d.jpg)
+![pic_for_github_imbalance](https://user-images.githubusercontent.com/50467171/120943709-a197b900-c6fe-11eb-9047-c8c612bff27c.jpg)
 
 
 
@@ -86,7 +84,7 @@ There is a context menu when right clicking the white space on the balance sheet
 
 ![pic_for_github_newAccount](https://user-images.githubusercontent.com/50467171/120576078-3002f680-c3f0-11eb-8cfa-691a1b3fdbbd.jpg)
 
-![pic_for_github_removeAccount](https://user-images.githubusercontent.com/50467171/120672186-13060c00-c460-11eb-9dc4-58d4fa708017.jpg)
+![pic_for_github_removeAccount](https://user-images.githubusercontent.com/50467171/120943716-aceae480-c6fe-11eb-95dc-d942f86b669e.jpg)
 
 
 
@@ -95,5 +93,6 @@ right clicking on a transaction entry in one of the ledgers opens that for editi
 ![pic_for_github_edit_entry](https://user-images.githubusercontent.com/50467171/120716224-ba506680-c493-11eb-8e84-9204faecde0d.jpg)
 
 It's a start, still a long way to go...
+
 
 
