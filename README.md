@@ -253,7 +253,9 @@ right clicking on a transaction entry in one of the ledgers opens that for editi
 
 ![pic_for_github_edit_entry](https://user-images.githubusercontent.com/50467171/120716224-ba506680-c493-11eb-8e84-9204faecde0d.jpg)
 
-It's a start, still a long way to go...
+ 
+<br><br>
+It's a start, still a long way to go... though I am looking for something rather simplistic here, so it may be ready to call version 1 in just a couple more days...
 
 
 
