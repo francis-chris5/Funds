@@ -9,6 +9,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.LinkedList;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 
 
@@ -23,10 +25,13 @@ public class Book implements Serializable {
         ////////////////////////////////////  INTERFACING REQUIREMENTS  ///////
     
     /**
-     * A java object must have a dispalyDetails() method to refresh the balance sheet to serve as a FXML controller for this class
+     * A java object must have a dispalyDetails(), updateLeftStatus(String), updateCenterStatus(Object), updateRightStatus(String) methods to refresh the balance sheet to serve as a FXML controller for this class
      */
     public interface AccountController{
-        void displayDetails();
+        public void displayDetails();
+        public void updateLeftStatus(String str);
+        public void updateCenterStatus(Pane pane);
+        public void updateRightStatus(String str);
     }//end interfacing requirements
     
     
@@ -213,6 +218,61 @@ public class Book implements Serializable {
             //just move on then
         }
     }
+    
+    
+    
+    
+    /**
+     * method to update the left label on the status bar of main GUI
+     * @param str The string to display in the status bar
+     */
+    public void updateLeftStatus(String str){
+        try{
+            AccountController ac = (AccountController)getAccountController();
+            ac.updateLeftStatus(str);
+        }
+        catch(Exception e){
+            //just move on then
+        }
+    }//end updateLeftStatus()
+    
+    
+    
+    
+    /**
+     * method to update the central pane of status bar on main GUI with things like progress bars and meters and the like
+     * @param pane The container holding desired widgets to load into the pane, height restriction is 1 font size tall
+     */
+    public void updateCenterStatus(Pane pane){
+        try{
+            ProgressBar pb = new ProgressBar(0.2);
+            Pane pn = new Pane(pb);
+            AccountController ac = (AccountController)getAccountController();
+            ac.updateCenterStatus(pn);
+        }
+        catch(Exception e){
+            //just move on then
+        }
+    }//end updateCenterStatus()
+    
+    
+    
+    
+    /**
+     * method to update the right hand label on the status bar of main GUI
+     * @param str the string to show on the label
+     */
+    public void updateRightStatus(String str){
+        try{
+            AccountController ac = (AccountController)getAccountController();
+            ac.updateRightStatus(str);
+        }
+        catch(Exception e){
+            //just move on then
+        }
+    }//end updateRightStatus()
+    
+    
     
     
     /**

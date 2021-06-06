@@ -7,10 +7,13 @@ import javafx.application.Platform;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Separator;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 
@@ -253,9 +256,10 @@ public class BalanceTree extends StackPane{
             /////////////////////////////////////////////////  DATAFIELDS  ///////
         
         private MenuItem miNewAccountCategory = new MenuItem("New " + type.toString() + " Category");
-        private Menu mnNewAccountCategory = new Menu("New " + type.toString() + " Account");
         private MenuItem miNewAccountDirect = new MenuItem("New " + type.toString() + " Account");
-        private MenuItem miRemoveAccount = new MenuItem("Remove " + type.toString() + " Account");
+        private Menu mnNewAccountCategory = new Menu("New Categorized " + type.toString() + " Account");
+        private MenuItem miModifyAccountOrder = new MenuItem("Modify " + type.toString() + " Categories/Accounts Order");
+        private MenuItem miRemoveAccount = new MenuItem("Remove " + type.toString() + " Categories/Accounts");
         
         
         
@@ -309,6 +313,16 @@ public class BalanceTree extends StackPane{
                 this.getItems().add(mnNewAccountCategory);
             }
             
+            
+            this.getItems().add(new SeparatorMenuItem());
+            
+            
+                //add modify order button
+            miModifyAccountOrder.setOnAction(m -> {
+                ModifyAccountOrderDialog temp = new ModifyAccountOrderDialog(book, findType(tree.getRoot().getValue().toString()));
+                book.displayDetails();
+            });
+            this.getItems().add(miModifyAccountOrder);
             
                 //add remove account button
             miRemoveAccount.setOnAction(m -> {

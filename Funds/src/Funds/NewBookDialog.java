@@ -14,6 +14,10 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
+/**
+ * The controller class for the similarly named FXML dialog.
+ * @author Chris Francis
+ */
 public class NewBookDialog extends Dialog implements Initializable {
 
         //////////////////////////////////////////  DATAFIELDS  /////////////
@@ -34,6 +38,9 @@ public class NewBookDialog extends Dialog implements Initializable {
     
         /////////////////////////////////////////  CONSTRUCTORS  //////////
     
+    /**
+     * The constructor doesn't do anything exceptional here, load in the fxml file and wait
+     */
     public NewBookDialog(){
         this.setTitle("Funds: New Book");
         Image icon = new Image(getClass().getResourceAsStream("Images/FundsIcon.png"));

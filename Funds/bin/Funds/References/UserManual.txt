@@ -25,11 +25,13 @@ Accounts (Balance Sheet Access)
 
     Clicking an account name will open the ledger for that account -see account ledger instructions to proceed from there
 
-    To create a new category to organize accounts in right-click in the white space for one of the categories (Assets, Liabilities, or Equity) and select "New <TYPE> Category" from the context menu --see create account categories to continue
+    To create a new category to organize accounts in right-click in the white space for one of the categories (Assets, Liabilities, or Equity) and select "New <TYPE> Category" from the context menu. Alternatively select [Accounts > New Account Category] from the main menu --see create account categories to continue
 
-    To create a new account right-click in the white space for one of the categories (Assets, Liabilities, or Equity) and select "New <TYPE> Account" from the context menu, if categories are available a second "New <TYPE> Account" menu will be available as well, --see create account instructions to proceed
+    To create a new account right-click in the white space for one of the main types (Assets, Liabilities, or Equity) and select "New <TYPE> Account" from the context menu, if categories are available a second "New <TYPE> Account" menu will be available as well. Alternatively select [Accounts > New Account] from the main menu --see create account instructions to proceed
 
-    To remove an account from the book right click in the white space for one of the categories (Assets, Liabilities, or Equity) and select "Remove <TYPE> Account" from the context menu, select the account(s) to remove (hold ctrl while clicking to make multiple selections) and click the ok button when ready. NOTE: An account can only be removed if it's balance is $0.00, if not please transfer the balance to another existing account and try again to remove it.
+    To modify the order the accounts appear in right click in the white space for one of the main types (Assets, Liabilities, or Equity) and select "Modify <TYPE> Category/Account Order" from the context menu. Alternatively select [Accounts > Modify Category/Account Order] from the main menu --see Modify Order of Categories/Accounts to continue
+
+    To remove an account from the book right click in the white space for one of the main types (Assets, Liabilities, or Equity) and select "Remove <TYPE> Category/Account" from the context menu, select the account(s) to remove (hold ctrl while clicking to make multiple selections) and click the ok button when ready. NOTE: An account can only be removed if it's balance is $0.00, if not please transfer the balance to another existing account and try again to remove it.
 
 
 
@@ -88,4 +90,70 @@ Create Account
     Fill in the text fields for account number, routing number, account code, and account description as needed
 
     Click ok button to create the new account
+
+
+
+
+
+
+
+Modify Order of Categories/Accounts
+   
+    Traditionally accounts are listed by order of liquidity (how fast it can be turned into cash) but the software will initially order categories and accounts in the order created so it may be necessary to adjust the order.
+
+    To modify the display order on the balance sheet right click in the white space for one of the main type trees, and select the "Modify <TYPE> Accounts Order" option. This will open the Modify Account Order Dialog which displays lists populated with all available options. 
+
+    Select the appropriate radio button for modifying either categories or accounts, then select items from the list one at a time and use the up or down buttons to relocate them to the desired location
+
+    NOTE: An account can only be moved up or down among the category it is organized in, and only the selected type of accounts will be shown so the buttons may need clicked more than once to see the change. For example: if you are looking at the list of asset accounts, but internally there are two liability accounts created/listed between the two asset accounts displayed in the list, then the up or down button would need clicked three times before the change will be seen.
+
+
+
+
+
+
+Change Category Account is organized in
+
+    I'm still working on a graceful way to do this, so unfortunately it currently involves manually creating a new account, transferring all transactions to the new account via the edit dialog, and then removing the original account 
+    
+
+
+
+
+
+Remove Categories/Accounts
+
+    To remove an unwanted account or category from one of the three main type trees right click in the tree's white space to pull up a context menu and select Remove <TYPE> Accounts. This will open the Remove Account Dialog which displays lists populated with all available options. 
+
+    Select the appropriate radio button for removing either a category or an account (more than one can be selected at a time by holding the ctrl key) and click the Remove Accounts Button
+
+    NOTE: An account cannot be deleted if it has a non-zero balance and a category cannot be deleted if it contains accounts, so zero out or transfer any balances before removing an account and then remove any accounts before removing a category 
+
+
+
+
+
+
+
+
+Keyboard Shortcuts
+
+    File Operations
+        ctrl+n  :   create new book
+        ctrl+o  :   open existing book
+        ctrl+s  :   save current book
+        ctrl+shift+s    :   save as... current book
+
+
+    Account Operations
+        ctrl+alt+c  :   new accounts category
+        ctrl+alt+a  :   new account
+        ctrl+alt+m :   modify category/account order
+        ctrl+alt+r  :   remove category/account
+
+
+
+    Help Operations
+        F1  :   open user manual    
+
 

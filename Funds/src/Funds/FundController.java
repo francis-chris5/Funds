@@ -13,8 +13,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -28,11 +31,16 @@ public class FundController implements Initializable, Book.AccountController {
 
         /////////////////////////////////////////////  GUI  /////////////////
 
-        //right pane
+        //main menu
+    @FXML
+    MenuItem miNewAccountCategory;
+    
+    
+        //left pane
     @FXML
     Button btnBookDetails;
 
-        //center pane
+        //main content pane
     @FXML
     VBox vbxAsset;
     @FXML
@@ -45,7 +53,15 @@ public class FundController implements Initializable, Book.AccountController {
     TextField txtTotalLiabilities;
     @FXML
     TextField txtTotalEquity;
-
+    
+    
+        //status bar
+    @FXML
+    Label lblLeftStatus;
+    @FXML
+    Pane pnCenterStatus;
+    @FXML
+    Label lblRightStatus;
 
 
 
@@ -233,23 +249,52 @@ public class FundController implements Initializable, Book.AccountController {
     
     
     
-    /**
-     * checks if book has been saved and closes the main GUI if so (asks for confirmation otherwise)
-     */
+    
+    
+    
+    
+        /////////////////////////////////////////  ACCOUNT METHODS  ////////
+    
     @FXML
-    public void exit(){
-        closeBook();
-        Platform.exit();
-    }//end quit()
-     
-
-
-
-
-
-
-
-
+    public void newCategory(){
+        NewAccountCategoryDialog temp = new NewAccountCategoryDialog(book, AccountType.ALL);
+        displayDetails();
+    }//end newCategory()
+    
+    
+    
+    
+    @FXML
+    public void newAccount(){
+        NewAccountDialog temp = new NewAccountDialog(book, AccountType.ALL);
+        displayDetails();
+    }//end newAccount()
+    
+    
+    
+    
+    @FXML
+    public void modifyAccountsOrder(){
+        ModifyAccountOrderDialog temp = new ModifyAccountOrderDialog(book, AccountType.ALL);
+        displayDetails();
+    }//end modifyAccountOrder()
+    
+    
+    
+    
+    @FXML
+    public void removeAccounts(){
+        RemoveAccountDialog temp = new RemoveAccountDialog(book, AccountType.ALL);
+        displayDetails();
+    }//end removeAccount()
+    
+    
+    
+    
+    
+    
+    
+    
         ///////////////////////////////////////////  GUI OPERATIONS  //////////
 
     /**
@@ -262,9 +307,46 @@ public class FundController implements Initializable, Book.AccountController {
         showBalanceSheet();
         displayTotals();
     }//end displayDetails()
-
-
-
+    
+    
+    
+    
+    /**
+     * Sets the left hand status label on the main GUI
+     * @param str The string to show in the status bar
+     */
+    @Override
+    public void updateLeftStatus(String str) {
+        lblLeftStatus.setText(str);
+    }
+    
+    
+    
+    
+    /**
+     * Sets the central pane container on the status bar of main GUI for use with progress bars and meters and such
+     * @param pane A pane containing desired widgets to be loaded in, height restriction is 1 font size tall, load widgets into Pane or subclass of Pane and send to this method to display
+     */
+    @Override
+    public void updateCenterStatus(Pane pane) {
+        pnCenterStatus.getChildren().clear();
+        pnCenterStatus.getChildren().add(pane);
+    }
+    
+    
+    
+    
+    /**
+     * Sets the right hand status bar label in the main GUI
+     * @param str The string to show in the status bar
+     */
+    @Override
+    public void updateRightStatus(String str) {
+        lblRightStatus.setText(str);
+    }
+    
+    
+    
 
     /**
      * Opens the details dialog with the current Book object for editing
@@ -377,7 +459,18 @@ public class FundController implements Initializable, Book.AccountController {
     public void getAbout(){
         new HelpDialog("Funds/References/about.txt");
     }//end getAbout()
-
+    
+    
+    
+    
+    /**
+     * checks if book has been saved and closes the main GUI if so (asks for confirmation otherwise)
+     */
+    @FXML
+    public void exit(){
+        closeBook();
+        Platform.exit();
+    }//end quit()
 
 
 

@@ -9,21 +9,36 @@ Developed By: Christopher S. Francis
     &copy; 2021
 
 
-(initial thought, more refined summary coming soon...)
-
-So the idea here is some accounting software to sort of accompany the Routines application. Just like the Routines Project Management Application the accounting software I've been using personally doesn't exactly fit my needs: it's designed for a large corporation which means there is way more there than I need, small input issues -I am constantly editing transactions by accident so trying to make that less likely to happen without making it difficult to edit transactions, I was also thinking that the standard accounting statements should be the primary appearance of the GUI not an afterthought to an overly fancy interface then tacked on and hidden a couple menus deep
 
 
-DESIGN THOUGHTS SUMMARY:
 
-A small accounting application, more for tracking a project (go with Routines) than for running an entire business (at least to start with)
 
-    double entry method
 
-    balance sheet, cash flows, and a few other standard accounting reports
+Summary
+The accounting software I've been using personally doesn't exactly fit my needs: it's designed for a large corporation which means there is way more there than I need, small input issues -I am constantly editing transactions by accident so trying to make that less likely to happen without making it difficult to edit transactions, I was also thinking that the standard accounting statements should be the primary appearance of the GUI not an afterthought to an overly fancy interface then tacked on and hidden a couple menus deep.
 
-    a number of charts and graphs tracking the flow of a projects budget as time progresses
+So that's what I tried to develop here: simplicity is the name of the game... Essentially it's just a balance sheet for an overview of the accounts and a ledger to enter and edit transactions. In the background the software handles the standard double-entry method balancing of accounts while the data is stored in nested collections of Linked Lists rather than a Relational Database.
 
-        (maybe some projection things to compare to)
+
+
+
+
+
+
+
+Design Details:
+
+It's open source software so if you are interested in customizing some accounting software to fit your exact needs the simplistic idea I was going for here may make an ideal starting point.
+
+PLATFORM: Coded in Java with Graphical User interface in JavaFX so that the same code can readily be used in desktop, mobile, and web scenarios. 
+Find the source-code here: https://github.com/francis-chris5/Funds 
+Find the javadocs here: https://francis-chris5.github.io/Funds/javadoc/Funds/package-summary.html 
+
+STRUCTURE: 
+Books are the working files (new, save, open, etc.)
+Books are collections of Accounts
+Accounts are collections of Transactions
+Transactions are collections of datafields describing a real world monetary exchange
+Everything is tied together via a nested assortment of Linked Lists
 
 

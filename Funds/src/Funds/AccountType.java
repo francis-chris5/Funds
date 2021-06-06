@@ -7,7 +7,7 @@ package Funds;
  * @author Chris Francis
  */
 public enum AccountType {
-    ASSET, LIABILITY, EQUITY;
+    ASSET, LIABILITY, EQUITY, ALL;
     
     
     /**
