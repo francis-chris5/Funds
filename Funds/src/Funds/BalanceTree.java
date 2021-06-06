@@ -2,8 +2,10 @@
 package Funds;
 
 import java.text.NumberFormat;
+import java.util.LinkedList;
 import javafx.application.Platform;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -90,19 +92,38 @@ public class BalanceTree extends StackPane{
      * @return <b>TreeView</b> ready to be loaded into the balance sheet
      */
     public TreeView loadAssetTree(){
+        
+            //create the root with an icon
         Image bag = new Image(getClass().getResourceAsStream("Images/MoneyBagIcon.png"));
         ImageView bagIcon = new ImageView(bag);
         bagIcon.setFitWidth(16);
         bagIcon.setFitHeight(16);
         TreeItem root = new TreeItem("Assets", bagIcon);
         root.setExpanded(true);
+        
+        
+            //add the orphan asset accounts
         if(!book.getAssets().isEmpty()){
             for(int i = 0; i < book.getAssets().size(); i++){
                 TreeItem<Account> branch = new TreeItem(book.getAssets().get(i));
                 root.getChildren().add(branch);
             }
         }
+
+            //add the categorized asset accounts
+        LinkedList<AccountCategory> subcategory = book.getSubcategory(AccountType.ASSET);
+        for(int i = 0; i < subcategory.size(); i++){
+            TreeItem branch = new TreeItem(subcategory.get(i));
+            branch.setExpanded(true);
+            root.getChildren().add(branch);
+            for(int j = 0; j < subcategory.get(i).getAccounts().size(); j++){
+                TreeItem twig = new TreeItem(subcategory.get(i).getAccounts().get(j));
+                branch.getChildren().add(twig);
+            }
+        }
         
+        
+            //assemble and return the tree
         TreeView assetTree = new TreeView(root);
         return assetTree;
     }//end loadAssetTree()
@@ -115,19 +136,38 @@ public class BalanceTree extends StackPane{
      * @return <b>TreeView</b> ready to be loaded into the balance sheet
      */
     public TreeView loadLiabilityTree(){
+        
+            //create the root with an icon
         Image scale = new Image(getClass().getResourceAsStream("Images/ScaleIcon.png"));
         ImageView scaleIcon = new ImageView(scale);
         scaleIcon.setFitWidth(16);
         scaleIcon.setFitHeight(16);
         TreeItem root = new TreeItem("Liabilities", scaleIcon);
         root.setExpanded(true);
-         if(!book.getLiabilities().isEmpty()){
+        
+        
+            //add the orphan liability accounts
+        if(!book.getLiabilities().isEmpty()){
             for(int i = 0; i < book.getLiabilities().size(); i++){
                 TreeItem<Account> branch = new TreeItem(book.getLiabilities().get(i));
                 root.getChildren().add(branch);
             }
         }
         
+        
+            //add the categorized liability accounts
+        LinkedList<AccountCategory> subcategory = book.getSubcategory(AccountType.LIABILITY);
+        for(int i = 0; i < subcategory.size(); i++){
+            TreeItem branch = new TreeItem(subcategory.get(i));
+            branch.setExpanded(true);
+            root.getChildren().add(branch);
+            for(int j = 0; j < subcategory.get(i).getAccounts().size(); j++){
+                TreeItem twig = new TreeItem(subcategory.get(i).getAccounts().get(j));
+                branch.getChildren().add(twig);
+            }
+        }
+        
+            //assemble and return the tree
         TreeView liabilityTree = new TreeView(root);
         return liabilityTree;
     }//end loadLiabilityTree()
@@ -140,12 +180,17 @@ public class BalanceTree extends StackPane{
      * @return <b>TreeView</b> ready to be loaded into the balance sheet
      */
     public TreeView loadEquityTree(){
+        
+            //create the root with an icon
         Image building = new Image(getClass().getResourceAsStream("Images/BuildingIcon.png"));
         ImageView buildingIcon = new ImageView(building);
         buildingIcon.setFitWidth(16);
         buildingIcon.setFitHeight(16);
         TreeItem root = new TreeItem("Equity", buildingIcon);
         root.setExpanded(true);
+        
+        
+            //add in orphan equity accounts
         if(!book.getEquities().isEmpty()){
             for(int i = 0; i < book.getEquities().size(); i++){
                 TreeItem<Account> branch = new TreeItem(book.getEquities().get(i));
@@ -153,9 +198,26 @@ public class BalanceTree extends StackPane{
             }
         }
         
+        
+            //add the categorized equity accounts
+        LinkedList<AccountCategory> subcategory = book.getSubcategory(AccountType.EQUITY);
+        for(int i = 0; i < subcategory.size(); i++){
+            TreeItem branch = new TreeItem(subcategory.get(i));
+            branch.setExpanded(true);
+            root.getChildren().add(branch);
+            for(int j = 0; j < subcategory.get(i).getAccounts().size(); j++){
+                TreeItem twig = new TreeItem(subcategory.get(i).getAccounts().get(j));
+                branch.getChildren().add(twig);
+            }
+        }
+        
+        
+            //assemble and return the tree
         TreeView equityTree = new TreeView(root);
         return equityTree;
     }//end loadEquityTree()
+    
+    
     
     
     
@@ -190,10 +252,10 @@ public class BalanceTree extends StackPane{
         
             /////////////////////////////////////////////////  DATAFIELDS  ///////
         
-        private MenuItem miNewAccount = new MenuItem("New " + type.toString() + " Account");
+        private MenuItem miNewAccountCategory = new MenuItem("New " + type.toString() + " Category");
+        private Menu mnNewAccountCategory = new Menu("New " + type.toString() + " Account");
+        private MenuItem miNewAccountDirect = new MenuItem("New " + type.toString() + " Account");
         private MenuItem miRemoveAccount = new MenuItem("Remove " + type.toString() + " Account");
-        
-        
         
         
         
@@ -204,17 +266,78 @@ public class BalanceTree extends StackPane{
          * Since this is a single purpose object the constructor handles all the work: which methods get called when a menu item is clicked on
          */
         public BalanceTreeContextMenu(){
-            miNewAccount.setOnAction(m -> {
-                NewAccountDialog temp = new NewAccountDialog(book, tree.getRoot().getValue().toString());
+            
+                //find available subcategories of this type
+            LinkedList<AccountCategory> subcategory = new LinkedList<>();
+            for(int i = 0; i < book.getAccountCategories().size(); i++){
+                if(book.getAccountCategories().get(i).getType() == type){
+                    subcategory.add(book.getAccountCategories().get(i));
+                }
+            }
+            
+            
+                //add new category button
+            miNewAccountCategory.setOnAction(m ->{
+                //AccountType localType = findType(tree.getRoot().getValue().toString());
+                NewAccountCategoryDialog temp = new NewAccountCategoryDialog(book, findType(tree.getRoot().getValue().toString()));
                 book.displayDetails();
             });
+            this.getItems().add(miNewAccountCategory);
+            
+            
+                //add new account button
+            miNewAccountDirect.setOnAction(m -> {
+                //AccountType localType = findType(tree.getRoot().getValue().toString());
+                NewAccountDialog temp = new NewAccountDialog(book, findType(tree.getRoot().getValue().toString()));
+                book.displayDetails();
+            });
+            this.getItems().add(miNewAccountDirect);
+            
+            
+                //add new account menu -for subcategories
+            if(!subcategory.isEmpty()){
+                for(int i = 0; i < subcategory.size(); i++){
+                    MenuItem item = new MenuItem("New " + subcategory.get(i).getName() + " Account");
+                    AccountCategory category = subcategory.get(i);
+                    item.setOnAction(m -> {
+                        //AccountType localType = findType(tree.getRoot().getValue().toString());
+                        NewAccountDialog temp = new NewAccountDialog(book, findType(tree.getRoot().getValue().toString()), category);
+                        book.displayDetails();
+                    });
+                    mnNewAccountCategory.getItems().add(item);
+                }
+                this.getItems().add(mnNewAccountCategory);
+            }
+            
+            
+                //add remove account button
             miRemoveAccount.setOnAction(m -> {
-                RemoveAccountDialog temp = new RemoveAccountDialog(book, tree.getRoot().getValue().toString());
+                RemoveAccountDialog temp = new RemoveAccountDialog(book, findType(tree.getRoot().getValue().toString()));
                 book.displayDetails();
             });
-            this.getItems().addAll(miNewAccount, miRemoveAccount);
+            this.getItems().add(miRemoveAccount);
         }//end constructor()
         
+        
+        
+        /**
+         * converts a localString, such as from a button label, to an enumerated AccountType
+         * @param localString
+         * @return 
+         */
+        public AccountType findType(String localString){
+            AccountType localType = null;
+            if(localString.equals("Assets")){
+                localType = AccountType.ASSET;
+            }
+            else if(localString.equals("Liabilities")){
+                localType = AccountType.LIABILITY;
+            }
+            else if(localString.equals("Equity")){
+                localType = AccountType.EQUITY;
+            }
+            return localType;
+        }//end findType()
         
     }//end BalanceTreeContextMenu
     

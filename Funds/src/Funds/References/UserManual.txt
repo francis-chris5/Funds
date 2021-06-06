@@ -25,7 +25,9 @@ Accounts (Balance Sheet Access)
 
     Clicking an account name will open the ledger for that account -see account ledger instructions to proceed from there
 
-    To create a new account right-click in the white space for one of the categories (Assets, Liabilities, or Equity) and select "New <TYPE> Account" from the context menu --see create account instructions to proceed
+    To create a new category to organize accounts in right-click in the white space for one of the categories (Assets, Liabilities, or Equity) and select "New <TYPE> Category" from the context menu --see create account categories to continue
+
+    To create a new account right-click in the white space for one of the categories (Assets, Liabilities, or Equity) and select "New <TYPE> Account" from the context menu, if categories are available a second "New <TYPE> Account" menu will be available as well, --see create account instructions to proceed
 
     To remove an account from the book right click in the white space for one of the categories (Assets, Liabilities, or Equity) and select "Remove <TYPE> Account" from the context menu, select the account(s) to remove (hold ctrl while clicking to make multiple selections) and click the ok button when ready. NOTE: An account can only be removed if it's balance is $0.00, if not please transfer the balance to another existing account and try again to remove it.
 
@@ -65,9 +67,19 @@ Account Ledger
 
 
 
+Create Account Categories
+
+    To create a new category for accounts to be organized in choose a type (Assets, Liabilities, or Equity) from the drop down menu and give it a meaningful name
+
+
+
+
+
+
+
 Create Account
 
-    To create a new account choose a parent chart for it (Assets, Liabilities, or Equity) from the drop down menu
+    To create a new account choose a type (Assets, Liabilities, or Equity) of account and parent category if applicable for it from the drop down menus
 
     Give the account a useful nickname to identify it in the books: the account nickname and balance will show anywhere it is listed
 

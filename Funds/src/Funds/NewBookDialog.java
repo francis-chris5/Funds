@@ -22,6 +22,8 @@ public class NewBookDialog extends Dialog implements Initializable {
     RadioButton rdEmpty;
     @FXML
     RadioButton rdBasicPersonal;
+    @FXML
+    RadioButton rdDetailed;
     
     
     
@@ -74,6 +76,9 @@ public class NewBookDialog extends Dialog implements Initializable {
         }
         else if(rdBasicPersonal.isSelected()){
             return NewBookType.BASIC_PERSONAL;
+        }
+        else if(rdDetailed.isSelected()){
+            return NewBookType.DETAILED;
         }
         else{
             return NewBookType.EMPTY;

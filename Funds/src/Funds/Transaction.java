@@ -178,7 +178,7 @@ public class Transaction implements Serializable {
      */
     @Override
     public String toString() {
-        return "Posted on " + this.getDate().toString() + " was " + this.getDescription() + ", debited for " + this.getDebit() + ", and credited for " + this.getCredit() + (isReconcile() ?  " has been" : " has not been") + " reconciled, ans is at " + getLedgerID();
+        return "Posted on " + this.getDate().toString() + " was " + this.getDescription() + ", debited for " + this.getDebit() + ", and credited for " + this.getCredit() + (isReconcile() ?  " has been" : " has not been") + " reconciled, and is at " + getLedgerID();
     }
 
 }//end Transaction

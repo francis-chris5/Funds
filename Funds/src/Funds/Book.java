@@ -45,6 +45,7 @@ public class Book implements Serializable {
     private LinkedList<Account> assets = new LinkedList<>();
     private LinkedList<Account> liabilities = new LinkedList<>();
     private LinkedList<Account> equities = new LinkedList<>();
+    private LinkedList<AccountCategory> accountCategories = new LinkedList<>();
     
     private AccountController accountController;
 
@@ -180,6 +181,15 @@ public class Book implements Serializable {
         this.accountController = accountController;
     }
     
+    public LinkedList<AccountCategory> getAccountCategories(){
+        return accountCategories;
+    }
+    
+    public void setAccountCategories(LinkedList<AccountCategory> accountCategories){
+        this.accountCategories = accountCategories;
+    }
+    
+    
  
     
     
@@ -203,6 +213,47 @@ public class Book implements Serializable {
             //just move on then
         }
     }
+    
+    
+    /**
+     * finds all categorized accounts of a given type and puts them in a non-categorized list
+     * @param type the type of accounts to find
+     * @return <b>LinkedList</b> of Accounts
+     */
+    public LinkedList<AccountCategory> getSubcategory(AccountType type){
+        LinkedList<AccountCategory> subcategory = new LinkedList<>();
+        if(!getAccountCategories().isEmpty()){
+            for(int i = 0; i < getAccountCategories().size(); i++){
+                if(getAccountCategories().get(i).getType() == type){
+                    subcategory.add(getAccountCategories().get(i));
+                }
+            }
+        }
+        return subcategory;
+    }//end getSubcategory()
+    
+    
+    
+    
+    
+    /**
+     * finds all categorized accounts of a given type and puts them in a non-categorized list
+     * @param type the type of accounts to find
+     * @return <b>LinkedList</b> of Accounts
+     */
+    public LinkedList<Account> getSubcategoryAccounts(AccountType type){
+        LinkedList<Account> accounts = new LinkedList<>();
+        if(!getAccountCategories().isEmpty()){
+            for(int i = 0; i < getAccountCategories().size(); i++){
+                if(getAccountCategories().get(i).getType() == type){
+                    for(int j = 0; j < getAccountCategories().get(i).getAccounts().size(); j++){
+                        accounts.add(getAccountCategories().get(i).getAccounts().get(j));
+                    }
+                }
+            }
+        }
+        return accounts;
+    }//end getSubcategoryAccounts()
     
 
     

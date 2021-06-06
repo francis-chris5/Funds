@@ -2,6 +2,7 @@
 package Funds;
 
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -23,6 +24,8 @@ import javafx.stage.Stage;
 public class NewAccountDialog extends Dialog implements Initializable {
 
     @FXML
+    ComboBox cmbType;
+    @FXML
     ComboBox cmbParent;
     @FXML
     TextField txtName;
@@ -41,6 +44,7 @@ public class NewAccountDialog extends Dialog implements Initializable {
     
     
     private Book book;
+    private AccountType type;
     
     
     
@@ -56,8 +60,9 @@ public class NewAccountDialog extends Dialog implements Initializable {
      * @param book The current book this account is being added to
      * @param type String (NOT ENUM VALUE this class will set that) representing the type of account ("Assets", "Liabilities", "Equity")
      */
-    public NewAccountDialog(Book book, String type){
+    public NewAccountDialog(Book book, AccountType type){
         this.book = book;
+        this.type = type;
         this.setTitle("Funds: New Account");
         Image icon = new Image(getClass().getResourceAsStream("Images/FundsIcon.png"));
         Stage stage = (Stage)this.getDialogPane().getScene().getWindow();
@@ -70,8 +75,47 @@ public class NewAccountDialog extends Dialog implements Initializable {
         catch(Exception e){
             //just move on then
         }
-        setParentChoices();
-        cmbParent.setValue(type);
+        cmbType.setValue(type);
+        setChoices();
+        setDefaultNormal();
+        this.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        Optional<ButtonType> clicked = this.showAndWait();
+        if(clicked.get() == ButtonType.OK){
+            addAccount();
+        }
+        else{
+            //probably don't do anything then
+        }
+    }//end one-arg constructor
+    
+    
+    
+    
+    /**
+     * The three-arg constructor needs a reference to the current Book and type of account as a string (not the enum value yet) which it gets from context menu on balance sheet tree, and the subcategory which this account goes into
+     * @param book The current book this account is being added to
+     * @param type String (NOT ENUM VALUE this class will set that) representing the type of account ("Assets", "Liabilities", "Equity")
+     * @param parent The subcategory of accounts this new account will go into
+     */
+    public NewAccountDialog(Book book, AccountType type, AccountCategory parent){
+        this.book = book;
+        this.type = type;
+        this.setTitle("Funds: New Account");
+        Image icon = new Image(getClass().getResourceAsStream("Images/FundsIcon.png"));
+        Stage stage = (Stage)this.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(icon);
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("NewAccountDialogGUI.fxml"));
+            loader.setController(this);
+            this.setDialogPane(loader.load());
+        }
+        catch(Exception e){
+            //just move on then
+        }
+        cmbType.setValue(this.type);
+        cmbParent.setValue(parent);
+        setChoices();
+        setDefaultNormal();
         this.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         Optional<ButtonType> clicked = this.showAndWait();
         if(clicked.get() == ButtonType.OK){
@@ -91,13 +135,55 @@ public class NewAccountDialog extends Dialog implements Initializable {
     
         /////////////////////////////////////////////// CLASS METHODS  /////////
     
+    
+    @FXML
+    public void onTypeChange(){
+        setChoices();
+        setDefaultNormal();
+    }//end onTypeChange()
+    
+    
+    
+    
+    
     /**
-     * Internal method to load choices for type of accounts into combobox
+     * Internal method to load choices for type of accounts into comboboxes
      */
-    public void setParentChoices(){
-            //eventually the book will have a list of subcategories to put accounts in rather than simply the big three
-        cmbParent.getItems().addAll("Assets", "Liabilities", "Equity");
+    public void setChoices(){
+        if(cmbType.getItems().isEmpty()){
+            cmbType.getItems().addAll(AccountType.ASSET, AccountType.LIABILITY, AccountType.EQUITY);
+        }
+        if(book.getAccountCategories().isEmpty()){
+            cmbParent.getItems().clear();
+            cmbParent.setDisable(true);
+        }
+        else{
+            cmbParent.getItems().clear();
+            cmbParent.setDisable(false);
+            LinkedList<AccountCategory> subcategory = book.getSubcategory((AccountType)cmbType.getValue());
+            for(int i = 0; i < subcategory.size(); i++){
+                cmbParent.getItems().add(subcategory.get(i).getName());
+            }
+        }
     }//end setParentChoices()
+    
+    
+    
+    
+    /**
+     * internal method to set the default radio button selection: asset -debit, liability or equity -credit
+     */
+    @FXML
+    public void setDefaultNormal(){
+        if(cmbType.getValue() == AccountType.ASSET){
+            rdDebit.setSelected(true);
+        }
+        else{
+            rdCredit.setSelected(true);
+        }
+    }//end setDefaultNormal()
+    
+    
     
     
     
@@ -112,20 +198,51 @@ public class NewAccountDialog extends Dialog implements Initializable {
         acc.setRouting(txtRouting.getText());
         acc.setCode(txtCode.getText());
         acc.setDescription(txtDescription.getText());
-        if(cmbParent.getValue().equals("Assets")){
-            acc.setType(AccountType.ASSET);
-            book.getAssets().add(acc);
+        if(cmbType.getValue() == AccountType.ASSET){
+            if(cmbParent.getValue() == null){
+                acc.setType(AccountType.ASSET);
+                book.getAssets().add(acc);
+            }
+            else{
+                acc.setType(AccountType.ASSET);
+                for(int i = 0; i < book.getAccountCategories().size(); i++){
+                    if(book.getAccountCategories().get(i) == cmbParent.getValue()){
+                        book.getAccountCategories().get(i).getAccounts().add(acc);
+                    }
+                }
+            }
         }
-        else if(cmbParent.getValue().equals("Liabilities")){
-            acc.setType(AccountType.LIABILITY);
-            book.getLiabilities().add(acc);
+        else if(cmbType.getValue() == AccountType.LIABILITY){
+            if(cmbParent.getValue() == null){
+                acc.setType(AccountType.LIABILITY);
+                book.getLiabilities().add(acc);
+            }
+            else{
+                acc.setType(AccountType.LIABILITY);
+                for(int i = 0; i < book.getAccountCategories().size(); i++){
+                    if(book.getAccountCategories().get(i) == cmbParent.getValue()){
+                        book.getAccountCategories().get(i).getAccounts().add(acc);
+                    }
+                }
+            }
         }
-        else if(cmbParent.getValue().equals("Equity")){
-            acc.setType(AccountType.EQUITY);
-            book.getEquities().add(acc);
+        else if(cmbType.getValue() == AccountType.EQUITY){
+            if(cmbParent.getValue() == null){
+                acc.setType(AccountType.EQUITY);
+                book.getEquities().add(acc);
+            }
+            else{
+                acc.setType(AccountType.EQUITY);
+                for(int i = 0; i < book.getAccountCategories().size(); i++){
+                    if(book.getAccountCategories().get(i) == cmbParent.getValue()){
+                        book.getAccountCategories().get(i).getAccounts().add(acc);
+                    }
+                }
+            }
         }
+        
         else{
-            book.getAssets().add(acc);
+            System.out.println("could not create account");
         }
     }//end addAccount()
     

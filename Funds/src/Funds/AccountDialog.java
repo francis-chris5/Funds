@@ -4,6 +4,7 @@ package Funds;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -11,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -199,21 +202,30 @@ public class AccountDialog extends Dialog implements Initializable {
     public void setAccountChoices(){
         cmbTransfer.getItems().clear();
         cmbTransfer.getItems().add(new ComboBoxItem(new Account("-----  ASSET  -----", true), true));
-        for(int i = 0; i < book.getAssets().size(); i++){
-            if(!book.getAssets().get(i).toString().equals(account.toString())){
-                cmbTransfer.getItems().add(new ComboBoxItem(book.getAssets().get(i), false));
+        LinkedList<Account> assetAccounts = new LinkedList<>();
+        assetAccounts.addAll(book.getAssets());
+        assetAccounts.addAll(book.getSubcategoryAccounts(AccountType.ASSET));
+        for(int i = 0; i < assetAccounts.size(); i++){
+            if(!assetAccounts.get(i).toString().equals(account.toString())){
+                cmbTransfer.getItems().add(new ComboBoxItem(assetAccounts.get(i), false));
             }
         }
         cmbTransfer.getItems().add(new ComboBoxItem(new Account("-----  LIABILITY  -----", false), true));
-        for(int i = 0; i < book.getLiabilities().size(); i++){
-            if(!book.getLiabilities().get(i).toString().equals(account.toString())){
-                cmbTransfer.getItems().add(new ComboBoxItem(book.getLiabilities().get(i), false));
+        LinkedList<Account> liabilityAccounts = new LinkedList<>();
+        liabilityAccounts.addAll(book.getLiabilities());
+        liabilityAccounts.addAll(book.getSubcategoryAccounts(AccountType.LIABILITY));
+        for(int i = 0; i < liabilityAccounts.size(); i++){
+            if(!liabilityAccounts.get(i).toString().equals(account.toString())){
+                cmbTransfer.getItems().add(new ComboBoxItem(liabilityAccounts.get(i), false));
             }
         }
         cmbTransfer.getItems().add(new ComboBoxItem(new Account("-----  EQUITY  -----", false), true));
-        for(int i = 0; i < book.getEquities().size(); i++){
-            if(!book.getEquities().get(i).toString().equals(account.toString())){
-                cmbTransfer.getItems().add(new ComboBoxItem(book.getEquities().get(i), false));
+        LinkedList<Account> equityAccounts = new LinkedList<>();
+        equityAccounts.addAll(book.getEquities());
+        equityAccounts.addAll(book.getSubcategoryAccounts(AccountType.EQUITY));
+        for(int i = 0; i < equityAccounts.size(); i++){
+            if(!equityAccounts.get(i).toString().equals(account.toString())){
+                cmbTransfer.getItems().add(new ComboBoxItem(equityAccounts.get(i), false));
             }
         }
         cmbTransfer.setCellFactory(cell -> new ListCell<ComboBoxItem>(){
@@ -360,12 +372,24 @@ public class AccountDialog extends Dialog implements Initializable {
      */
     @FXML
     public void removeTransactions(){
-        ObservableList<Transaction> remove = ledger.getSelectionModel().getSelectedItems();
-        remove.forEach(r -> ledger.getItems().remove(r));
-        for(int i = 0; i < ledger.getItems().size(); i++){
-            account.getTransactions().add(ledger.getItems().get(i));
+        Alert confirm = new Alert(AlertType.CONFIRMATION);
+        confirm.setTitle("Funds");
+        confirm.setContentText("Are you sure you want to remove these transactions from the ledger?");
+        Optional<ButtonType> clicker = confirm.showAndWait();
+        if(clicker.get() == ButtonType.OK){
+            ObservableList<Transaction> remove = ledger.getSelectionModel().getSelectedItems();
+            remove.forEach(transaction -> {
+                for(int i = 0; i < transaction.getTransfer().getTransactions().size(); i++){
+                    if(transaction.getTransfer().getTransactions().get(i).getLedgerID() == transaction.getLedgerID()){
+                        transaction.getTransfer().getTransactions().remove(i);
+                    }
+                }
+                account.getTransactions().remove(transaction);
+            });
         }
-        account.findRunningBalance();
+        else{
+            //just cancel out then without doing anything
+        }
         ledger.getSelectionModel().clearSelection();
         loadAccountLedger();
         book.setSaved(false);

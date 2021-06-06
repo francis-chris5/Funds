@@ -3,6 +3,7 @@ package Funds;
 
 import java.net.URL;
 import java.text.NumberFormat;
+import java.util.LinkedList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -84,6 +85,9 @@ public class FundController implements Initializable, Book.AccountController {
                 book.getEquities().add(rev);
                 book.getEquities().add(exp);
                 showBalanceSheet();
+                break;
+            case DETAILED:
+                
             default:
                 break; //close method sets this up
         }
@@ -157,6 +161,7 @@ public class FundController implements Initializable, Book.AccountController {
         }
         if(close){
             book = new Book();
+            book.setSaved(true);
             book.setAccountController(this);
             vbxAsset.getChildren().clear();
             vbxLiability.getChildren().clear();
@@ -262,6 +267,7 @@ public class FundController implements Initializable, Book.AccountController {
         vbxAsset.getChildren().clear();
         vbxLiability.getChildren().clear();
         vbxEquity.getChildren().clear();
+            //this line creates an infinite loop????
         BalanceTree asset = new BalanceTree(book, AccountType.ASSET);
         BalanceTree liability = new BalanceTree(book, AccountType.LIABILITY);
         BalanceTree equity = new BalanceTree(book, AccountType.EQUITY);
@@ -279,31 +285,58 @@ public class FundController implements Initializable, Book.AccountController {
      */
     public void displayTotals(){
         double total = 0.0;
-        for(int i = 0; i < book.getAssets().size(); i++){
-            Account acc = book.getAssets().get(i);
-            for(int j = 0; j < acc.getTransactions().size(); j++){
-                total += acc.getTransactions().get(j).getDebit() - acc.getTransactions().get(j).getCredit();
-            }
-        }
+        LinkedList<Account> subcategory = new LinkedList<>();
+        total += findNormalDebitSubtotal(book.getAssets());
+        total += findNormalDebitSubtotal(book.getSubcategoryAccounts(AccountType.ASSET));
         txtTotalAssets.setText(Double.toString(total));
+        
         total = 0.0;
-        for(int i = 0; i < book.getLiabilities().size(); i++){
-            Account acc = book.getLiabilities().get(i);
-            for(int j = 0; j < acc.getTransactions().size(); j++){
-                total += acc.getTransactions().get(j).getCredit() - acc.getTransactions().get(j).getDebit();
-            }
-        }
+        total += findNormalCreditSubtotal(book.getLiabilities());
+        total += findNormalCreditSubtotal(book.getSubcategoryAccounts(AccountType.LIABILITY));
         txtTotalLiabilities.setText(Double.toString(total));
+        
         total = 0.0;
-        for(int i = 0; i < book.getEquities().size(); i++){
-            Account acc = book.getEquities().get(i);
+        total += findNormalCreditSubtotal(book.getEquities());
+        total += findNormalCreditSubtotal(book.getSubcategoryAccounts(AccountType.EQUITY));
+        txtTotalEquity.setText(Double.toString(total));
+    }//end displayTotals()
+    
+    
+    
+    /**
+     * method to find balance totals from a list of accounts
+     * @param accounts the collection of accounts to find the balance total of
+     * @return <b>double</b> of all the debits in the account less all the credits
+     */
+    public double findNormalDebitSubtotal(LinkedList<Account> accounts){
+        double subtotal = 0.0;
+        for(int i = 0; i < accounts.size(); i++){
+            Account acc = accounts.get(i);
             for(int j = 0; j < acc.getTransactions().size(); j++){
-                total += acc.getTransactions().get(j).getCredit() - acc.getTransactions().get(j).getDebit();
+                subtotal += acc.getTransactions().get(j).getDebit() - acc.getTransactions().get(j).getCredit();
             }
         }
-        txtTotalEquity.setText(Double.toString(total));
-        total = 0.0;
-    }//end displayTotals()
+        return subtotal;
+    }//end findAccountSubtotal()
+    
+    
+    
+    
+    /**
+     * method to find balance totals from a list of accounts
+     * @param accounts the collection of accounts to find the balance total of
+     * @return <b>double</b> of all the credits in the account less all the debits
+     */
+    public double findNormalCreditSubtotal(LinkedList<Account> accounts){
+        double subtotal = 0.0;
+        for(int i = 0; i < accounts.size(); i++){
+            Account acc = accounts.get(i);
+            for(int j = 0; j < acc.getTransactions().size(); j++){
+                subtotal += acc.getTransactions().get(j).getCredit() - acc.getTransactions().get(j).getDebit();
+            }
+        }
+        return subtotal;
+    }//end findAccountSubtotal()
     
     
     
@@ -352,6 +385,7 @@ public class FundController implements Initializable, Book.AccountController {
         book.getLiabilities().add(card);
         book.getEquities().add(rev);
         book.getEquities().add(exp);
+        book.setSaved(true);
         showBalanceSheet(); //holy cow... I finally did someting at startup...
     }//end initialize()
 

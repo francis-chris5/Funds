@@ -47,9 +47,9 @@ public class RemoveAccountDialog extends Dialog implements Initializable{
      * @param book The current book this account is being added to
      * @param type String (NOT ENUM VALUE this class will set that) representing the type of account ("Assets", "Liabilities", "Equity")
      */
-    public RemoveAccountDialog(Book book, String type){
+    public RemoveAccountDialog(Book book, AccountType type){
         this.book = book;
-        setType(type);
+        this.type = type;
         this.setTitle("Funds: Remove Account");
         Image icon = new Image(getClass().getResourceAsStream("Images/FundsIcon.png"));
         Stage stage = (Stage)this.getDialogPane().getScene().getWindow();
@@ -86,23 +86,6 @@ public class RemoveAccountDialog extends Dialog implements Initializable{
         ///////////////////////////////////////////  CLASS METHODS  //////////
     
     /**
-     * converts the type passed in as string to the AccountType enumerated list
-     * @param type String (not enum) representation of type, passed to constructor from labels on the treeview
-     */
-    public void setType(String type){
-        if(type.equals("Assets")){
-            this.type = AccountType.ASSET;
-        }
-        else if(type.equals("Liabilities")){
-            this.type = AccountType.LIABILITY;
-        }
-        else if(type.equals("Equity")){
-            this.type = AccountType.EQUITY;
-        }
-    }//end setType()
-    
-    
-    /**
      * internal method to fill the listview with available accounts
      */
     public void fillList(){
@@ -110,20 +93,26 @@ public class RemoveAccountDialog extends Dialog implements Initializable{
             case ASSET:
                 lstAccounts.getItems().clear();
                 lstAccounts.getItems().addAll(book.getAssets());
+                lstAccounts.getItems().addAll(book.getSubcategoryAccounts(AccountType.ASSET));
                 break;
             case LIABILITY:
                 lstAccounts.getItems().clear();
                 lstAccounts.getItems().addAll(book.getLiabilities());
+                lstAccounts.getItems().addAll(book.getSubcategoryAccounts(AccountType.LIABILITY));
                 break;
             case EQUITY:
                 lstAccounts.getItems().clear();
                 lstAccounts.getItems().addAll(book.getEquities());
+                lstAccounts.getItems().addAll(book.getSubcategoryAccounts(AccountType.EQUITY));
                 break;
             default:
                 lstAccounts.getItems().clear();
                 lstAccounts.getItems().addAll(book.getAssets());
-                lstAccounts.getItems().addAll(book.getLiabilities());
+                lstAccounts.getItems().addAll(book.getSubcategoryAccounts(AccountType.ASSET));
+                 lstAccounts.getItems().addAll(book.getLiabilities());
+                lstAccounts.getItems().addAll(book.getSubcategoryAccounts(AccountType.LIABILITY));
                 lstAccounts.getItems().addAll(book.getEquities());
+                lstAccounts.getItems().addAll(book.getSubcategoryAccounts(AccountType.EQUITY));
         }
     }//end fillList()
     
@@ -171,6 +160,13 @@ public class RemoveAccountDialog extends Dialog implements Initializable{
                                 book.getEquities().remove(i);
                             }
                         }
+                }
+                for(int i = 0; i < book.getAccountCategories().size(); i++){
+                    for(int j = 0; j < book.getAccountCategories().get(i).getAccounts().size(); j++){
+                        if(book.getAccountCategories().get(i).getAccounts().get(j).toString().equals(a.toString())){
+                            book.getAccountCategories().get(i).getAccounts().remove(j);
+                        }
+                    }
                 }
                 book.setSaved(false);
             }
