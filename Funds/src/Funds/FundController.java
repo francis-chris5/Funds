@@ -87,7 +87,27 @@ public class FundController implements Initializable, Book.AccountController {
                 showBalanceSheet();
                 break;
             case DETAILED:
-                
+                AccountCategory currentAssets = new AccountCategory("Current Assets", AccountType.ASSET);
+                AccountCategory longTermAssets = new AccountCategory("Long Term Assets", AccountType.ASSET);
+                AccountCategory currentLiabilities = new AccountCategory("Current Liabilities", AccountType.LIABILITY);
+                AccountCategory longTermLiabilities = new AccountCategory("Long Term Liabilities", AccountType.LIABILITY);
+                AccountCategory retainedEarnings = new AccountCategory("Retained Earnings", AccountType.EQUITY);
+                currentAssets.getAccounts().add(new Account("Cash", true));
+                currentAssets.getAccounts().add(new Account("Accounts Receivable", true));
+                longTermAssets.getAccounts().add(new Account("Property, Plant, & Equipment", true));
+                longTermAssets.getAccounts().add(new Account("Real Estate", true));
+                currentLiabilities.getAccounts().add(new Account("Credit Card", false));
+                currentLiabilities.getAccounts().add(new Account("Accounts Payable", false));
+                longTermLiabilities.getAccounts().add(new Account("Notes Payable", false));
+                retainedEarnings.getAccounts().add(new Account("Initial Capital", false));
+                retainedEarnings.getAccounts().add(new Account("Revenue", false));
+                retainedEarnings.getAccounts().add(new Account("Expense", true));
+                book.getAccountCategories().add(currentAssets);
+                book.getAccountCategories().add(longTermAssets);
+                book.getAccountCategories().add(currentLiabilities);
+                book.getAccountCategories().add(longTermLiabilities);
+                book.getAccountCategories().add(retainedEarnings);
+                showBalanceSheet();
             default:
                 break; //close method sets this up
         }

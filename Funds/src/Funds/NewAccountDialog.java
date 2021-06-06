@@ -162,7 +162,7 @@ public class NewAccountDialog extends Dialog implements Initializable {
             cmbParent.setDisable(false);
             LinkedList<AccountCategory> subcategory = book.getSubcategory((AccountType)cmbType.getValue());
             for(int i = 0; i < subcategory.size(); i++){
-                cmbParent.getItems().add(subcategory.get(i).getName());
+                cmbParent.getItems().add(subcategory.get(i));
             }
         }
     }//end setParentChoices()

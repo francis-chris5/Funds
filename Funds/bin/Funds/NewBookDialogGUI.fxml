@@ -13,7 +13,7 @@
    <content>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <VBox layoutX="42.0" layoutY="15.0" prefHeight="150.0" prefWidth="247.0" spacing="3.0">
+            <VBox layoutX="25.0" layoutY="18.0" prefHeight="308.0" prefWidth="315.0" spacing="3.0">
                <children>
                   <RadioButton fx:id="rdEmpty" mnemonicParsing="false" text="Empty">
                      <font>
@@ -37,6 +37,19 @@
                      </font>
                   </RadioButton>
                   <Label alignment="TOP_LEFT" prefHeight="49.0" prefWidth="208.0" text="Asset, Liability, and Equity charts containing Cash, Credit Card, Revenue, and Expense accounts" wrapText="true">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="16.0" />
+                     </VBox.margin>
+                  </Label>
+                  <RadioButton fx:id="rdDetailed" mnemonicParsing="false" text="Detailed" toggleGroup="$StartTypeToggleGroup">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <Label alignment="TOP_LEFT" prefHeight="75.0" prefWidth="208.0" text="Asset, Liability, and Equity charts containing categories for Current and Long Term Assets and Liabilities and a Retained Earnings categeory under Equity, numerous accounts have been placed in these categories for a starting point" wrapText="true">
                      <font>
                         <Font size="10.0" />
                      </font>
