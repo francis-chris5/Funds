@@ -28,14 +28,27 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </VBox>
-            <VBox layoutX="35.0" layoutY="25.0" prefHeight="68.0" prefWidth="160.0">
+            <VBox layoutX="35.0" layoutY="13.0" prefHeight="68.0" prefWidth="160.0">
                <children>
-                  <Label text="Parent" />
-                  <ComboBox fx:id="cmbParent" prefWidth="150.0">
+                  <Label text="Type" />
+                  <ComboBox fx:id="cmbType" onAction="#onTypeChange" prefWidth="150.0">
                      <VBox.margin>
                         <Insets left="8.0" />
                      </VBox.margin>
                   </ComboBox>
+                  <VBox prefHeight="68.0" prefWidth="160.0">
+                     <children>
+                        <Label text="Parent" />
+                        <ComboBox fx:id="cmbParent" prefWidth="150.0">
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                        </ComboBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
