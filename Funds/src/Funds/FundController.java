@@ -1,6 +1,19 @@
 package Funds;
 
 
+import Funds.DataEnums.NewBookType;
+import Funds.DataEnums.AccountType;
+import Funds.Dialogs.RemoveAccountDialog;
+import Funds.Dialogs.NewBookDialog;
+import Funds.Dialogs.NewAccountDialog;
+import Funds.Dialogs.NewAccountCategoryDialog;
+import Funds.Dialogs.HelpDialog;
+import Funds.Dialogs.DetailsDialog;
+import Funds.DataObjects.AccountCategory;
+import Funds.Dialogs.ModifyAccountOrderDialog;
+import Funds.DataObjects.Account;
+import Funds.DataObjects.Book;
+import Funds.Tools.Budgeting.RevenueSplitter.RevenueSplitter;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.LinkedList;
@@ -15,6 +28,8 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -41,6 +56,10 @@ public class FundController implements Initializable, Book.AccountController {
     Button btnBookDetails;
 
         //main content pane
+    //tabpane
+    @FXML
+    TabPane tpMain;
+    //balance sheet
     @FXML
     VBox vbxAsset;
     @FXML
@@ -295,6 +314,21 @@ public class FundController implements Initializable, Book.AccountController {
     
     
     
+        ///////////////////////////////////////////  TOOL METHODS  ////////////
+    
+    public void launchRevenueSplitter(){
+        Tab revenueSplitterTab = new Tab("Revenue Splitter", new RevenueSplitter(book));
+        tpMain.getTabs().add(revenueSplitterTab);
+        tpMain.getSelectionModel().select(revenueSplitterTab);
+    }//end launchRevenueSplitter()
+    
+    
+    
+    
+    
+    
+    
+    
         ///////////////////////////////////////////  GUI OPERATIONS  //////////
 
     /**
@@ -390,17 +424,17 @@ public class FundController implements Initializable, Book.AccountController {
         LinkedList<Account> subcategory = new LinkedList<>();
         total += findNormalDebitSubtotal(book.getAssets());
         total += findNormalDebitSubtotal(book.getSubcategoryAccounts(AccountType.ASSET));
-        txtTotalAssets.setText(Double.toString(total));
+        txtTotalAssets.setText(currencyFormat.format(total));
         
         total = 0.0;
         total += findNormalCreditSubtotal(book.getLiabilities());
         total += findNormalCreditSubtotal(book.getSubcategoryAccounts(AccountType.LIABILITY));
-        txtTotalLiabilities.setText(Double.toString(total));
+        txtTotalLiabilities.setText(currencyFormat.format(total));
         
         total = 0.0;
         total += findNormalCreditSubtotal(book.getEquities());
         total += findNormalCreditSubtotal(book.getSubcategoryAccounts(AccountType.EQUITY));
-        txtTotalEquity.setText(Double.toString(total));
+        txtTotalEquity.setText(currencyFormat.format(total));
     }//end displayTotals()
     
     

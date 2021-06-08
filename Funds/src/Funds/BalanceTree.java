@@ -1,19 +1,26 @@
 
 package Funds;
 
+import Funds.DataEnums.AccountType;
+import Funds.Dialogs.RemoveAccountDialog;
+import Funds.Dialogs.NewAccountDialog;
+import Funds.Dialogs.NewAccountCategoryDialog;
+import Funds.Dialogs.AccountDialog;
+import Funds.DataObjects.AccountCategory;
+import Funds.Dialogs.ModifyAccountOrderDialog;
+import Funds.DataObjects.Account;
+import Funds.DataObjects.Book;
 import java.text.NumberFormat;
 import java.util.LinkedList;
 import javafx.application.Platform;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Separator;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 
@@ -30,7 +37,6 @@ public class BalanceTree extends StackPane{
     private TreeView tree;
     private AccountDialog accountDialog;
     
-    private int clickCounter = 0;
     private NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
     
     

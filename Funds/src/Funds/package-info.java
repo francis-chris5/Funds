@@ -1,4 +1,6 @@
 /**
+ * The .java and .fxml files relating to the primary Graphical User Interface for this application.
+ * 
  * <h3>Description</h3>
  * <p>Finally getting around to making the accounting software that's been rattling around in the back of my mind for years. Sort of a small scale thing for personal use or single projects rather than a company-wide conglomeration it's easy to get lost in. Creating it to coincide with an open source project management thing that just hit the first release to perhaps be part of a suite of management software someday.</p>
  * <p>The application is being constructed with Java and JavaFX to ease the replication into web or mobile versions of the app.</p>

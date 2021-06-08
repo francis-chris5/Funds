@@ -72,6 +72,11 @@
                      </accelerator></MenuItem>
               </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Tools">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#launchRevenueSplitter" text="Revenue Splitter" />
+              </items>
+            </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#getHelp" text="User Manual">
@@ -107,9 +112,9 @@
                </children></AnchorPane>
       <AnchorPane id="Content" fx:id="apnMain" minHeight="-1.0" minWidth="-1.0" prefHeight="561.0" prefWidth="447.0">
                <children>
-                  <TabPane tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+                  <TabPane fx:id="tpMain" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
                     <tabs>
-                      <Tab text="Balance Sheet">
+                      <Tab closable="false" text="Balance Sheet">
                         <content>
                           <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
