@@ -4,15 +4,15 @@
 
 <h4>Summary</h4>
 
-After having a laptop stolen a few years back I switched tracking my personal finances from accounting software to a customized spreadsheet. When time came for a new laptop again I decided to go back to accounting software, however, the accounting software I've been using personally doesn't exactly fit my needs: it's designed for a large corporation which means there is way more there than I need, small input issues -I am constantly editing transactions by accident so trying to make that less likely to happen without making it difficult to edit transactions, I was also thinking that the standard accounting statements should be the primary appearance of the GUI not an afterthought to an overly fancy interface then tacked on and hidden a couple menus deep.
+After having a laptop stolen a few years back led to switching over my personal finance tracking from accounting software to a customized spreadsheet. When time came for a new laptop again the decision was made to go back to accounting software, however, the accounting software initially selected doesn't exactly fit my needs: it's designed for a large corporation which means there is way more there than needed, small input issues -am constantly editing transactions by accident so that needs to be less likely to happen without making it difficult to edit, also been thinking for quite a while that the standard accounting statements should be the primary appearance of the GUI not an afterthought to an overly fancy interface then tacked on and hidden a couple menus deep in the interface.
 
-I don't want a general purpose spreadsheet modified to fit my needs, I want to use specific purpose software set up to automate double entry accounting, but I don't want one of those massive conglomerations of tools that I'll never use and find myself getting lost in the menus for. So that's what I tried to develop here: simplicity is the name of the game... Essentially it's just a balance sheet for an overview of the accounts and a ledger to enter and edit transactions. In the background the software handles the standard double-entry method balancing of accounts while the data is stored in nested collections of Linked Lists rather than a Relational Database, and just the small number of tools I find myself needing.
+So did not want a general purpose spreadsheet modified to fit my needs, there's a desire for specific purpose software set up to automate double entry accounting, but at the same time don't want one of those massive conglomerations of tools, most of which never get used and just leave a person getting lost in the menus. So that's what I tried to develop here: simplicity is the name of the game... Essentially it's just a balance sheet for an overview of the accounts and a ledger to enter and edit transactions. In the background the software handles the standard double-entry method balancing of accounts while the data is stored in nested collections of Linked Lists rather than a Relational Database, and just the small number of tools to meet needs as they arise.
 
 
 
 <h4>Design Details:</h4>
 
-It's open source software so if you are interested in customizing some accounting software to fit your exact needs the simplistic idea I was going for here may make an ideal starting point.
+It's open source software so if you are interested in customizing some accounting software to fit your exact needs the simplistic idea here may make an ideal starting point.
 
 PLATFORM: 
 
