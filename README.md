@@ -86,7 +86,7 @@ At the bottom of the table is a yellow row for inputting a new transaction. The 
 
 (Optional) enter a date for the transaction (the default is current date)
 
-(Optional) an id for the transaction (the transfer account for balancing will receive the same ID)
+(Optional) a human readable id for the transaction (the transfer account for balancing will receive the same ID) --the computer keeps a different id in the background for the transactions
 
 (Optional) a short description of the transaction
 
@@ -102,7 +102,7 @@ click the clear button (center button on the right side of the input row) to res
 
 To edit a transaction that has already been posted right click on it and an edit transaction dialog box will open, make the changes and click the okay button, or cancel out of the dialog to keep the transaction as it was.
 
-To delete a transaction select it from the account ledger and click the delete button (rightmost button on the right side of the input row) --eventually this will delete the balance transfer as well
+To delete a transaction select it from the account ledger and click the delete button (rightmost button on the right side of the input row)
 
 
 
