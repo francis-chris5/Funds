@@ -10,21 +10,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="523.0" prefWidth="639.0" stylesheets="@../../../Stylesheets/FundStyle.css" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="523.0" prefWidth="1037.0" stylesheets="@../../../Stylesheets/FundStyle.css" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="14.0" layoutY="41.0" prefHeight="420.0" prefWidth="262.0">
+      <VBox layoutX="27.0" layoutY="31.0" prefHeight="242.0" prefWidth="262.0">
          <children>
             <Label text="Available Accounts" />
-            <ListView fx:id="lstAccounts" prefHeight="119.0" prefWidth="244.0" styleClass="account-list">
+            <ListView fx:id="lstAccounts" prefHeight="178.0" prefWidth="244.0" styleClass="account-list">
                <VBox.margin>
                   <Insets left="8.0" />
                </VBox.margin>
             </ListView>
-            <HBox prefHeight="54.0" prefWidth="252.0" spacing="12.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="54.0" prefWidth="252.0" spacing="12.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#selectAccounts" text="Select" />
-                  <Button mnemonicParsing="false" text="Calculate" />
-                  <Button mnemonicParsing="false" onAction="#saveSplit" text="Save Split" />
+                  <Button mnemonicParsing="false" onAction="#calculateTransfers" text="Calculate Transfers" />
                </children>
                <padding>
                   <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
@@ -38,7 +37,28 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </VBox>
-      <VBox layoutY="231.0" prefHeight="254.0" prefWidth="671.0">
+      <VBox layoutX="27.0" layoutY="276.0" prefHeight="216.0" prefWidth="262.0" spacing="3.0">
+         <children>
+            <Label text="Saved Splits" />
+            <ListView fx:id="lstSplits" onContextMenuRequested="#removeSavedSplit" onMouseClicked="#openSplit" prefHeight="160.0" prefWidth="244.0" styleClass="account-list">
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+            </ListView>
+            <HBox alignment="CENTER_RIGHT" prefHeight="54.0" prefWidth="252.0" spacing="12.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#saveSplit" text="Save Split" />
+               </children>
+               <padding>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <VBox layoutX="338.0" layoutY="31.0" prefHeight="461.0" prefWidth="671.0">
          <children>
             <HBox prefHeight="8.0" prefWidth="338.0">
                <children>
@@ -68,6 +88,20 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </VBox>
+               </children>
+            </HBox>
+            <ScrollPane prefHeight="419.0" prefWidth="671.0">
+               <content>
+                  <VBox fx:id="vbxControls" />
+               </content>
+            </ScrollPane>
+            <HBox alignment="CENTER_RIGHT" prefHeight="8.0" prefWidth="338.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#calculateTransfers" text="Calculate Transfers">
+                     <HBox.margin>
+                        <Insets top="18.0" />
+                     </HBox.margin>
+                  </Button>
                   <VBox prefHeight="100.0" prefWidth="166.0">
                      <children>
                         <Label text="Moving Amount" />
@@ -81,32 +115,9 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </VBox>
-                  <Button mnemonicParsing="false" onAction="#calculateTransfers" text="Calculate Transfers">
-                     <HBox.margin>
-                        <Insets top="18.0" />
-                     </HBox.margin>
-                  </Button>
                </children>
             </HBox>
-            <ScrollPane prefHeight="255.0" prefWidth="614.0">
-               <content>
-                  <VBox fx:id="vbxControls" />
-               </content>
-            </ScrollPane>
          </children>
-      </VBox>
-      <VBox layoutX="320.0" layoutY="41.0" prefHeight="150.0" prefWidth="262.0" spacing="3.0">
-         <children>
-            <Label text="Saved Splits" />
-            <ListView fx:id="lstSplits" onContextMenuRequested="#removeSavedSplit" onMouseClicked="#openSplit" prefHeight="118.0" prefWidth="244.0" styleClass="account-list">
-               <VBox.margin>
-                  <Insets left="8.0" />
-               </VBox.margin>
-            </ListView>
-         </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
       </VBox>
    </children>
 </AnchorPane>
