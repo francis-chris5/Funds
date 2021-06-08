@@ -40,7 +40,7 @@ Everything is tied together via a nested assortment of Linked Lists
 
 <h2>User Manual</h2>
 
-
+BALANCE SHEET OPERATIONS:
 
 Book
 
@@ -170,6 +170,38 @@ Select the appropriate radio button for removing either a category or an account
 
 NOTE: An account cannot be deleted if it has a non-zero balance and a category cannot be deleted if it contains accounts, so zero out or transfer any balances before removing an account and then remove any accounts before removing a category 
 
+<br><br>
+   
+   
+TOOLS:
+
+Revenue Splitter
+
+The Revenue Splitter is for dividing a payment up between multiple accounts based on percentages: such as in someone's personal accounts 2/3 of a paycheck goes to checking 15% to savings and the remainder goes to petty cash
+
+Select [Tools > Revenue Splitter] to add the Revenue Splitter Tab to the main content area
+
+Choose the accounts you want to divide the payment between
+
+In the "Split Amount" text field enter the amount to be split between the selected accounts
+
+Use the available controls to determine percentage for each account, and if the account's amount needs excluded from the displayed total, since most money comes in as direct deposit these days a checkbox to exclude the initial one from the total to see how much transfers out of it (for those times when the direct deposit goes to an account with a limited number of monthly transfers --typical savings-- and money needs moved in bulk to an account with unlimited transfers --typical checking-- to shuffle it all around)
+
+The amount that is to be moved will display in the non-editable "Moving Amount" text field
+
+The amount field for each control item will display the amount to transfer to each of the selected accounts
+
+The non-editable Moving Amount text field displays the total which takes the "Exclude From Total" checkbox into consideration
+
+If the percentage the Split Amount is being divided into exceeds 100% the amount fields will turn red and indicate the percentage is too high
+
+If this will be a regular division of income the revenue split can be saved, simply give it a name, or leave the name blank and it will show the date the split was saved on, and select the "Save Split" button
+
+To reopen a saved split left-click on it in the Saved Splits List View
+
+To remove a saved split right-click on it in the Saved Splits List View
+
+** I hope I explained the purpose of this correctly, if not, for example: my salary paycheck goes to my general savings account, 2/3 of it goes to living funds (checking), 11% to vehicle fund (saving), 9% to home fund (savings), 4% to stock brokerage account, and only the remainder stays in the general savings, 4 transfers with each check, happens every other week, which exceeds the monthly limit on transfers in the account the paycheck is deposited to, so it all needs transferred to checking to begin with except the amount left behind which still needs listed out with these numbers...
 
 
 
@@ -254,6 +286,10 @@ right clicking on a transaction entry in one of the ledgers opens that for editi
 
 ![pic_for_github_edit_entry](https://user-images.githubusercontent.com/50467171/120716224-ba506680-c493-11eb-8e84-9204faecde0d.jpg)
 
+   
+ The first of the tools is well underway and appears to be working
+   
+![pics_for_github_revenueSplit](https://user-images.githubusercontent.com/50467171/121110003-931ecf80-c7da-11eb-95a8-b01f90e76e8a.jpg)
  
 <br><br>
 It's a start, still a long way to go... though I am looking for something rather simplistic here, so it may be ready to call version 1 in just a couple more days...
