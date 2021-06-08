@@ -287,9 +287,9 @@ right clicking on a transaction entry in one of the ledgers opens that for editi
 ![pic_for_github_edit_entry](https://user-images.githubusercontent.com/50467171/120716224-ba506680-c493-11eb-8e84-9204faecde0d.jpg)
 
    
- The first of the tools is well underway and appears to be working, I'm not happy with the layout but this was the first one I found where everything fit in the opening size of the main GUI and I was tired of moving boxes around by that point
+ The first of the tools is well underway and appears to be working so far
    
-![pics_for_github_revenueSplit](https://user-images.githubusercontent.com/50467171/121110003-931ecf80-c7da-11eb-95a8-b01f90e76e8a.jpg)
+![pics_for_github_revenueSplit](https://user-images.githubusercontent.com/50467171/121172494-c5095380-c825-11eb-8e3a-e998fceb9437.jpg)
  
 <br><br>
 It's a start, still a long way to go... though I am looking for something rather simplistic here, so it may be ready to call version 1 in just a couple more days...
