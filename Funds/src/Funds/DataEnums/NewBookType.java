@@ -2,6 +2,10 @@
 package Funds.DataEnums;
 
 
+/**
+ * The available options for creating new Books, or we could just call them templates if you prefer
+ * @author Chris
+ */
 public enum NewBookType {
     
     EMPTY, BASIC_PERSONAL, DETAILED;

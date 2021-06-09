@@ -21,11 +21,11 @@ import javafx.scene.layout.VBox;
 
 
 /**
- * One thing I always kept set up in my spreadsheet that seemed to be lacking in the accounting software was a way to divy up the paychecks (or other income) between various savings/checking accounts based off percentages.
- * This tool brings in that functionality: select several accounts from the list of available accounts, then use sliders to determine what percentage goes to each account, and since most money comes in as direct deposit these days a checkbox to exclude the initial one from the total to see how much transfers out of it (for those times when the direct deposit goes to an account with a limited number of monthly transfers --typical savings-- and money needs moved in bulk to an account with unlimited transfers --typical checking-- to shuffle it all around)
+ * The primary control class for all of the user and machine interface components making up this tool
+ * 
  * @author Chris
  */
-public class RevenueSplitter extends Pane implements Initializable {
+public class RevenueSplitter extends Pane implements Initializable, RevenueSplitterItemPane.SplitControl {
     
     
         /////////////////////////////////////////  DATAFIELDS  ////////////
@@ -56,6 +56,10 @@ public class RevenueSplitter extends Pane implements Initializable {
     
         //////////////////////////////////////  CONSTRUCTORS  ///////////
     
+    /**
+     * The one-arg constructor only requires a reference to the book containing the accounts the money will be split among
+     * @param book The currently open book
+     */
     public RevenueSplitter(Book book){
         this.book = book;
         try{
@@ -67,9 +71,8 @@ public class RevenueSplitter extends Pane implements Initializable {
             //just move on then
         }
         fillLists();
-        prepControls();
+        clearControls();
         lstAccounts.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        
     }//end constructor
     
     
@@ -99,43 +102,61 @@ public class RevenueSplitter extends Pane implements Initializable {
     
     
     
-    public void prepControls(){
-        txtSplitName.setPromptText("untitled split");
+    /**
+     * Resets/Clears the GUI components for a split
+     */
+    public void clearControls(){
+        txtSplitName.clear();
+        txtSplitAmount.clear();
+        txtMoveAmount.clear();
         vbxControls.getChildren().clear();
-    }//end prepControls()
+    }//end clearControls()
     
     
     
     
+    /**
+     * Creates a revenue splitter item for each selected account and fills the list of items to have controls shown on the interface
+     */
     @FXML
     public void selectAccounts(){
         ObservableList<Account> selected = lstAccounts.getSelectionModel().getSelectedItems();
         selected.forEach(acc -> {
             RevenueSplitterItem it = new RevenueSplitterItem();
             it.setAccount((Account)acc);
+            it.setAutomatic(true);
             currentItems.add(it);
         });
+        findAutomaticPercents();
         displayAccounts();
         lstAccounts.getSelectionModel().clearSelection();
     }//end selectAccounts()
     
     
     
+    /**
+     * This method actually walks through the list of revenue splitter items and loads in the GUI controls for each one
+     */
     @FXML
     public void displayAccounts(){
         vbxControls.getChildren().clear();
         for(int i = 0; i < currentItems.size(); i++){
-            vbxControls.getChildren().add(new RevenueSplitterItemPane(currentItems.get(i)));
+            RevenueSplitterItemPane rsip = new RevenueSplitterItemPane(currentItems.get(i));
+            rsip.setSplitControl(this);
+            vbxControls.getChildren().add(rsip);
         }
     }//end displayAccounts()
     
     
     
     
+    /**
+     * Copies the list of revenue splitter items to the current book and clears the controls to prepare for the next split
+     */
     @FXML
     public void saveSplit(){
         RevenueSplit split = new RevenueSplit();
-        split.setName(txtSplitName.getText().length() == 0 ? "untitled split " + LocalDate.now() : txtSplitName.getText());
+        split.setName(txtSplitName.getText().length() == 0 ? "untitled split from " + LocalDate.now() : txtSplitName.getText() + " from " + LocalDate.now());
         for(int i  = 0; i < currentItems.size(); i++){
             split.getItems().add(currentItems.get(i));
         }
@@ -150,16 +171,22 @@ public class RevenueSplitter extends Pane implements Initializable {
     
     
     
+    /**
+     * loads in a previously saved revenue split
+     */
     @FXML
     public void openSplit(){
         RevenueSplit split = (RevenueSplit)lstSplits.getSelectionModel().getSelectedItem();
         currentItems = split.getItems();
+        findAutomaticPercents();
         displayAccounts();
     }//end openSplit()
     
     
     
-    
+    /**
+     * removes a stored list of revenue split items from the current book
+     */
     @FXML
     public void removeSavedSplit(){
         RevenueSplit split = (RevenueSplit)lstSplits.getSelectionModel().getSelectedItem();
@@ -175,9 +202,38 @@ public class RevenueSplitter extends Pane implements Initializable {
     
     
     
+    /**
+     * subtracts any non-automatic percents from one-hundred and then divides the remaining percentage evenly among the automatic items
+     */
+    @FXML
+    public void findAutomaticPercents(){
+        double available = 100;
+        int autos = 0;
+        for(int i = 0; i < currentItems.size(); i++){
+            if(!currentItems.get(i).isAutomatic()){
+                available -= currentItems.get(i).getPercent();
+            }
+            else{
+                autos++;
+            }
+        }
+        for(int i = 0; i < currentItems.size(); i++){
+            if(currentItems.get(i).isAutomatic()){
+                currentItems.get(i).setPercent(available/autos);
+            }
+        }
+    }//end findAutomaticPercents()
+    
+    
+    
+    
+    /**
+     * Method that walks through the settings for the split to calculate and display amounts
+     */
     @FXML
     public void calculateTransfers(){
         double totalPercent = 0.0;
+        findAutomaticPercents();
         for(int i = 0; i < currentItems.size(); i++){
             totalPercent += currentItems.get(i).getPercent();
         }
@@ -190,18 +246,25 @@ public class RevenueSplitter extends Pane implements Initializable {
             txtSplitAmount.setStyle("-fx-background-color: white;");
             txtMoveAmount.setStyle("-fx-background-color: white;");
             double moving = 0.0;
+            double splitAmount = 0.0;
             try{
-                double splitAmount = Double.parseDouble(txtSplitAmount.getText());
-                for(int i = 0; i < currentItems.size(); i++){
-                    currentItems.get(i).setAmount(splitAmount * 0.01 * currentItems.get(i).getPercent());
-                    moving += !currentItems.get(i).isExcluded() ? currentItems.get(i).getAmount() : 0.0;
+                splitAmount = Double.parseDouble(txtSplitAmount.getText());
+            }
+            catch(NumberFormatException e0){
+                try{
+                        //check if it's a dollar sign
+                    splitAmount = Double.parseDouble(txtSplitAmount.getText().substring(1));
                 }
-                txtMoveAmount.setText(currencyFormat.format(moving));
-                displayAccounts();
+                catch(Exception e1){
+                    //bad input just move on with it at zero then
+                }
             }
-            catch(Exception e){
-                //it's probably not a number then
+            for(int i = 0; i < currentItems.size(); i++){
+                currentItems.get(i).setAmount(splitAmount * 0.01 * currentItems.get(i).getPercent());
+                moving += !currentItems.get(i).isExcluded() ? currentItems.get(i).getAmount() : 0.0;
             }
+            txtMoveAmount.setText(currencyFormat.format(moving));
+            displayAccounts();
         }
         
     }//end calculateTransfers()

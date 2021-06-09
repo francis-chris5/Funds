@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 
 
 /**
- * The controller class for the similarly named FXML dialog.
+ * Dialog to remove unwanted categories or accounts from the Book, as long as they're empty: an account must have a balance of zero and a category cannot contain any accounts in order to be deleted
  * @author Chris Francis
  */
 public class RemoveAccountDialog extends Dialog implements Initializable{

@@ -7,11 +7,10 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
 /**
- * <h2>Summary</h2>
- * <p>An Transaction is the basic building block of the whole thing. It is a collection of datafields representing a single real-world monetary transaction.</p>
- * <p>Every Transaction made will have a corresponding Transfer -another entry with debits and credits reversed for the GAAP standard double-entry method of "balancing the books."</p>
- * <p>The early stages of the plan have the Transaction object corresponding to a single record in a relational database for compatibility with other accounting software concerns.</p>
- * @author Chris
+ * An Transaction is the basic building block of the whole thing, it is a collection of datafields representing a single real-world monetary transaction.
+ * Every Transaction made will have a corresponding Transfer -another entry with debits and credits reversed for the GAAP standard double-entry method of "balancing the books."
+ * The early stages of the plan have the Transaction object corresponding to a single record in a relational database for compatibility with other accounting software concerns.
+ * @author Chris Francis
  */
 public class Transaction implements Serializable {
     
@@ -20,7 +19,6 @@ public class Transaction implements Serializable {
     private String transactionID;
     private String Description;
     private Account transfer;
-    //private BooleanProperty reconcile;
     private boolean reconcile;
     private double debit;
     private double credit;

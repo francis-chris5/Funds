@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 
 
 /**
- * The controller class for the similarly named FXML dialog.
+ * Dialog to create a new account, the traditional cornerstone of double-entry method accounting practices: some accounts increase with a debit (left column) and decrease with a credit (right column) while other accounts are the reverse and every dollar recorded is listed in both a debit and a column credit somewhere.
  * @author Chris Francis
  */
 public class NewAccountDialog extends Dialog implements Initializable {

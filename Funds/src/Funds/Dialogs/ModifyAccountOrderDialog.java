@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 
 
 /**
- * The controller class for the similarly named FXML dialog. The standard practice in accounting is that accounts are listed by order of liquidity (how quickly it can be turned into cash).
+ * The standard practice in accounting is that accounts are listed by order of liquidity (how quickly it can be turned into cash), this dialog is for changing the order that accounts and categories of accounts appear on the balance sheet
  * @author Chris Francis
  */
 public class ModifyAccountOrderDialog extends Dialog implements Initializable {

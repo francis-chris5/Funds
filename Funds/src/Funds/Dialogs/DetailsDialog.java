@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 
 
 /**
- * The controller class for the similarly named FXML dialog.
+ * The dialog for Book level interaction: book name (not filename to allow versioning), date opened, description, text editor for general note keeping...
  * @author Chris Francis
  */
 public class DetailsDialog extends Dialog implements Initializable {

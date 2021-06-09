@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
 
 /**
- * The controller class for the similarly named FXML dialog.
+ * The dialog with options for creating a new category to organize accounts in on the balance sheet rather than one long list, each category will become an expandable/collapsable list of accounts on the balance sheet based primary user interface
  * @author Chris Francis
  */
 public class NewAccountCategoryDialog extends Dialog implements Initializable {

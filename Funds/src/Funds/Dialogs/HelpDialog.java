@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 
 
 /**
- * The Java class to accompany a GUI constructed in FXML. Basically this reads from a text file (about.txt and UserManual.txt) and sets it up to be displayed nicely on the screen for a user.
+ * Basically this reads from a text file (about.txt and UserManual.txt) to keep the info easy to edit, and sets it up to be displayed nicely on the screen for a user.
  * @author Chris Francis
  */
 public class HelpDialog extends Dialog implements Initializable{

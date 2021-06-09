@@ -29,7 +29,7 @@
             <VBox prefHeight="57.0" prefWidth="168.0" spacing="3.0">
                <children>
                   <Label text="Percentage" />
-                  <CheckBox fx:id="chkAutomatic" disable="true" mnemonicParsing="false" onAction="#onAutomaticCheckChanged" text="Automatic">
+                  <CheckBox fx:id="chkAutomatic" mnemonicParsing="false" onAction="#onAutomaticCheckChanged" text="Automatic">
                      <VBox.margin>
                         <Insets left="8.0" />
                      </VBox.margin>

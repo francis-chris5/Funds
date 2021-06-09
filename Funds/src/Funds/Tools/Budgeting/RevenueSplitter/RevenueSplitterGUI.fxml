@@ -23,7 +23,6 @@
             <HBox alignment="CENTER_RIGHT" prefHeight="54.0" prefWidth="252.0" spacing="12.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#selectAccounts" text="Select" />
-                  <Button mnemonicParsing="false" onAction="#calculateTransfers" text="Calculate Transfers" />
                </children>
                <padding>
                   <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
@@ -65,7 +64,7 @@
                   <VBox prefHeight="52.0" prefWidth="145.0">
                      <children>
                         <Label text="Split Amount" />
-                        <TextField fx:id="txtSplitAmount">
+                        <TextField fx:id="txtSplitAmount" onAction="#calculateTransfers">
                            <VBox.margin>
                               <Insets left="8.0" />
                            </VBox.margin>

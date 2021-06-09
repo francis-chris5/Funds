@@ -5,6 +5,10 @@ import Funds.DataObjects.Account;
 import java.io.Serializable;
 
 
+/**
+ * Java bean style class to represent the accounts being modified, and how they're modified, by revenue splitter
+ * @author Chris Francis
+ */
 public class RevenueSplitterItem implements Serializable {
     
         /////////////////////////////////////////////////  DATAFIELDS  /////////

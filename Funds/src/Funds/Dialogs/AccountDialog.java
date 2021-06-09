@@ -39,7 +39,7 @@ import javafx.stage.Stage;
 
 
 /**
- * The controller class for the similarly named FXML dialog.
+ * This could just be called the "ledger" for each account as that's the old school (paper) model I had in mind for book keeping
  * @author Chris Francis
  */
 public class AccountDialog extends Dialog implements Initializable {

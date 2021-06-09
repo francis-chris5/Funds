@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 
 /**
- * The controller class for the similarly named FXML dialog.
+ * The dialog to start a new Book, which is the working file: what the user opens/edits/saves...
  * @author Chris Francis
  */
 public class NewBookDialog extends Dialog implements Initializable {

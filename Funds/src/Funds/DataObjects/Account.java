@@ -10,9 +10,8 @@ import java.util.LinkedList;
 
 
 /**
- * <h2>Summary</h2>
- * <p>The Account class will be the primary working tool for organizing the transactions in terms of money coming in or money going out using the standard accounting practice of double-entry method. All transactions are recorded in two accounts, once as a debit and once as a credit, and in the end all debits and credits will balance out.</p>
- * <p>Transactions are the small scale and Books are the big picture which leaves Accounts as that nice middle-ground where we get the whole picture without getting bogged down in, but can still see, the finer details.</p>
+ * The Account class will be the primary working tool for organizing the transactions in terms of money coming in or money going out using the standard accounting practice of double-entry method. All transactions are recorded in two accounts, once as a debit and once as a credit, and in the end all debits and credits will balance out.
+ * Transactions are the small scale and Books are the big picture which leaves Accounts as that nice middle-ground where we get the whole picture without getting bogged down in, but can still see, the finer details.
  * @author Chris Francis
  */
 public class Account implements Serializable {

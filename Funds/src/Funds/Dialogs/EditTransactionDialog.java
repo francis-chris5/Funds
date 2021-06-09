@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 
 
 /**
- * The controller class for the similarly named FXML dialog.
+ * The software I used previously was too easy to edit transactions, so I added a step to prevent that happening on accident so often, have to right click and then confirm changes from a separate dialog
  * @author Chris Francis
  */
 public class EditTransactionDialog extends Dialog implements Initializable {

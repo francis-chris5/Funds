@@ -17,9 +17,7 @@ import javafx.stage.FileChooser;
 
 
 /**
- * <h2>Summary</h2>
- * <p>A Book is the main organizer object for this whole software application. Entries will be collected into Accounts, and the Book is a collection of accounts with measures taken to assure it is balanced.</p>
- * <p>The Book object is what will be saved/opened/worked-with by users for ongoing concerns in accounting.</p>
+ * A Book is the main organizer object for this whole software application, transactions will be collected into Accounts, and the Book is a collection of accounts with measures taken to assure it is balanced, and the Book object is what will be saved/opened/worked-with by users for ongoing concerns in accounting.
  * @author Chris Francis
  */
 public class Book implements Serializable {
@@ -27,7 +25,7 @@ public class Book implements Serializable {
         ////////////////////////////////////  INTERFACING REQUIREMENTS  ///////
     
     /**
-     * A java object must have a dispalyDetails(), updateLeftStatus(String), updateCenterStatus(Object), updateRightStatus(String) methods to refresh the balance sheet to serve as a FXML controller for this class
+     * All of the dialogs keep a reference to the current Book object, but not the primary GUI controller, so this interface assures there is a way to call the methods on the primary GUI from any dialog 
      */
     public interface AccountController{
         public void displayDetails();

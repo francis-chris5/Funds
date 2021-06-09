@@ -28,6 +28,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
@@ -317,7 +318,8 @@ public class FundController implements Initializable, Book.AccountController {
         ///////////////////////////////////////////  TOOL METHODS  ////////////
     
     public void launchRevenueSplitter(){
-        Tab revenueSplitterTab = new Tab("Revenue Splitter", new RevenueSplitter(book));
+        ScrollPane scpContent = new ScrollPane(new RevenueSplitter(book));
+        Tab revenueSplitterTab = new Tab("Revenue Splitter", scpContent);
         tpMain.getTabs().add(revenueSplitterTab);
         tpMain.getSelectionModel().select(revenueSplitterTab);
     }//end launchRevenueSplitter()
