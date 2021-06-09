@@ -20,7 +20,7 @@ Coded in Java with Graphical User interface in JavaFX so that the same code can 
 
 Find the source-code here: https://github.com/francis-chris5/Funds 
 
-Find the javadocs here: https://francis-chris5.github.io/Funds/javadoc/Funds/package-summary.html 
+Find the javadocs here: https://francis-chris5.github.io/Funds/javadoc
 
 STRUCTURE: 
 
