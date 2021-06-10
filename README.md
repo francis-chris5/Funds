@@ -179,6 +179,8 @@ TOOLS:
 General Ledger
 
 A listing of all transactions with search and filter functionality. NOTE: there is no editing on the general ledger only filters to find what needs to be edited, a general journal for making/editing entries is on the plan to be included eventually
+   
+Select [Tools > General Ledger] to add the general ledger tab to the main content area
 
 The ledger will automatically fill with all available transactions
 
