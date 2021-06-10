@@ -174,6 +174,22 @@ NOTE: An account cannot be deleted if it has a non-zero balance and a category c
    
    
 TOOLS:
+   
+   
+General Ledger
+
+A listing of all transactions with search and filter functionality. NOTE: there is no editing on the general ledger only filters to find what needs to be edited, a general journal for making/editing entries is on the plan to be included eventually
+
+The ledger will automatically fill with all available transactions
+
+select the date or date range to see transactions from and click "Apply Filters" button to remove all but the desired transactions
+
+enter characters expected to be in a description in the description filter text field and click the "Apply Filters" button to remove all but the transactions which contain the entered characters in the order they are entered (it will find partial matches so the filter does not require the full description)
+
+Click the "Clear Filters" button to reset the filter inputs and reload the general ledger with all transactions
+
+   
+   <br><br>
 
 Revenue Splitter
 
