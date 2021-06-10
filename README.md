@@ -211,14 +211,13 @@ The non-editable Moving Amount text field displays the total which takes the "Ex
 
 If the percentage the Split Amount is being divided into exceeds 100% the amount fields will turn red and indicate the percentage is too high
 
-If this will be a regular division of income the revenue split can be saved, simply give it a name, or leave the name blank and it will show the date the split was saved on, and select the "Save Split" button
+If this will be a regular division of income the revenue split can be saved, simply give it a name, or leave the name blank and it will show the date the split was saved on, and select the "Save Split" button. CRITICAL NOTE: the splitter uses references to accounts it does not create a different/copy-of account to work with so if the same account shows up in more than one saved split changes to one will affect the other as well as new splits using the same account, changing this will destroy the fairly efficient memory management selected for this software so the suggested workaround if this will be a problem is to create a set of dummy/fake accounts just to get the numbers from the tool instead of working with the actual accounts in the book (it does not make the transfer this tool is only a calculator)
 
 To reopen a saved split left-click on it in the Saved Splits List View
 
 To remove a saved split right-click on it in the Saved Splits List View
 
-** I hope I explained the purpose of this correctly, if not, for example: my salary paycheck goes to my general savings account, 2/3 of it goes to living funds (checking), 11% to vehicle fund (saving), 9% to home fund (savings), 4% to stock brokerage account, and only the remainder stays in the general savings, 4 transfers with each check, happens every other week, which exceeds the monthly limit on transfers in the account the paycheck is deposited to, so it all needs transferred to checking to begin with except the amount left behind which still needs listed out with these numbers...
-
+To remove a split item from the current set of controls right-click on the item to be removed
 
 
 <br><br>
