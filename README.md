@@ -250,7 +250,7 @@ In general everything seems to be moving along nicely with this, certianly still
 
 
 
-![pic_for_github_main](https://user-images.githubusercontent.com/50467171/120943668-5b425a00-c6fe-11eb-920f-65a9517ce138.jpg)
+![pic_for_github_main](https://user-images.githubusercontent.com/50467171/121451427-91384600-c96b-11eb-9566-216a5d2530f3.jpg)
 
 
 
@@ -287,12 +287,17 @@ right clicking on a transaction entry in one of the ledgers opens that for editi
 ![pic_for_github_edit_entry](https://user-images.githubusercontent.com/50467171/120716224-ba506680-c493-11eb-8e84-9204faecde0d.jpg)
 
    
- The first of the tools is well underway and appears to be working so far
+ The first couple tools seem to be ready and made it through the rudimentary testing, a revenue splitter to divide an amount between an assortment of accounts based on percentages and a general ledger with date and description filters (no editing on the general ledger, the plan has a general journal coming eventually for that)
    
 ![pics_for_github_revenueSplit](https://user-images.githubusercontent.com/50467171/121172494-c5095380-c825-11eb-8e3a-e998fceb9437.jpg)
+   
+![pic_for_github_generalLedger](https://user-images.githubusercontent.com/50467171/121451429-91384600-c96b-11eb-8fd7-01fd522d42d6.jpg)
  
 <br><br>
 It's a start, still a long way to go... though I am looking for something rather simplistic here, so it may be ready to call version 1 in just a couple more days...
 
+
+   
+   
 
 
