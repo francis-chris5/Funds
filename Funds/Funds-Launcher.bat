@@ -19,5 +19,5 @@ echo+
 
 REM powershell -window hidden -command ''
 
-java -cp %cd%\bin --module-path "%cd%\javafx\javafx-sdk-11.0.2\lib" --add-modules javafx.controls,javafx.fxml,javafx.web --add-opens=javafx.graphics/javafx.scene=ALL-UNNAMED --add-exports javafx.base/com.sun.javafx.event=ALL-UNNAMED Funds.FundMain
+java -cp "%cd%\bin" --module-path "%cd%\javafx\javafx-sdk-11.0.2\lib" --add-modules javafx.controls,javafx.fxml,javafx.web --add-opens=javafx.graphics/javafx.scene=ALL-UNNAMED --add-exports javafx.base/com.sun.javafx.event=ALL-UNNAMED Funds.FundMain
 
