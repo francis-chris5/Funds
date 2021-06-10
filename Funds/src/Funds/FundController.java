@@ -14,6 +14,7 @@ import Funds.Dialogs.ModifyAccountOrderDialog;
 import Funds.DataObjects.Account;
 import Funds.DataObjects.Book;
 import Funds.Tools.Budgeting.RevenueSplitter.RevenueSplitter;
+import Funds.Tools.GeneralLedger.LedgerPane;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.LinkedList;
@@ -33,6 +34,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -55,6 +57,8 @@ public class FundController implements Initializable, Book.AccountController {
         //left pane
     @FXML
     Button btnBookDetails;
+    @FXML
+    ImageView imgSave;
 
         //main content pane
     //tabpane
@@ -250,6 +254,7 @@ public class FundController implements Initializable, Book.AccountController {
         }
         Stage stgMain = (Stage)btnBookDetails.getScene().getWindow();
         stgMain.setTitle(book.getFilepath() != null? "Funds:\t\t" + book.getFilepath(): "Book: \t\tunsaved book");
+        displayDetails();
     }//end saveBook()
 
 
@@ -264,6 +269,7 @@ public class FundController implements Initializable, Book.AccountController {
         book.saveAsBook();
         Stage stgMain = (Stage)btnBookDetails.getScene().getWindow();
         stgMain.setTitle(book.getFilepath() != null? "Funds:\t\t" + book.getFilepath(): "Funds: \t\tunsaved book");
+        displayDetails();
     }//end saveAsBook()
     
     
@@ -278,6 +284,7 @@ public class FundController implements Initializable, Book.AccountController {
     @FXML
     public void newCategory(){
         NewAccountCategoryDialog temp = new NewAccountCategoryDialog(book, AccountType.ALL);
+        book.setSaved(false);
         displayDetails();
     }//end newCategory()
     
@@ -287,6 +294,7 @@ public class FundController implements Initializable, Book.AccountController {
     @FXML
     public void newAccount(){
         NewAccountDialog temp = new NewAccountDialog(book, AccountType.ALL);
+        book.setSaved(false);
         displayDetails();
     }//end newAccount()
     
@@ -296,6 +304,7 @@ public class FundController implements Initializable, Book.AccountController {
     @FXML
     public void modifyAccountsOrder(){
         ModifyAccountOrderDialog temp = new ModifyAccountOrderDialog(book, AccountType.ALL);
+        book.setSaved(false);
         displayDetails();
     }//end modifyAccountOrder()
     
@@ -305,6 +314,7 @@ public class FundController implements Initializable, Book.AccountController {
     @FXML
     public void removeAccounts(){
         RemoveAccountDialog temp = new RemoveAccountDialog(book, AccountType.ALL);
+        book.setSaved(false);
         displayDetails();
     }//end removeAccount()
     
@@ -317,11 +327,21 @@ public class FundController implements Initializable, Book.AccountController {
     
         ///////////////////////////////////////////  TOOL METHODS  ////////////
     
+    @FXML
+    public void launchGeneralLedger(){
+        ScrollPane scpContent = new ScrollPane(new LedgerPane(book));
+        Tab tbGeneralLedger = new Tab("General Ledger", scpContent);
+        tpMain.getTabs().add(tbGeneralLedger);
+        tpMain.getSelectionModel().select(tbGeneralLedger);
+    }//end launchGeneralLedger()
+    
+    
+    @FXML
     public void launchRevenueSplitter(){
         ScrollPane scpContent = new ScrollPane(new RevenueSplitter(book));
-        Tab revenueSplitterTab = new Tab("Revenue Splitter", scpContent);
-        tpMain.getTabs().add(revenueSplitterTab);
-        tpMain.getSelectionModel().select(revenueSplitterTab);
+        Tab tbRevenueSplitter = new Tab("Revenue Splitter", scpContent);
+        tpMain.getTabs().add(tbRevenueSplitter);
+        tpMain.getSelectionModel().select(tbRevenueSplitter);
     }//end launchRevenueSplitter()
     
     
@@ -342,7 +362,23 @@ public class FundController implements Initializable, Book.AccountController {
         btnBookDetails.setText(book.toString());
         showBalanceSheet();
         displayTotals();
+        toggleSaveImage();
     }//end displayDetails()
+    
+    
+    
+    
+    /**
+     * switches between blue and red image to match saved state of the book
+     */
+    public void toggleSaveImage(){
+        if(book.isSaved()){
+            imgSave.setImage(new Image(getClass().getResourceAsStream("Images/SaveIcon.png")));
+        }
+        else{
+            imgSave.setImage(new Image(getClass().getResourceAsStream("Images/NeedSaveIcon.png")));
+        }
+    }//end toggleSaveImage()
     
     
     

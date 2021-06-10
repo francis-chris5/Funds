@@ -14,12 +14,12 @@
 
 
 
-.table-view .column-header{
+.table-view .column-header, .general-ledger > .label{
     -fx-background-color: #618257;
     -fx-border-color: #434343;
 }
 
-.table-view .column-header-background .label{
+.table-view .column-header-background .label, .general-ledger .label{
     -fx-text-fill: #c1d9ba;
 }
 
@@ -55,6 +55,14 @@
     -fx-background-color: #9bc78d;
     -fx-border-color: #ddfad4;
 }
+
+.general-ledger .check-box > .box, .general-ledger .text-field{
+    -fx-background-color: transparent;
+    -fx-border-color: #323232;
+}
+
+
+
 
 
 .ledger-input{
@@ -120,5 +128,12 @@
 .balance-sheet .tree-view{
     -fx-border-color: #ffffff;
 }*/
+
+
+
+.revenue-splitter-item .text-field{
+    -fx-background-color: transparent;
+}
+
 
 

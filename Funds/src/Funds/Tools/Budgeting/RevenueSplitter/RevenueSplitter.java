@@ -9,6 +9,7 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +18,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 
 /**
@@ -39,9 +39,10 @@ public class RevenueSplitter extends Pane implements Initializable, RevenueSplit
     @FXML
     TextField txtSplitName;
     @FXML
-    VBox vbxControls;
-    @FXML
     TextField txtMoveAmount;
+    
+    @FXML
+    ListView lstSplitItems;
     
     private Book book;
     private LinkedList<RevenueSplitterItem> currentItems = new LinkedList<>();
@@ -105,11 +106,13 @@ public class RevenueSplitter extends Pane implements Initializable, RevenueSplit
     /**
      * Resets/Clears the GUI components for a split
      */
+    @FXML
     public void clearControls(){
         txtSplitName.clear();
         txtSplitAmount.clear();
         txtMoveAmount.clear();
-        vbxControls.getChildren().clear();
+        lstSplitItems.getItems().clear();
+        currentItems.clear();
     }//end clearControls()
     
     
@@ -139,13 +142,28 @@ public class RevenueSplitter extends Pane implements Initializable, RevenueSplit
      */
     @FXML
     public void displayAccounts(){
-        vbxControls.getChildren().clear();
+        lstSplitItems.getItems().clear();
+        ObservableList<RevenueSplitterItemPane> splitterPanes = FXCollections.observableArrayList();
         for(int i = 0; i < currentItems.size(); i++){
             RevenueSplitterItemPane rsip = new RevenueSplitterItemPane(currentItems.get(i));
             rsip.setSplitControl(this);
-            vbxControls.getChildren().add(rsip);
+            splitterPanes.add(rsip);
         }
+        lstSplitItems.getItems().addAll(splitterPanes);
     }//end displayAccounts()
+    
+    
+    
+    
+    /**
+     * Removes the selected revenue splitter item pane from the list of controls
+     */
+    @FXML
+    public void removeSplitterAccount(){
+        int item= lstSplitItems.getSelectionModel().getSelectedIndex();
+        currentItems.remove(item);
+        displayAccounts();
+    }//end removeSplitterAccount()
     
     
     
@@ -164,7 +182,7 @@ public class RevenueSplitter extends Pane implements Initializable, RevenueSplit
         book.getSavedSplits().add(split);
         book.setSaved(false);
         txtSplitName.clear();
-        vbxControls.getChildren().clear();
+        lstSplitItems.getItems().clear();
         fillLists();
     }//end saveSplits()
     
@@ -177,7 +195,11 @@ public class RevenueSplitter extends Pane implements Initializable, RevenueSplit
     @FXML
     public void openSplit(){
         RevenueSplit split = (RevenueSplit)lstSplits.getSelectionModel().getSelectedItem();
-        currentItems = split.getItems();
+        //currentItems = split.getItems();
+        currentItems.clear();
+        for(int i = 0; i < split.getItems().size(); i++){
+            currentItems.add(split.getItems().get(i));
+        }
         findAutomaticPercents();
         displayAccounts();
     }//end openSplit()
@@ -195,7 +217,7 @@ public class RevenueSplitter extends Pane implements Initializable, RevenueSplit
                 book.getSavedSplits().remove(i);
             }
         }
-        vbxControls.getChildren().clear();
+        lstSplitItems.getItems().clear();
         fillLists();
     }//end removedSavedSplit()
     

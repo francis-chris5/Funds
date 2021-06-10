@@ -30,6 +30,7 @@ public class RevenueSplitterItemPane extends HBox implements Initializable {
         public void findAutomaticPercents();
         public void displayAccounts();
         public void calculateTransfers();
+        public void removeSplitterAccount();
     }//end SplitControl
 
         /////////////////////////////////////////////  DATAFIELDS  ////////////
@@ -125,6 +126,22 @@ public class RevenueSplitterItemPane extends HBox implements Initializable {
     
     
     
+    /**
+     * calls method by the same name from the interface
+     */
+    @FXML
+    public void removeSplitterAccount(){
+         try{
+            SplitControl sc = (SplitControl)getSplitControl();
+            sc.removeSplitterAccount();
+        }
+        catch(Exception e){
+            //just move on then
+        }
+    }//end removeSplitterAccount()
+    
+    
+    
     
     /**
      * When the text field input for percent changes this changes the slider right along with it
@@ -182,6 +199,9 @@ public class RevenueSplitterItemPane extends HBox implements Initializable {
         item.setExcluded(!item.isExcluded());
         updateGUI();
     }//end onExcludedCheckChanged()
+    
+    
+    
     
     
         ////////////////////////////////////////  JAVA OBJECT //////////

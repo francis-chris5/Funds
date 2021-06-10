@@ -12,6 +12,8 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -74,6 +76,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Tools">
               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#launchGeneralLedger" text="General Ledger" />
                 <MenuItem mnemonicParsing="false" onAction="#launchRevenueSplitter" text="Revenue Splitter" />
               </items>
             </Menu>
@@ -94,10 +97,46 @@
                <children>
                   <VBox layoutY="32.0" prefHeight="245.0" prefWidth="221.0" AnchorPane.bottomAnchor="276.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
                      <children>
-                        <VBox prefHeight="132.0" prefWidth="221.0">
+                        <VBox alignment="CENTER_LEFT" prefHeight="216.0" prefWidth="222.0" spacing="7.0">
                            <children>
                               <Label text="Book Operations" />
-                              <Button fx:id="btnBookDetails" mnemonicParsing="false" onAction="#launchBookDetails" prefHeight="60.0" prefWidth="200.0" text="Book Details" wrapText="true">
+                              <Button fx:id="btnBookDetails" minHeight="-Infinity" mnemonicParsing="false" onAction="#launchBookDetails" prefHeight="60.0" prefWidth="200.0" text="Book Details" wrapText="true">
+                                 <VBox.margin>
+                                    <Insets left="8.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#newBook" prefWidth="200.0">
+                                 <graphic>
+                                    <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/FileIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <VBox.margin>
+                                    <Insets left="8.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#openBook" prefWidth="200.0">
+                                 <graphic>
+                                    <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/FolderIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <VBox.margin>
+                                    <Insets left="8.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#saveBook" prefWidth="200.0">
+                                 <graphic>
+                                    <ImageView fx:id="imgSave" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/SaveIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
                                  <VBox.margin>
                                     <Insets left="8.0" />
                                  </VBox.margin>

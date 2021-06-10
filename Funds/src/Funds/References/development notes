@@ -1,8 +1,10 @@
 
 
-copy package info file to subpackages --how do I get top level description in javadoc?
 
 add a way to switch accounts to different categories
+
+
+add some sort of export/import feature (standard data transfer XML, JSON, and CSV)
 
 
 
@@ -15,4 +17,6 @@ SPOTTED BUGS:
 couldn't reproduce:     removing equity accounts still show on the equity tree (until close and reopen)
 couldn't reproduce:     assets did the same thing once when adding a new account
 
+
+**That thing happened again, it only seems to occur immediatly after saving
 

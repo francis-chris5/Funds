@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="139.0" prefWidth="660.0" stylesheets="@../../../Stylesheets/FundStyle.css" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onContextMenuRequested="#removeSplitterAccount" prefHeight="139.0" prefWidth="660.0" styleClass="revenue-splitter-item" stylesheets="@../../../Stylesheets/FundStyle.css" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutX="6.0" prefHeight="90.0" prefWidth="662.0">
          <children>
