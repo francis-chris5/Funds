@@ -98,6 +98,8 @@ public class NewAccountCategoryDialog extends Dialog implements Initializable {
      */
     public void addAccountCategory(){
         book.getAccountCategories().add(new AccountCategory(txtName.getText(), (AccountType)cmbType.getValue()));
+        book.setSaved(false);
+        book.displayDetails();
     }//end addAccountCategory()
     
     

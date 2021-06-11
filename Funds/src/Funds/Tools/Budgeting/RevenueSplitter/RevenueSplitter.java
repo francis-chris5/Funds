@@ -181,6 +181,7 @@ public class RevenueSplitter extends Pane implements Initializable, RevenueSplit
         currentItems.clear();
         book.getSavedSplits().add(split);
         book.setSaved(false);
+        book.displayDetails();
         txtSplitName.clear();
         lstSplitItems.getItems().clear();
         fillLists();
@@ -218,6 +219,8 @@ public class RevenueSplitter extends Pane implements Initializable, RevenueSplit
             }
         }
         lstSplitItems.getItems().clear();
+        book.setSaved(false);
+        book.displayDetails();
         fillLists();
     }//end removedSavedSplit()
     

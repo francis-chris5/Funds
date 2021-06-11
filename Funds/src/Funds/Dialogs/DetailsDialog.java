@@ -75,7 +75,7 @@ public class DetailsDialog extends Dialog implements Initializable {
             //should be finished at this point
         }
         else{
-            this.book = null;
+            //should be finished at this point
         }
     }//end string-arg constructor
     
@@ -132,6 +132,7 @@ public class DetailsDialog extends Dialog implements Initializable {
         book.setDescription(txtDescription.getText());
         book.setNotes(txtNotes.getHtmlText());
         book.setSaved(false);
+        book.displayDetails();
     }//end editDetails()
     
     

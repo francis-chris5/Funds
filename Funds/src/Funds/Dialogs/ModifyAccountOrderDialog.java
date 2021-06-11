@@ -265,6 +265,8 @@ public class ModifyAccountOrderDialog extends Dialog implements Initializable {
             }
             fillList();
         }
+        book.setSaved(false);
+        book.displayDetails();
     }//end moveAccountUp()
     
     
@@ -380,6 +382,8 @@ public class ModifyAccountOrderDialog extends Dialog implements Initializable {
             }
             fillList();
         }
+        book.setSaved(false);
+        book.displayDetails();
     }//end moveAccountDown()
     
     

@@ -160,7 +160,6 @@ public class EditTransactionDialog extends Dialog implements Initializable {
         transaction.setDate(dtDate.getValue());
         transaction.setTransactionID(txtTransactionID.getText());
         transaction.setDescription(txtDescription.getText());
-        //revised.setTransfer((Account)cmbTransfer.getValue());
         transaction.setReconcile(chkReconcile.isSelected());
         if(account.isNormalDebit()){
             if(Double.parseDouble(txtAmount.getText()) < 0){

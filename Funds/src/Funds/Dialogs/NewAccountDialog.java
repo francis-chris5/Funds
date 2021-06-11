@@ -215,6 +215,8 @@ public class NewAccountDialog extends Dialog implements Initializable {
                     }
                 }
             }
+            book.setSaved(false);
+            book.displayDetails();
         }
         else if(cmbType.getValue() == AccountType.LIABILITY){
             if(cmbParent.getValue() == null){
@@ -229,6 +231,8 @@ public class NewAccountDialog extends Dialog implements Initializable {
                     }
                 }
             }
+            book.setSaved(false);
+            book.displayDetails();
         }
         else if(cmbType.getValue() == AccountType.EQUITY){
             if(cmbParent.getValue() == null){
@@ -243,10 +247,12 @@ public class NewAccountDialog extends Dialog implements Initializable {
                     }
                 }
             }
+            book.setSaved(false);
+            book.displayDetails();
         }
         
         else{
-            System.out.println("could not create account");
+            //the account did not create for some reason
         }
     }//end addAccount()
     

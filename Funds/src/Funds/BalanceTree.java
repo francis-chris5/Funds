@@ -290,7 +290,7 @@ public class BalanceTree extends StackPane{
             miNewAccountCategory.setOnAction(m ->{
                 //AccountType localType = findType(tree.getRoot().getValue().toString());
                 NewAccountCategoryDialog temp = new NewAccountCategoryDialog(book, findType(tree.getRoot().getValue().toString()));
-                book.setSaved(false);
+                //book.setSaved(false);
                 book.displayDetails();
             });
             this.getItems().add(miNewAccountCategory);
@@ -300,7 +300,7 @@ public class BalanceTree extends StackPane{
             miNewAccountDirect.setOnAction(m -> {
                 //AccountType localType = findType(tree.getRoot().getValue().toString());
                 NewAccountDialog temp = new NewAccountDialog(book, findType(tree.getRoot().getValue().toString()));
-                book.setSaved(false);
+                //book.setSaved(false);
                 book.displayDetails();
             });
             this.getItems().add(miNewAccountDirect);
@@ -314,7 +314,7 @@ public class BalanceTree extends StackPane{
                     item.setOnAction(m -> {
                         //AccountType localType = findType(tree.getRoot().getValue().toString());
                         NewAccountDialog temp = new NewAccountDialog(book, findType(tree.getRoot().getValue().toString()), category);
-                        book.setSaved(false);
+                        //book.setSaved(false);
                         book.displayDetails();
                     });
                     mnNewAccountCategory.getItems().add(item);
@@ -329,7 +329,7 @@ public class BalanceTree extends StackPane{
                 //add modify order button
             miModifyAccountOrder.setOnAction(m -> {
                 ModifyAccountOrderDialog temp = new ModifyAccountOrderDialog(book, findType(tree.getRoot().getValue().toString()));
-                book.setSaved(false);
+                //book.setSaved(false);
                 book.displayDetails();
             });
             this.getItems().add(miModifyAccountOrder);
@@ -337,7 +337,7 @@ public class BalanceTree extends StackPane{
                 //add remove account button
             miRemoveAccount.setOnAction(m -> {
                 RemoveAccountDialog temp = new RemoveAccountDialog(book, findType(tree.getRoot().getValue().toString()));
-                book.setSaved(false);
+                //book.setSaved(false);
                 book.displayDetails();
             });
             this.getItems().add(miRemoveAccount);

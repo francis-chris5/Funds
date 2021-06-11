@@ -237,6 +237,8 @@ public class RemoveAccountDialog extends Dialog implements Initializable{
                 }
             });
         }
+        book.setSaved(false);
+        book.displayDetails();
     }//end removeSelectedAccounts()
     
     

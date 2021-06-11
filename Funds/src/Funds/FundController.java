@@ -51,6 +51,8 @@ public class FundController implements Initializable, Book.AccountController {
 
         //main menu
     @FXML
+    MenuItem miSave;
+    @FXML
     MenuItem miNewAccountCategory;
     
     
@@ -252,6 +254,7 @@ public class FundController implements Initializable, Book.AccountController {
         else{
             book.saveBook();
         }
+        book.setAccountController(this);
         Stage stgMain = (Stage)btnBookDetails.getScene().getWindow();
         stgMain.setTitle(book.getFilepath() != null? "Funds:\t\t" + book.getFilepath(): "Book: \t\tunsaved book");
         displayDetails();
@@ -267,6 +270,7 @@ public class FundController implements Initializable, Book.AccountController {
     public void saveAsBook(){
         book.setAccountController(null);
         book.saveAsBook();
+        book.setAccountController(this);
         Stage stgMain = (Stage)btnBookDetails.getScene().getWindow();
         stgMain.setTitle(book.getFilepath() != null? "Funds:\t\t" + book.getFilepath(): "Funds: \t\tunsaved book");
         displayDetails();
@@ -373,9 +377,11 @@ public class FundController implements Initializable, Book.AccountController {
      */
     public void toggleSaveImage(){
         if(book.isSaved()){
+            miSave.setDisable(true);
             imgSave.setImage(new Image(getClass().getResourceAsStream("Images/SaveIcon.png")));
         }
         else{
+            miSave.setDisable(false);
             imgSave.setImage(new Image(getClass().getResourceAsStream("Images/NeedSaveIcon.png")));
         }
     }//end toggleSaveImage()

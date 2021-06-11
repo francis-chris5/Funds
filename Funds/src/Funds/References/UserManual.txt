@@ -209,6 +209,11 @@ Keyboard Shortcuts
 
 
 
+    Tool Operations
+        alt+shift+g :   general ledger
+        alt+shift+r :   revenue splitter
+
+
     Help Operations
         F1  :   open user manual    
 

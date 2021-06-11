@@ -63,23 +63,22 @@ public class LedgerItemPane extends Pane implements Initializable {
             this.getChildren().add(loader.load());
         }
         catch(Exception e){
-            e.printStackTrace();
             //just move on then
         }
         item.setDate(t1.getDate());
         item.setTransactionID(t1.getTransactionID());
         item.setDescription(t1.getDescription());
         if(t1.getDebit() == 0.0 && t2.getDebit() != 0.0){
-            item.setAccount1(t2.getTransfer());
-            item.setAccount2(t1.getTransfer());
+            item.setAccount1(t1.getTransfer());
+            item.setAccount2(t2.getTransfer());
             item.setDebit1(t2.getDebit());
             item.setDebit2(t1.getDebit());
             item.setCredit1(t2.getCredit());
             item.setCredit2(t1.getCredit());
         }
         else{
-            item.setAccount1(t1.getTransfer());
-            item.setAccount2(t2.getTransfer());
+            item.setAccount1(t2.getTransfer());
+            item.setAccount2(t1.getTransfer());
             item.setDebit1(t1.getDebit());
             item.setDebit2(t2.getDebit());
             item.setCredit1(t1.getCredit());

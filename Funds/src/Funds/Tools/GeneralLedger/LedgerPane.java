@@ -103,8 +103,8 @@ public class LedgerPane extends Pane implements Initializable {
         for(int i = 0; i < book.getEquities().size(); i++){
             transactions.addAll(book.getEquities().get(i).getTransactions());
         }
-        for(int i = 0; i < book.getSubcategoryAccounts(AccountType.LIABILITY).size(); i++){
-            transactions.addAll(book.getSubcategoryAccounts(AccountType.LIABILITY).get(i).getTransactions());
+        for(int i = 0; i < book.getSubcategoryAccounts(AccountType.EQUITY).size(); i++){
+            transactions.addAll(book.getSubcategoryAccounts(AccountType.EQUITY).get(i).getTransactions());
         }
         for(int i = 0; i < book.getLedgerID(); i++){
             Transaction t1 = null;
