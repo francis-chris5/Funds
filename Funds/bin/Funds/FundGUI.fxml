@@ -12,6 +12,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.input.KeyCodeCombination?>
@@ -41,7 +42,7 @@
                      </accelerator></MenuItem>
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" onAction="#closeBook" text="Close" />
-            <MenuItem mnemonicParsing="false" onAction="#saveBook" text="Save">
+            <MenuItem fx:id="miSave" mnemonicParsing="false" onAction="#saveBook" text="Save">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
@@ -76,8 +77,14 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Tools">
               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#launchGeneralLedger" text="General Ledger" />
-                <MenuItem mnemonicParsing="false" onAction="#launchRevenueSplitter" text="Revenue Splitter" />
+                  <MenuItem mnemonicParsing="false" onAction="#launchGeneralLedger" text="General Ledger">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="G" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator></MenuItem>
+                <MenuItem mnemonicParsing="false" onAction="#launchRevenueSplitter" text="Revenue Splitter">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="R" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator></MenuItem>
               </items>
             </Menu>
         <Menu mnemonicParsing="false" text="Help">
@@ -116,6 +123,9 @@
                                  <VBox.margin>
                                     <Insets left="8.0" />
                                  </VBox.margin>
+                                 <tooltip>
+                                    <Tooltip text="New Book     Ctrl+N" />
+                                 </tooltip>
                               </Button>
                               <Button mnemonicParsing="false" onAction="#openBook" prefWidth="200.0">
                                  <graphic>
@@ -128,6 +138,9 @@
                                  <VBox.margin>
                                     <Insets left="8.0" />
                                  </VBox.margin>
+                                 <tooltip>
+                                    <Tooltip text="Open Book     Ctrl+O" />
+                                 </tooltip>
                               </Button>
                               <Button mnemonicParsing="false" onAction="#saveBook" prefWidth="200.0">
                                  <graphic>
@@ -140,6 +153,9 @@
                                  <VBox.margin>
                                     <Insets left="8.0" />
                                  </VBox.margin>
+                                 <tooltip>
+                                    <Tooltip text="Save Book     Ctrl+S" />
+                                 </tooltip>
                               </Button>
                            </children>
                            <padding>

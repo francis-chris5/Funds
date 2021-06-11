@@ -142,6 +142,8 @@ General Ledger
 
     A listing of all transactions with search and filter functionality. NOTE: there is no editing on the general ledger only filters to find what needs to be edited, a general journal for making/editing entries is on the plan to be included eventually
 
+    Select [Tools > General Ledger] to add the general ledger tab to the main content area
+
     The ledger will automatically fill with all available transactions
 
     select the date or date range to see transactions from and click "Apply Filters" button to remove all but the desired transactions
@@ -205,6 +207,11 @@ Keyboard Shortcuts
         ctrl+alt+m :   modify category/account order
         ctrl+alt+r  :   remove category/account
 
+
+
+    Tool Operations
+        alt+shift+g :   general ledger
+        alt+shift+r :   revenue splitter
 
 
     Help Operations
