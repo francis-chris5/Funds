@@ -240,6 +240,12 @@ Keyboard Shortcuts
         ctrl+alt+a  :   new account
         ctrl+alt+m :   modify category/account order
         ctrl+alt+r  :   remove category/account
+   
+   
+   
+       Tool Operations
+        alt+shift+g :   general ledger
+        alt+shift+r :   revenue splitter
 
 
 
