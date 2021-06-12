@@ -2,6 +2,9 @@
 create accounts in templates needs all strings set to empty string instead of null (like would get from dialog box)
 
 
+don't allow special characters in account names (regular file naming exclusions)
+
+
 
 
 add a way to switch accounts to different categories (a drag and drop interface in tools section)
@@ -15,12 +18,4 @@ add some sort of export/import feature (standard data transfer XML, JSON, and CS
 update status bar while doing stuff
     -it's in the book's inner interface so access through that
 
-
-
-SPOTTED BUGS:
-couldn't reproduce:     removing equity accounts still show on the equity tree (until close and reopen)
-couldn't reproduce:     assets did the same thing once when adding a new account
-
-
-**That thing happened again, it only seems to occur immediatly after saving
 
