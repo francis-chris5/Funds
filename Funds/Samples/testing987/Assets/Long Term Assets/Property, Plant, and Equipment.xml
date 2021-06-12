@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Account>
+	<name>Property, Plant, and Equipment</name>
+	<number></number>
+	<routing></routing>
+	<code></code>
+	<description></description>
+	<type>Asset</type>
+	<normalDebit>true</normalDebit>
+	<transactions>
+	</transactions>
+</Account>
