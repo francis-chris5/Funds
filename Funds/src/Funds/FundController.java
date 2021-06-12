@@ -315,6 +315,19 @@ public class FundController implements Initializable, Book.AccountController {
     
     
     
+    /**
+     * exports the book to a collection of .sql files to create a relational database mimicking the structure of the original book
+     * It was set up for and tested on MariaDB
+     */
+    @FXML
+    public void bookToSQL(){
+        BookExport bts = new BookExport(book, ExportType.SQL);
+        bts.write();
+    }
+    
+    
+    
+    
     
     
     

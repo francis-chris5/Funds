@@ -7,6 +7,7 @@ import Funds.DataObjects.Book;
 import Funds.DataObjects.Transaction;
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 import javafx.stage.DirectoryChooser;
 
 
@@ -277,7 +278,59 @@ public class BookExport {
                 }
             }
             else if(type == ExportType.SQL){
-                //write the .sql file to create database and tables (will kind of match directory strucutre above) then fill tables all in one file
+                File initFile = new File(folder.getPath() + "/" + "initialize_" + book.getName().replace(" ", "_") + "_DB.sql");
+                String initString = new String("CREATE DATABASE IF NOT EXISTS " + book.getName().replace(" ", "_") + "_DB;\n");
+                initString += "USE " + book.getName().replace(" ", "_").replace(",", "") + "_DB;\n";
+                initString += "\n\n\nCREATE TABLE IF NOT EXISTS Accounts_Table(accountID INT PRIMARY KEY AUTO_INCREMENT, category VARCHAR(255), name VARCHAR(255), number VARCHAR(16), routing VARCHAR(16), code VARCHAR(255), description VARCHAR(255), type VARCHAR(16), normalDebit BOOLEAN);\n\n";
+                
+                    //fill accounts table
+                for(int i = 0; i < book.getAssets().size(); i++){
+                    initString += "INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES(\"Assets\", \"" + book.getAssets().get(i).getName() + "\", \"" + book.getAssets().get(i).getNumber() + "\", \"" + book.getAssets().get(i).getRouting() + "\", \"" +  book.getAssets().get(i).getCode() + "\", \"" +  book.getAssets().get(i).getDescription() + "\", \"" + book.getAssets().get(i).getType() + "\", " + book.getAssets().get(i).isNormalDebit() + ");\n";
+                }
+                for(int i = 0; i < book.getLiabilities().size(); i++){
+                    initString += "INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES(\"Liability\", \"" + book.getLiabilities().get(i).getName() + "\", \"" + book.getLiabilities().get(i).getNumber() + "\", \"" + book.getLiabilities().get(i).getRouting() + "\", \"" +  book.getLiabilities().get(i).getCode() + "\", \"" +  book.getLiabilities().get(i).getDescription() + "\", \"" + book.getLiabilities().get(i).getType() + "\", " + book.getLiabilities().get(i).isNormalDebit() + ");\n";
+                }
+                for(int i = 0; i < book.getEquities().size(); i++){
+                    initString += "INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES(\"Equity\", \"" + book.getEquities().get(i).getName() + "\", \"" + book.getEquities().get(i).getNumber() + "\", \"" + book.getEquities().get(i).getRouting() + "\", \"" +  book.getEquities().get(i).getCode() + "\", \"" +  book.getEquities().get(i).getDescription() + "\", \"" + book.getEquities().get(i).getType() + "\", " + book.getEquities().get(i).isNormalDebit() + ");\n";
+                }
+                for(int i = 0; i < book.getAccountCategories().size(); i++){
+                    for(int j = 0; j < book.getAccountCategories().get(i).getAccounts().size(); j++){
+                        initString += "INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES(\"" + book.getAccountCategories().get(i).getName() + "\", \"" + book.getAccountCategories().get(i).getAccounts().get(j).getName() + "\", \"" + book.getAccountCategories().get(i).getAccounts().get(j).getNumber() + "\", \"" + book.getAccountCategories().get(i).getAccounts().get(j).getRouting() + "\", \"" +  book.getAccountCategories().get(i).getAccounts().get(j).getCode() + "\", \"" +  book.getAccountCategories().get(i).getAccounts().get(j).getDescription() + "\", \"" + book.getAccountCategories().get(i).getAccounts().get(j).getType() + "\", " + book.getAccountCategories().get(i).getAccounts().get(j).isNormalDebit() + ");\n";
+                    }
+                }
+                
+                    //create table of transactions for each account
+                for(int i = 0; i < book.getAssets().size(); i++){
+                    initString += "\n\n\nCREATE TABLE IF NOT EXISTS " + book.getAssets().get(i).getName().replace(" ", "_").replace(",", "") + "_Table(accountTransactionID INT PRIMARY KEY AUTO_INCREMENT, accountID INT, date DATE, transactionID VARCHAR(16), description VARCHAR(255), transfer VARCHAR(255), reconcile BOOLEAN, debit FLOAT, credit FLOAT, ledgerID int);\n\n";
+                    for(int j = 0; j < book.getAssets().get(i).getTransactions().size(); j++){
+                        initString += "INSERT INTO " + book.getAssets().get(i).getName().replace(" ", "_").replace(",", "") + "_Table(accountID, date, transactionID, description, transfer, reconcile, debit, credit, ledgerID) VALUES(" + (i + 1) + ", \"" + book.getAssets().get(i).getTransactions().get(j).getDate() + "\", \"" + book.getAssets().get(i).getTransactions().get(j).getTransactionID() + "\", \"" + book.getAssets().get(i).getTransactions().get(j).getDescription() + "\", \"" + book.getAssets().get(i).getTransactions().get(j).getTransfer().getName() + "\", " + book.getAssets().get(i).getTransactions().get(j).isReconcile() + ", " + book.getAssets().get(i).getTransactions().get(j).getDebit() + ", " + book.getAssets().get(i).getTransactions().get(j).getCredit() + ", " + book.getAssets().get(i).getTransactions().get(j).getLedgerID() + ");\n";
+                    }
+                }
+                for(int i = 0; i < book.getLiabilities().size(); i++){
+                    initString += "\n\n\nCREATE TABLE IF NOT EXISTS " + book.getLiabilities().get(i).getName().replace(" ", "_").replace(",", "") + "_Table(accountTransactionID INT PRIMARY KEY AUTO_INCREMENT, accountID INT, date DATE, transactionID VARCHAR(16), description VARCHAR(255), transfer VARCHAR(255), reconcile BOOLEAN, debit FLOAT, credit FLOAT, ledgerID int);\n\n";
+                    for(int j = 0; j < book.getLiabilities().get(i).getTransactions().size(); j++){
+                        initString += "INSERT INTO " + book.getLiabilities().get(i).getName().replace(" ", "_").replace(",", "") + "_Table(accountID, date, transactionID, description, transfer, reconcile, debit, credit, ledgerID) VALUES(" + (book.getAssets().size() + i + 1) + ", \"" + book.getLiabilities().get(i).getTransactions().get(j).getDate() + "\", \"" + book.getLiabilities().get(i).getTransactions().get(j).getTransactionID() + "\", \"" + book.getLiabilities().get(i).getTransactions().get(j).getDescription() + "\", \"" + book.getLiabilities().get(i).getTransactions().get(j).getTransfer().getName() + "\", " + book.getLiabilities().get(i).getTransactions().get(j).isReconcile() + ", " + book.getLiabilities().get(i).getTransactions().get(j).getDebit() + ", " + book.getLiabilities().get(i).getTransactions().get(j).getCredit() + ", " + book.getLiabilities().get(i).getTransactions().get(j).getLedgerID() + ");\n";
+                    }
+                }
+                for(int i = 0; i < book.getEquities().size(); i++){
+                    initString += "\n\n\nCREATE TABLE IF NOT EXISTS " + book.getEquities().get(i).getName().replace(" ", "_").replace(",", "") + "_Table(accountTransactionID INT PRIMARY KEY AUTO_INCREMENT, accountID INT, date DATE, transactionID VARCHAR(16), description VARCHAR(255), transfer VARCHAR(255), reconcile BOOLEAN, debit FLOAT, credit FLOAT, ledgerID int);\n\n";
+                    for(int j = 0; j < book.getEquities().get(i).getTransactions().size(); j++){
+                        initString += "INSERT INTO " + book.getEquities().get(i).getName().replace(" ", "_").replace(",", "") + "_Table(accountID, date, transactionID, description, transfer, reconcile, debit, credit, ledgerID) VALUES(" + (book.getAssets().size() + book.getLiabilities().size() + i + 1) + ", \"" + book.getEquities().get(i).getTransactions().get(j).getDate() + "\", \"" + book.getEquities().get(i).getTransactions().get(j).getTransactionID() + "\", \"" + book.getEquities().get(i).getTransactions().get(j).getDescription() + "\", \"" + book.getEquities().get(i).getTransactions().get(j).getTransfer().getName() + "\", " + book.getEquities().get(i).getTransactions().get(j).isReconcile() + ", " + book.getEquities().get(i).getTransactions().get(j).getDebit() + ", " + book.getEquities().get(i).getTransactions().get(j).getCredit() + ", " + book.getEquities().get(i).getTransactions().get(j).getLedgerID() + ");\n";
+                    }
+                }
+                int accountCounter = -1;
+                for(int i = 0; i < book.getAccountCategories().size(); i++){
+                    for(int j = 0; j < book.getAccountCategories().get(i).getAccounts().size(); j++){
+                        accountCounter++;
+                        initString += "\n\n\nCREATE TABLE IF NOT EXISTS " + book.getAccountCategories().get(i).getAccounts().get(j).getName().replace(" ", "_").replace(",", "") + "_Table(accountTransactionID INT PRIMARY KEY AUTO_INCREMENT, accountID INT, date DATE, transactionID VARCHAR(16), description VARCHAR(255), transfer VARCHAR(255), reconcile BOOLEAN, debit FLOAT, credit FLOAT, ledgerID int);\n\n";
+                        for(int k = 0; k < book.getAccountCategories().get(i).getAccounts().get(j).getTransactions().size(); k++){
+                            initString += "INSERT INTO " + book.getAccountCategories().get(i).getAccounts().get(j).getName().replace(" ", "_").replace(",", "") + "_Table(accountID, date, transactionID, description, transfer, reconcile, debit, credit, ledgerID) VALUES(" + (book.getAssets().size() + book.getLiabilities().size() + book.getEquities().size() + accountCounter + 1) + ", \"" + book.getAccountCategories().get(i).getAccounts().get(j).getTransactions().get(k).getDate() + "\", \"" + book.getAccountCategories().get(i).getAccounts().get(j).getTransactions().get(k).getTransactionID() + "\", \"" + book.getAccountCategories().get(i).getAccounts().get(j).getTransactions().get(k).getDescription() + "\", \"" + book.getAccountCategories().get(i).getAccounts().get(j).getTransactions().get(k).getTransfer().getName() + "\", " + book.getAccountCategories().get(i).getAccounts().get(j).getTransactions().get(k).isReconcile() + ", " + book.getAccountCategories().get(i).getAccounts().get(j).getTransactions().get(k).getDebit() + ", " + book.getAccountCategories().get(i).getAccounts().get(j).getTransactions().get(k).getCredit() + ", " + book.getAccountCategories().get(i).getAccounts().get(j).getTransactions().get(k).getLedgerID() + ");\n";
+                        }
+                    }
+                }
+                PrintWriter pw = new PrintWriter(initFile);
+                pw.write(initString);
+                pw.close();
             }
         }
         catch(Exception e){
@@ -399,7 +452,7 @@ public class BookExport {
     public void createTransactionCSV(File file, Transaction[] transactions){
         String csv = new String("date,transactionID,description,transfer,reconcile,debit,credit,ledgerID\n");
         for(int i = 0; i < transactions.length; i++){
-            csv += transactions[i].getDate() + "," + transactions[i].getTransactionID() + "," + transactions[i].getDescription() + "," + transactions[i].getTransfer() + "," + transactions[i].isReconcile() + "," + transactions[i].getDebit() + "," + transactions[i].getCredit() + "," + transactions[i].getLedgerID() + "\n";
+            csv += transactions[i].getDate() + "," + transactions[i].getTransactionID() + "," + transactions[i].getDescription() + "," + transactions[i].getTransfer().getName() + "," + transactions[i].isReconcile() + "," + transactions[i].getDebit() + "," + transactions[i].getCredit() + "," + transactions[i].getLedgerID() + "\n";
         }
         try{
             PrintWriter pw = new PrintWriter(file);
@@ -410,6 +463,7 @@ public class BookExport {
             //nevermind then
         }
     }//end createTransactionCSV()
+
   
     
     
