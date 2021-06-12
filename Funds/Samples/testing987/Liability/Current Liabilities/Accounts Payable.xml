@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Account>
+	<name>Accounts Payable</name>
+	<number>null</number>
+	<routing>null</routing>
+	<code>null</code>
+	<description>null</description>
+	<type>null</type>
+	<normalDebit>false</normalDebit>
+	<transactions>
+		<transaction>
+			<date>2021-06-11</date>
+			<transactionID></transactionID>
+			<description>bcky</description>
+			<transfer>IMBALANCE</transfer>
+			<reconcile>false</reconcile>
+			<debit>0.0</debit>
+			<credit>7.0</credit>
+			<ledgerID>4</ledgerID>
+		</transaction>
+	</transactions>
+</Account>

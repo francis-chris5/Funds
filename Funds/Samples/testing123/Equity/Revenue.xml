@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Account>
+	<name>Revenue</name>
+	<number>null</number>
+	<routing>null</routing>
+	<code>null</code>
+	<description>null</description>
+	<type>null</type>
+	<normalDebit>false</normalDebit>
+	<transactions>
+		<transaction>
+			<date>2021-06-01</date>
+			<transactionID></transactionID>
+			<description>open</description>
+			<transfer>Cash</transfer>
+			<reconcile>false</reconcile>
+			<debit>0.0</debit>
+			<credit>123.0</credit>
+			<ledgerID>0</ledgerID>
+		</transaction>
+		<transaction>
+			<date>2021-06-09</date>
+			<transactionID></transactionID>
+			<description>sally</description>
+			<transfer>Receivables</transfer>
+			<reconcile>false</reconcile>
+			<debit>0.0</debit>
+			<credit>15.0</credit>
+			<ledgerID>3</ledgerID>
+		</transaction>
+	</transactions>
+</Account>

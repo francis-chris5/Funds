@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Account>
+	<name>Receivables</name>
+	<number></number>
+	<routing></routing>
+	<code></code>
+	<description></description>
+	<type>Asset</type>
+	<normalDebit>true</normalDebit>
+	<transactions>
+		<transaction>
+			<date>2021-06-09</date>
+			<transactionID></transactionID>
+			<description>sally</description>
+			<transfer>Revenue</transfer>
+			<reconcile>false</reconcile>
+			<debit>15.0</debit>
+			<credit>0.0</credit>
+			<ledgerID>3</ledgerID>
+		</transaction>
+	</transactions>
+</Account>

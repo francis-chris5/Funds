@@ -1,0 +1,24 @@
+{
+	"name": "Credit Card",
+	"number": "null",
+	"routing": "null",
+	"code": "null",
+	"description": "null",
+	"type": "null",
+	"normalDebit": "false",
+	"transactions": [
+		{
+			"date": "2021-06-05",
+			"transactionID": "",
+			"description": "mcdonalds",
+			"transfer": "Expense",
+			"reconcile": "false",
+			"debit": 0.0,
+			"credit": 8.0,
+			"ledgerID": 1
+		}
+	]
+}
+
+
+

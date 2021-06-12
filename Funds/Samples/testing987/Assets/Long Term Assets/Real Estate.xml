@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Account>
+	<name>Real Estate</name>
+	<number>null</number>
+	<routing>null</routing>
+	<code>null</code>
+	<description>null</description>
+	<type>null</type>
+	<normalDebit>true</normalDebit>
+	<transactions>
+	</transactions>
+</Account>

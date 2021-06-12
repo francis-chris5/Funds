@@ -1,0 +1,2 @@
+date,transactionID,description,transfer,reconcile,debit,credit,ledgerID
+2021-06-09,,sally,Revenue: $138.00,false,15.0,0.0,3

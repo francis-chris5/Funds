@@ -1,0 +1,2 @@
+date,transactionID,description,transfer,reconcile,debit,credit,ledgerID
+2021-06-11,,mcdonalds,Expense: $27.00,false,0.0,8.0,1

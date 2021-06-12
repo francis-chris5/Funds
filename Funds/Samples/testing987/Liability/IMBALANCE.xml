@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Account>
+	<name>IMBALANCE</name>
+	<number>null</number>
+	<routing>null</routing>
+	<code>null</code>
+	<description>null</description>
+	<type>null</type>
+	<normalDebit>false</normalDebit>
+	<transactions>
+		<transaction>
+			<date>2021-06-11</date>
+			<transactionID></transactionID>
+			<description>sally</description>
+			<transfer>Accounts Receivable</transfer>
+			<reconcile>false</reconcile>
+			<debit>0.0</debit>
+			<credit>15.0</credit>
+			<ledgerID>3</ledgerID>
+		</transaction>
+		<transaction>
+			<date>2021-06-11</date>
+			<transactionID></transactionID>
+			<description>bcky</description>
+			<transfer>Accounts Payable</transfer>
+			<reconcile>false</reconcile>
+			<debit>7.0</debit>
+			<credit>0.0</credit>
+			<ledgerID>4</ledgerID>
+		</transaction>
+	</transactions>
+</Account>
