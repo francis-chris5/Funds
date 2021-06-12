@@ -252,7 +252,7 @@ Keyboard Shortcuts
    
    
    
-       Tool Operations
+    Tool Operations
         alt+shift+g :   general ledger
         alt+shift+r :   revenue splitter
 
