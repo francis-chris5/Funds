@@ -228,7 +228,7 @@ To remove a split item from the current set of controls right-click on the item 
 Export
 
 
-Selecting [File > Export > (export format)] will export the book data in several of the standard formats for data transfer and handling: xml, json, csv, (sql coming soon). The generated files are written into a directory structure that attempts to preserve the organization of the book, and the top level folder here will get the name assigned in the book details options rather than the filename.
+Selecting [File > Export > (export format)] will export the book data in several of the standard formats for data transfer and handling: xml, json, csv, and sql. The generated files are written into a directory structure that attempts to preserve the organization of the book, and the top level folder here will get the name assigned in the book details options rather than the filename.
 
    
    <br><br>
