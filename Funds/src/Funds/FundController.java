@@ -13,6 +13,8 @@ import Funds.DataObjects.AccountCategory;
 import Funds.Dialogs.ModifyAccountOrderDialog;
 import Funds.DataObjects.Account;
 import Funds.DataObjects.Book;
+import Funds.Tools.BookExport.BookExport;
+import Funds.Tools.BookExport.ExportType;
 import Funds.Tools.Budgeting.RevenueSplitter.RevenueSplitter;
 import Funds.Tools.GeneralLedger.LedgerPane;
 import java.net.URL;
@@ -136,7 +138,7 @@ public class FundController implements Initializable, Book.AccountController {
                 AccountCategory retainedEarnings = new AccountCategory("Retained Earnings", AccountType.EQUITY);
                 currentAssets.getAccounts().add(new Account("Cash", true));
                 currentAssets.getAccounts().add(new Account("Accounts Receivable", true));
-                longTermAssets.getAccounts().add(new Account("Property, Plant, & Equipment", true));
+                longTermAssets.getAccounts().add(new Account("Property, Plant, and Equipment", true));
                 longTermAssets.getAccounts().add(new Account("Real Estate", true));
                 currentLiabilities.getAccounts().add(new Account("Credit Card", false));
                 currentLiabilities.getAccounts().add(new Account("Accounts Payable", false));
@@ -275,6 +277,40 @@ public class FundController implements Initializable, Book.AccountController {
         stgMain.setTitle(book.getFilepath() != null? "Funds:\t\t" + book.getFilepath(): "Funds: \t\tunsaved book");
         displayDetails();
     }//end saveAsBook()
+    
+    
+    
+    
+    
+    /**
+     * exports the book to a collection of xml files positioned in a directory tree to preserve the structure of the book
+     */
+    @FXML
+    public void bookToXML(){
+        BookExport btx = new BookExport(book, ExportType.XML);
+        btx.write();
+    }//end bookToXML()
+    
+    
+    
+    
+    @FXML
+    public void bookToJSON(){
+        BookExport btj = new BookExport(book, ExportType.JSON);
+        btj.write();
+    }//end bookToJSON()
+    
+    
+    
+    
+    /**
+     * exports the book to a collection of csv files positioned in a directory tree to preserve structure of the book
+     */
+    @FXML
+    public void bookToCSV(){
+        BookExport btc = new BookExport(book, ExportType.CSV);
+        btc.write();
+    }//end bookToCSV()
     
     
     
@@ -517,6 +553,10 @@ public class FundController implements Initializable, Book.AccountController {
         }
         return subtotal;
     }//end findAccountSubtotal()
+    
+    
+    
+    
     
     
     

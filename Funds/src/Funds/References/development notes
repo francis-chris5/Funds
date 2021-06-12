@@ -1,7 +1,5 @@
 
-
-
-maybe have way to edit transaction from general ledger (that should be general journal to edit though)
+create accounts in templates needs all strings set to empty string instead of null (like would get from dialog box)
 
 
 
