@@ -148,6 +148,15 @@ Select the appropriate radio button for modifying either categories or accounts,
 
 NOTE: An account can only be moved up or down among the category it is organized in, and only the selected type of accounts will be shown so the buttons may need clicked more than once to see the change. For example: if you are looking at the list of asset accounts, but internally there are two liability accounts created/listed between the two asset accounts displayed in the list, then the up or down button would need clicked three times before the change will be seen.
 
+   
+   
+   <br><br>
+   
+   
+Edit Account Details
+
+Select [Accounts > Edit Account Details > (choose account)] in the main menu to edit any details about the account itself
+
 
 
 <br><br>
