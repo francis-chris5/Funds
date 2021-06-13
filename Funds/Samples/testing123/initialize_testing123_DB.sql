@@ -5,11 +5,11 @@ USE testing123_DB;
 
 CREATE TABLE IF NOT EXISTS Accounts_Table(accountID INT PRIMARY KEY AUTO_INCREMENT, category VARCHAR(255), name VARCHAR(255), number VARCHAR(16), routing VARCHAR(16), code VARCHAR(255), description VARCHAR(255), type VARCHAR(16), normalDebit BOOLEAN);
 
-INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Assets", "Cash", "null", "null", "null", "null", "Asset", true);
+INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Assets", "Cash", "", "", "", "", "Asset", true);
 INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Assets", "Receivables", "", "", "", "", "Asset", true);
-INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Liability", "Credit Card", "null", "null", "null", "null", "Liability", false);
-INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Equity", "Revenue", "null", "null", "null", "null", "Equity", false);
-INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Equity", "Expense", "null", "null", "null", "null", "Equity", false);
+INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Liability", "Credit Card", "", "", "", "", "Liability", false);
+INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Equity", "Revenue", "", "", "", "", "Equity", false);
+INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Equity", "Expense", "", "", "", "", "Equity", false);
 
 
 

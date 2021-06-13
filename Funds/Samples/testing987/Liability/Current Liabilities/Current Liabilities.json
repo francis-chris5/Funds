@@ -1,10 +1,10 @@
 {
 	"name": "Credit Card",
-	"number": "null",
-	"routing": "null",
-	"code": "null",
-	"description": "null",
-	"type": "null",
+	"number": "",
+	"routing": "",
+	"code": "",
+	"description": "",
+	"type": "Liability",
 	"normalDebit": "false",
 	"transactions": [
 		{
@@ -24,11 +24,11 @@
 
 {
 	"name": "Accounts Payable",
-	"number": "null",
-	"routing": "null",
-	"code": "null",
-	"description": "null",
-	"type": "null",
+	"number": "",
+	"routing": "",
+	"code": "",
+	"description": "",
+	"type": "Liability",
 	"normalDebit": "false",
 	"transactions": [
 		{

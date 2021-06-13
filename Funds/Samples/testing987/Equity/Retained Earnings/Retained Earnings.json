@@ -1,10 +1,10 @@
 {
 	"name": "Initial Capital",
-	"number": "null",
-	"routing": "null",
-	"code": "null",
-	"description": "null",
-	"type": "null",
+	"number": "",
+	"routing": "",
+	"code": "",
+	"description": "",
+	"type": "Equity",
 	"normalDebit": "false",
 	"transactions": [
 		{
@@ -24,11 +24,11 @@
 
 {
 	"name": "Revenue",
-	"number": "null",
-	"routing": "null",
-	"code": "null",
-	"description": "null",
-	"type": "null",
+	"number": "",
+	"routing": "",
+	"code": "",
+	"description": "",
+	"type": "Equity",
 	"normalDebit": "false",
 	"transactions": [
 	]
@@ -38,12 +38,12 @@
 
 {
 	"name": "Expense",
-	"number": "null",
-	"routing": "null",
-	"code": "null",
-	"description": "null",
-	"type": "null",
-	"normalDebit": "true",
+	"number": "",
+	"routing": "",
+	"code": "",
+	"description": "",
+	"type": "Equity",
+	"normalDebit": "false",
 	"transactions": [
 		{
 			"date": "2021-06-11",

@@ -2,11 +2,11 @@
 <CurrentLiabilities>
 	<Account>
 		<name>Credit Card</name>
-		<number>null</number>
-		<routing>null</routing>
-		<code>null</code>
-		<description>null</description>
-		<type>null</type>
+		<number></number>
+		<routing></routing>
+		<code></code>
+		<description></description>
+		<type>Liability</type>
 		<normalDebit>false</normalDebit>
 		<transactions>
 			<transaction>
@@ -23,11 +23,11 @@
 	</Account>
 	<Account>
 		<name>Accounts Payable</name>
-		<number>null</number>
-		<routing>null</routing>
-		<code>null</code>
-		<description>null</description>
-		<type>null</type>
+		<number></number>
+		<routing></routing>
+		<code></code>
+		<description></description>
+		<type>Liability</type>
 		<normalDebit>false</normalDebit>
 		<transactions>
 			<transaction>

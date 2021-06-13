@@ -1,6 +1,6 @@
 category,name,number,routing,code,description,type,normalDebit
-Assets,Cash,null,null,null,null,Asset,true
+Assets,Cash,,,,,Asset,true
 Assets,Receivables,,,,,Asset,true
-Liability,Credit Card,null,null,null,null,Liability,false
-Equity,Revenue,null,null,null,null,Equity,false
-Equity,Expense,null,null,null,null,Equity,false
+Liability,CreditCard,,,,,Liability,false
+Equity,Revenue,,,,,Equity,false
+Equity,Expense,,,,,Equity,false

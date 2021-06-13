@@ -1,9 +1,9 @@
 {
 	"name": "Credit Card",
-	"number": "null",
-	"routing": "null",
-	"code": "null",
-	"description": "null",
+	"number": "",
+	"routing": "",
+	"code": "",
+	"description": "",
 	"type": "Liability",
 	"normalDebit": "false",
 	"transactions": [

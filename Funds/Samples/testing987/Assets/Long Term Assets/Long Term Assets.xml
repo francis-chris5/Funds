@@ -13,11 +13,11 @@
 	</Account>
 	<Account>
 		<name>Real Estate</name>
-		<number>null</number>
-		<routing>null</routing>
-		<code>null</code>
-		<description>null</description>
-		<type>null</type>
+		<number></number>
+		<routing></routing>
+		<code></code>
+		<description></description>
+		<type>Asset</type>
 		<normalDebit>true</normalDebit>
 		<transactions>
 		</transactions>

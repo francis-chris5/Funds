@@ -5,17 +5,17 @@ USE testing987_DB;
 
 CREATE TABLE IF NOT EXISTS Accounts_Table(accountID INT PRIMARY KEY AUTO_INCREMENT, category VARCHAR(255), name VARCHAR(255), number VARCHAR(16), routing VARCHAR(16), code VARCHAR(255), description VARCHAR(255), type VARCHAR(16), normalDebit BOOLEAN);
 
-INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Liability", "IMBALANCE", "null", "null", "null", "null", "null", false);
-INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Current Assets", "Cash", "null", "null", "null", "null", "null", true);
-INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Current Assets", "Accounts Receivable", "null", "null", "null", "null", "null", true);
+INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Liability", "IMBALANCE", "", "", "", "", "Liability", false);
+INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Current Assets", "Cash", "", "", "", "", "Asset", true);
+INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Current Assets", "Accounts Receivable", "", "", "", "", "Asset", true);
 INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Long Term Assets", "Property, Plant, and Equipment", "", "", "", "", "Asset", true);
-INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Long Term Assets", "Real Estate", "null", "null", "null", "null", "null", true);
-INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Current Liabilities", "Credit Card", "null", "null", "null", "null", "null", false);
-INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Current Liabilities", "Accounts Payable", "null", "null", "null", "null", "null", false);
-INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Long Term Liabilities", "Notes Payable", "null", "null", "null", "null", "null", false);
-INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Retained Earnings", "Initial Capital", "null", "null", "null", "null", "null", false);
-INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Retained Earnings", "Revenue", "null", "null", "null", "null", "null", false);
-INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Retained Earnings", "Expense", "null", "null", "null", "null", "null", true);
+INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Long Term Assets", "Real Estate", "", "", "", "", "Asset", true);
+INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Current Liabilities", "Credit Card", "", "", "", "", "Liability", false);
+INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Current Liabilities", "Accounts Payable", "", "", "", "", "Liability", false);
+INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Long Term Liabilities", "Notes Payable", "", "", "", "", "Liability", false);
+INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Retained Earnings", "Initial Capital", "", "", "", "", "Equity", false);
+INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Retained Earnings", "Revenue", "", "", "", "", "Equity", false);
+INSERT INTO Accounts_TABLE(category, name, number, routing, code, description, type, normalDebit) VALUES("Retained Earnings", "Expense", "", "", "", "", "Equity", false);
 
 
 

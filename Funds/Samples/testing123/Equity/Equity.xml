@@ -2,10 +2,10 @@
 <Equity>
 	<Account>
 		<name>Revenue</name>
-		<number>null</number>
-		<routing>null</routing>
-		<code>null</code>
-		<description>null</description>
+		<number></number>
+		<routing></routing>
+		<code></code>
+		<description></description>
 		<type>Equity</type>
 		<normalDebit>false</normalDebit>
 		<transactions>
@@ -33,10 +33,10 @@
 	</Account>
 	<Account>
 		<name>Expense</name>
-		<number>null</number>
-		<routing>null</routing>
-		<code>null</code>
-		<description>null</description>
+		<number></number>
+		<routing></routing>
+		<code></code>
+		<description></description>
 		<type>Equity</type>
 		<normalDebit>false</normalDebit>
 		<transactions>
