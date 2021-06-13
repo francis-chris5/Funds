@@ -264,6 +264,7 @@ public class BalanceTree extends StackPane{
         private MenuItem miNewAccountCategory = new MenuItem("New " + type.toString() + " Category");
         private MenuItem miNewAccountDirect = new MenuItem("New " + type.toString() + " Account");
         private Menu mnNewAccountCategory = new Menu("New Categorized " + type.toString() + " Account");
+        private Menu mnEditAccountDetails = new Menu("Edit " + type.toString() + " Account Details");
         private MenuItem miModifyAccountOrder = new MenuItem("Modify " + type.toString() + " Categories/Accounts Order");
         private MenuItem miRemoveAccount = new MenuItem("Remove " + type.toString() + " Categories/Accounts");
         
@@ -326,6 +327,10 @@ public class BalanceTree extends StackPane{
             this.getItems().add(new SeparatorMenuItem());
             
             
+            fillEditAccountDetailsMenu();
+            this.getItems().add(mnEditAccountDetails);
+            
+            
                 //add modify order button
             miModifyAccountOrder.setOnAction(m -> {
                 ModifyAccountOrderDialog temp = new ModifyAccountOrderDialog(book, findType(tree.getRoot().getValue().toString()));
@@ -363,6 +368,78 @@ public class BalanceTree extends StackPane{
             }
             return localType;
         }//end findType()
+        
+        
+        
+        /**
+         * method to create the list of menu buttons to edit the details for an account: name, account number, routing number, description, etc.
+         */
+        public void fillEditAccountDetailsMenu(){
+        mnEditAccountDetails.getItems().clear();
+        if(type == AccountType.ASSET){
+            for(int i = 0; i < book.getAssets().size(); i++){
+                MenuItem miAsset = new MenuItem(book.getAssets().get(i).getName());
+                Account acc = book.getAssets().get(i);
+                miAsset.setOnAction(m -> {
+                    AccountDetailsDialog add = new AccountDetailsDialog(book, acc);
+                });
+                mnEditAccountDetails.getItems().add(miAsset);
+            }
+            for(int i = 0; i < book.getSubcategory(AccountType.ASSET).size(); i++){
+                mnEditAccountDetails.getItems().add(new SeparatorMenuItem());
+                for(int j = 0; j < book.getSubcategory(AccountType.ASSET).get(i).getAccounts().size(); j++){
+                    MenuItem miAsset = new MenuItem(book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getName());
+                    Account acc = book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j);
+                    miAsset.setOnAction(m ->{
+                        AccountDetailsDialog add = new AccountDetailsDialog(book, acc);
+                    });
+                    mnEditAccountDetails.getItems().add(miAsset);
+                }
+            }
+        }
+        else if(type == AccountType.LIABILITY){
+            for(int i = 0; i < book.getLiabilities().size(); i++){
+                MenuItem miLiability = new MenuItem(book.getLiabilities().get(i).getName());
+                Account acc = book.getLiabilities().get(i);
+                miLiability.setOnAction(m -> {
+                    AccountDetailsDialog add = new AccountDetailsDialog(book, acc);
+                });
+                mnEditAccountDetails.getItems().add(miLiability);
+            }
+            for(int i = 0; i < book.getSubcategory(AccountType.LIABILITY).size(); i++){
+                mnEditAccountDetails.getItems().add(new SeparatorMenuItem());
+                for(int j = 0; j < book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().size(); j++){
+                    MenuItem miLiability = new MenuItem(book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getName());
+                    Account acc = book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j);
+                    miLiability.setOnAction(m ->{
+                        AccountDetailsDialog add = new AccountDetailsDialog(book, acc);
+                    });
+                    mnEditAccountDetails.getItems().add(miLiability);
+                }
+            }
+        }
+        else if(type == AccountType.EQUITY){
+            for(int i = 0; i < book.getEquities().size(); i++){
+                MenuItem miEquity = new MenuItem(book.getEquities().get(i).getName());
+                Account acc = book.getEquities().get(i);
+                miEquity.setOnAction(m -> {
+                    AccountDetailsDialog add = new AccountDetailsDialog(book, acc);
+                });
+                mnEditAccountDetails.getItems().add(miEquity);
+            }
+            for(int i = 0; i < book.getSubcategory(AccountType.EQUITY).size(); i++){
+                mnEditAccountDetails.getItems().add(new SeparatorMenuItem());
+                for(int j = 0; j < book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().size(); j++){
+                    MenuItem miEquity = new MenuItem(book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getName());
+                    Account acc = book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j);
+                    miEquity.setOnAction(m ->{
+                        AccountDetailsDialog add = new AccountDetailsDialog(book, acc);
+                    });
+                    mnEditAccountDetails.getItems().add(miEquity);
+                }
+            }
+        }
+    }//end fillEditAccountDetailsList()
         
     }//end BalanceTreeContextMenu
     

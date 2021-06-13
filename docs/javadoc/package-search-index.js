@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"Funds"},{"l":"Funds.DataEnums"},{"l":"Funds.DataObjects"},{"l":"Funds.Dialogs"},{"l":"Funds.Tools.Budgeting.RevenueSplitter"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"Funds"},{"l":"Funds.DataEnums"},{"l":"Funds.DataObjects"},{"l":"Funds.Dialogs"},{"l":"Funds.Tools.BookExport"},{"l":"Funds.Tools.Budgeting.RevenueSplitter"},{"l":"Funds.Tools.GeneralLedger"}]

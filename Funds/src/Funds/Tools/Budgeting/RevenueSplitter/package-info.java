@@ -3,6 +3,5 @@
  * 
  * 
  * @author Chris Francis
- * @version 1.1.1
  */
 package Funds.Tools.Budgeting.RevenueSplitter;

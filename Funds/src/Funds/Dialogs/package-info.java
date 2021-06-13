@@ -4,6 +4,5 @@
  * An early draft of the javadocs here had the same sentence on everyone of these: "The controller class for the similarly named FXML dialog" so that essentially describes this whole inner package nicely
  * 
  * @author Chris Francis
- * @version 1.1.1
  */
 package Funds.Dialogs;

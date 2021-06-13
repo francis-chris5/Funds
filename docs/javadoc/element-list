@@ -2,4 +2,6 @@ Funds
 Funds.DataEnums
 Funds.DataObjects
 Funds.Dialogs
+Funds.Tools.BookExport
 Funds.Tools.Budgeting.RevenueSplitter
+Funds.Tools.GeneralLedger

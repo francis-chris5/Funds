@@ -197,15 +197,12 @@ public class BookExport {
             }
             else if(type == ExportType.CSV){
                 String accountString = new String("category,name,number,routing,code,description,type,normalDebit\n");
+                 
                     //assets
                 File assetFolder = new File(folder.getPath() + "/Assets");
                 assetFolder.mkdir();
-                //File file  = new File(assetFolder.getPath() + "/AssetAccounts.csv");
-                Account[] accounts;
-                //book.getAssets().toArray(accounts);
-                //createAccountCSV(file, accounts);
                 for(int i = 0; i < book.getAssets().size(); i++){
-                    accountString += "Assets," + book.getAssets().get(i).getName() + "," + book.getAssets().get(i).getNumber() + "," + book.getAssets().get(i).getRouting() + "," + book.getAssets().get(i).getCode() + "," + book.getAssets().get(i).getDescription() + "," + book.getAssets().get(i).getType() + "," + book.getAssets().get(i).isNormalDebit() + "\n";
+                    accountString += "Assets," + book.getAssets().get(i).getName().replaceAll("[ ,.()&-/]", "") + "," + book.getAssets().get(i).getNumber() + "," + book.getAssets().get(i).getRouting() + "," + book.getAssets().get(i).getCode() + "," + book.getAssets().get(i).getDescription() + "," + book.getAssets().get(i).getType() + "," + book.getAssets().get(i).isNormalDebit() + "\n";
                     File file = new File(assetFolder.getPath() + "/" + book.getAssets().get(i).getName() + ".csv");
                     Transaction[] transactions = new Transaction[book.getAssets().get(i).getTransactions().size()];
                     book.getAssets().get(i).getTransactions().toArray(transactions);
@@ -213,14 +210,10 @@ public class BookExport {
                 }
                 for(int i = 0; i < book.getSubcategory(AccountType.ASSET).size(); i++){
                     for(int j = 0; j < book.getSubcategory(AccountType.ASSET).get(i).getAccounts().size(); j++){
-                        accountString += book.getSubcategory(AccountType.ASSET).get(i).getName().replaceAll("[ ,.()&-/]", "") + "," + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getName() + "," + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getNumber() + "," + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getRouting() + "," + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getCode() + "," + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getDescription() + "," + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getType() + "," + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).isNormalDebit() + "\n";
+                        accountString += book.getSubcategory(AccountType.ASSET).get(i).getName().replaceAll("[ ,.()&-/]", "") + "," + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getName().replaceAll("[ ,.()&-/]", "") + "," + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getNumber() + "," + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getRouting() + "," + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getCode() + "," + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getDescription() + "," + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getType() + "," + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).isNormalDebit() + "\n";
                     }
                     File category = new File(assetFolder.getPath() + "/" + book.getSubcategory(AccountType.ASSET).get(i).getName());
                     category.mkdir();
-                    //File accountFile = new File(category.getPath() + "/" + book.getSubcategory(AccountType.ASSET).get(i).getName() + ".csv");
-                    //accounts = new Account[book.getSubcategory(AccountType.ASSET).get(i).getAccounts().size()];
-                    //book.getSubcategory(AccountType.ASSET).get(i).getAccounts().toArray(accounts);
-                    //createAccountCSV(accountFile, accounts);
                     for(int j = 0; j < book.getSubcategory(AccountType.ASSET).get(i).getAccounts().size(); j++){
                         File file = new File(category.getPath() + "/" + book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getName() + ".csv");
                         Transaction[] transactions = new Transaction[book.getSubcategory(AccountType.ASSET).get(i).getAccounts().get(j).getTransactions().size()];
@@ -233,12 +226,8 @@ public class BookExport {
                     //assets
                 File liabilityFolder = new File(folder.getPath() + "/Liability");
                 liabilityFolder.mkdir();
-                //file  = new File(liabilityFolder.getPath() + "/LiabilityAccounts.csv");
-                //accounts = new Account[book.getLiabilities().size()];
-                //book.getLiabilities().toArray(accounts);
-                //createAccountCSV(file, accounts);
                 for(int i = 0; i < book.getLiabilities().size(); i++){
-                    accountString += "Liability," + book.getLiabilities().get(i).getName() + "," + book.getLiabilities().get(i).getNumber() + "," + book.getLiabilities().get(i).getRouting() + "," + book.getLiabilities().get(i).getCode() + "," + book.getLiabilities().get(i).getDescription() + "," + book.getLiabilities().get(i).getType() + "," + book.getLiabilities().get(i).isNormalDebit() + "\n";
+                    accountString += "Liability," + book.getLiabilities().get(i).getName().replaceAll("[ ,.()&-/]", "") + "," + book.getLiabilities().get(i).getNumber() + "," + book.getLiabilities().get(i).getRouting() + "," + book.getLiabilities().get(i).getCode() + "," + book.getLiabilities().get(i).getDescription() + "," + book.getLiabilities().get(i).getType() + "," + book.getLiabilities().get(i).isNormalDebit() + "\n";
                     File file = new File(liabilityFolder.getPath() + "/" + book.getLiabilities().get(i).getName() + ".csv");
                     Transaction[] transactions = new Transaction[book.getLiabilities().get(i).getTransactions().size()];
                     book.getLiabilities().get(i).getTransactions().toArray(transactions);
@@ -246,14 +235,11 @@ public class BookExport {
                 }
                 for(int i = 0; i < book.getSubcategory(AccountType.LIABILITY).size(); i++){
                     for(int j = 0; j < book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().size(); j++){
-                        accountString += book.getSubcategory(AccountType.LIABILITY).get(i).getName().replaceAll("[ ,.()&-/]", "") + "," + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getName() + "," + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getNumber() + "," + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getRouting() + "," + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getCode() + "," + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getDescription() + "," + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getType() + "," + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).isNormalDebit() + "\n";
+                        accountString += book.getSubcategory(AccountType.LIABILITY).get(i).getName().replaceAll("[ ,.()&-/]", "") + "," + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getName().replaceAll("[ ,.()&-/]", "") + "," + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getNumber() + "," + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getRouting() + "," + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getCode() + "," + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getDescription() + "," + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getType() + "," + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).isNormalDebit() + "\n";
                     }
                     File category = new File(liabilityFolder.getPath() + "/" + book.getSubcategory(AccountType.LIABILITY).get(i).getName());
                     category.mkdir();
                     File accountFile = new File(category.getPath() + "/" + book.getSubcategory(AccountType.LIABILITY).get(i).getName() + ".csv");
-                    //accounts = new Account[book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().size()];
-                    //book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().toArray(accounts);
-                    //createAccountCSV(accountFile, accounts);
                     for(int j = 0; j < book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().size(); j++){
                         File file = new File(category.getPath() + "/" + book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getName() + ".csv");
                         Transaction[] transactions = new Transaction[book.getSubcategory(AccountType.LIABILITY).get(i).getAccounts().get(j).getTransactions().size()];
@@ -266,12 +252,8 @@ public class BookExport {
                     //equity
                 File equityFolder = new File(folder.getPath() + "/Equity");
                 equityFolder.mkdir();
-                //file  = new File(equityFolder.getPath() + "/EquityAccounts.csv");
-                //accounts = new Account[book.getEquities().size()];
-                //book.getEquities().toArray(accounts);
-                //createAccountCSV(file, accounts);
                 for(int i = 0; i < book.getEquities().size(); i++){
-                    accountString += "Equity," + book.getEquities().get(i).getName() + "," + book.getEquities().get(i).getNumber() + "," + book.getEquities().get(i).getRouting() + "," + book.getEquities().get(i).getCode() + "," + book.getEquities().get(i).getDescription() + "," + book.getEquities().get(i).getType() + "," + book.getEquities().get(i).isNormalDebit() + "\n";
+                    accountString += "Equity," + book.getEquities().get(i).getName().replaceAll("[ ,.()&-/]", "") + "," + book.getEquities().get(i).getNumber() + "," + book.getEquities().get(i).getRouting() + "," + book.getEquities().get(i).getCode() + "," + book.getEquities().get(i).getDescription() + "," + book.getEquities().get(i).getType() + "," + book.getEquities().get(i).isNormalDebit() + "\n";
                     File file = new File(equityFolder.getPath() + "/" + book.getEquities().get(i).getName() + ".csv");
                     Transaction[] transactions = new Transaction[book.getEquities().get(i).getTransactions().size()];
                     book.getEquities().get(i).getTransactions().toArray(transactions);
@@ -279,14 +261,11 @@ public class BookExport {
                 }
                 for(int i = 0; i < book.getSubcategory(AccountType.EQUITY).size(); i++){
                     for(int j = 0; j < book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().size(); j++){
-                        accountString += book.getSubcategory(AccountType.EQUITY).get(i).getName().replaceAll("[ ,.()&-/]", "") + "," + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getName() + "," + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getNumber() + "," + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getRouting() + "," + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getCode() + "," + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getDescription() + "," + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getType() + "," + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).isNormalDebit() + "\n";
+                        accountString += book.getSubcategory(AccountType.EQUITY).get(i).getName().replaceAll("[ ,.()&-/]", "") + "," + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getName().replaceAll("[ ,.()&-/]", "") + "," + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getNumber() + "," + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getRouting() + "," + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getCode() + "," + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getDescription() + "," + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getType() + "," + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).isNormalDebit() + "\n";
                     }
                     File category = new File(equityFolder.getPath() + "/" + book.getSubcategory(AccountType.EQUITY).get(i).getName());
                     category.mkdir();
                     File accountFile = new File(category.getPath() + "/" + book.getSubcategory(AccountType.EQUITY).get(i).getName() + ".csv");
-                    //accounts = new Account[book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().size()];
-                    //book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().toArray(accounts);
-                    //createAccountCSV(accountFile, accounts);
                     for(int j = 0; j < book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().size(); j++){
                         File file = new File(category.getPath() + "/" + book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getName() + ".csv");
                         Transaction[] transactions = new Transaction[book.getSubcategory(AccountType.EQUITY).get(i).getAccounts().get(j).getTransactions().size()];
@@ -365,7 +344,7 @@ public class BookExport {
     
     /**
      * Generates a string of xml data representing the current state of an account
-     * @param account the account data object to be formatted
+     * @param accounts the account data object to be formatted
      * @return <b>String</b> in pretty-print ready to be written to an xml file
      */
     public String getXMLString(String root, Account[] accounts){
@@ -405,7 +384,7 @@ public class BookExport {
     
     /**
      * generates a string of JSON formatted account data
-     * @param account The account to convert from .fabk form to json format
+     * @param accounts The account to convert from .fabk form to json format
      * @return <b>String</b> ready to be written to a json file in pretty-print
      */
     public String getJSONString(Account[] accounts){
@@ -446,31 +425,6 @@ public class BookExport {
     
     
     
-//    /**
-//     * Writes the csv file of data about a collection of accounts (such as all the accounts in a given directory)
-//     * @param file the java file object to be written
-//     * @param accounts an array of Account object to export for data storage elsewhere
-//     */
-//    public void createAccountCSV(File file, Account[] accounts){
-//        String csv = new String("name,number,routing,code,description,type,normalDebit\n");
-//        for(int i = 0; i < accounts.length; i++){
-//            csv += accounts[i].getName() + "," + accounts[i].getNumber() + "," + accounts[i].getRouting() + "," + accounts[i].getCode() + "," + accounts[i].getDescription() + "," + accounts[i].getType() + "," + accounts[i].isNormalDebit() + "\n";
-//        }
-//        try{
-//            PrintWriter pw = new PrintWriter(file);
-//            pw.write(csv);
-//            pw.close();
-//        }
-//        catch(Exception e){
-//            e.printStackTrace();
-//            //nevermind then
-//        }
-//    }//end createAccountCSV()
-
-    
-    
-    
-    
     /**
      * Writes the csv file of data about a collection of transactions (such as all the transactions in a given account)
      * @param file the java file object to write to
@@ -491,14 +445,4 @@ public class BookExport {
         }
     }//end createTransactionCSV()
 
-  
-    
-    
-    
-
-    
-    
-
-    
-    
 }//end BookExport

@@ -12,17 +12,19 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 
 
 /**
- * The general ledger listing out all transactions and eventually including filters and search features to sort through and find records of a certain transaction
+ * The general ledger listing out all transactions with filters to sort through and track down the records of a transaction or group of transactions
  * @author Chris Francis
  */
 public class LedgerPane extends Pane implements Initializable {
@@ -43,6 +45,16 @@ public class LedgerPane extends Pane implements Initializable {
     DatePicker dtDate2;
     @FXML
     TextField txtDescription;
+    @FXML
+    TextField txtTransactionID;
+    @FXML
+    RadioButton rdChecked;
+    @FXML
+    RadioButton rdUnchecked;
+    @FXML
+    ComboBox cmbTransfer;
+    @FXML
+    TextField txtAmount;
     
     @FXML
     ListView lstTransactions;
@@ -61,6 +73,10 @@ public class LedgerPane extends Pane implements Initializable {
     
         ///////////////////////////////////////////  CONSTRUCTORS  //////////
     
+    /**
+     * In order to list out all recorded transactions the only thing necessary is the book where those transactions are recorded
+     * @param book the current working book
+     */
     public LedgerPane(Book book){
         this.book = book;
         try{
@@ -72,6 +88,7 @@ public class LedgerPane extends Pane implements Initializable {
             //just move on then
         }
         fillList();
+        loadAccountList();
         lstTransactions.getItems().addAll(observableTransactions);
     }//end one-arg constructor
     
@@ -127,6 +144,9 @@ public class LedgerPane extends Pane implements Initializable {
     
     
     
+    /**
+     * internal method to disable/enable the second date picker when it's needed
+     */
     @FXML
     public void activateDate2(){
         if(rdBetween.isSelected()){
@@ -141,10 +161,29 @@ public class LedgerPane extends Pane implements Initializable {
     
     
     /**
+     * fills the options for the account filter
+     */
+    public void loadAccountList(){
+        cmbTransfer.getItems().clear();
+        cmbTransfer.setValue(null);
+        cmbTransfer.getItems().addAll(book.getAssets());
+        cmbTransfer.getItems().addAll(book.getSubcategoryAccounts(AccountType.ASSET));
+        cmbTransfer.getItems().addAll(book.getLiabilities());
+        cmbTransfer.getItems().addAll(book.getSubcategoryAccounts(AccountType.LIABILITY));
+        cmbTransfer.getItems().addAll(book.getEquities());
+        cmbTransfer.getItems().addAll(book.getSubcategoryAccounts(AccountType.EQUITY));
+    }//end loadAccountList()
+    
+    
+    
+    
+    /**
      * uses the selected filters to remove items from the list of transactions being shown
      */
     @FXML
     public void applyFilters(){
+        
+            // date filters
         if(rdOn.isSelected()){
             for(int i = 0; i < transactions.size(); i++){
                 if(dtDate1.getValue() != null && !transactions.get(i).getDate().equals(dtDate1.getValue())){
@@ -177,6 +216,8 @@ public class LedgerPane extends Pane implements Initializable {
                 }
             }
         }
+        
+            //description filter
         if(txtDescription.getText().length() > 0){
             for(int i = 0; i < transactions.size(); i++){
                 if(!transactions.get(i).getDescription().contains(txtDescription.getText())){
@@ -185,6 +226,93 @@ public class LedgerPane extends Pane implements Initializable {
                 }
             }
         }
+        
+        
+            //filter by human readable transaction id
+        if(txtTransactionID.getText().length() > 0){
+            for(int i = 0; i < transactions.size(); i++){
+                if(!transactions.get(i).getTransactionID().contains(txtTransactionID.getText())){
+                    transactions.remove(i);
+                    i--;
+                }
+            }
+        }
+        
+            //reconciled filter
+        if(rdChecked.isSelected()){
+            for(int i = 0; i < transactions.size(); i++){
+                if(!transactions.get(i).isReconcile()){
+                    transactions.remove(i);
+                    i--;
+                }
+            }
+        }
+        
+        
+            //unreconciled filter
+        if(rdUnchecked.isSelected()){
+            for(int i = 0; i < transactions.size(); i++){
+                if(transactions.get(i).isReconcile()){
+                    transactions.remove(i);
+                    i--;
+                }
+            }
+        }
+        
+        
+            //account filter
+        if(cmbTransfer.getValue() != null){
+            LinkedList<Integer> keepIDs = new LinkedList<>();
+            for(int i = 0; i < transactions.size(); i++){
+                if(transactions.get(i).getTransfer() == cmbTransfer.getValue()){
+                    keepIDs.add(transactions.get(i).getLedgerID());
+                }
+            }
+            for(int i = 0; i < transactions.size(); i++){
+                boolean keep = false;
+                for(int j = 0; j < keepIDs.size(); j++){
+                    if(transactions.get(i).getLedgerID() == keepIDs.get(j)){
+                        keep = true;
+                        break;
+                    }
+                }
+                if(!keep){
+                    transactions.remove(i);
+                    i--;
+                }
+            }
+        }
+        
+        
+        
+        if(txtAmount.getText().length() > 0){
+            double amount = 0.0;
+            try{
+                amount = Double.parseDouble(txtAmount.getText());
+            }
+            catch(Exception e){
+                try{
+                    amount = Double.parseDouble(txtAmount.getText().substring(1));
+                }
+                catch(NumberFormatException nf){
+                    //not a number or number with dollar sign, just ignoring then
+                }
+            }
+            if(amount != 0.0){
+                for(int i = 0; i < transactions.size(); i++){
+                    if(transactions.get(i).getDebit() != amount && transactions.get(i).getCredit() != amount){
+                        transactions.remove(i);
+                        i--;
+                    }
+                }
+            }
+        }
+        
+        
+        
+        
+        
+            //reset the list with selected filters applied
         observableTransactions.clear();
         for(int i = 0; i < book.getLedgerID(); i++){
             Transaction t1 = null;
@@ -221,6 +349,11 @@ public class LedgerPane extends Pane implements Initializable {
         dtDate2.setValue(null);
         dtDate2.setDisable(true);
         txtDescription.clear();
+        txtTransactionID.clear();
+        rdChecked.setSelected(false);
+        rdUnchecked.setSelected(false);
+        loadAccountList();
+        txtAmount.clear();
         transactions.clear();
         observableTransactions.clear();
         fillList();
@@ -228,6 +361,24 @@ public class LedgerPane extends Pane implements Initializable {
         lstTransactions.getItems().addAll(observableTransactions);
     }//end clearFilters()
     
+    
+    
+    
+    
+    /**
+     * Method to listen for and react to keyboard events, currently the only one is to try apply filters when the enter key is pressed
+     * @param event The keyboard event detected
+     */
+    @FXML
+    public void checkKeyboardEvents(KeyEvent event){
+        switch(event.getCode()){
+            case ENTER:
+                applyFilters();
+                break;
+            default:
+                break;
+        }
+    }//end keyboardEvents
     
     
     

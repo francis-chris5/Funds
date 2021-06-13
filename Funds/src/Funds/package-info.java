@@ -3,6 +3,5 @@
  * 
  * 
  * @author Chris Francis
- * @version 0.0.1
  */
 package Funds;

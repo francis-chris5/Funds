@@ -133,7 +133,7 @@ public class FundController implements Initializable, Book.AccountController {
                 book.getEquities().add(rev);
                 book.getEquities().add(exp);
                 showBalanceSheet();
-                fillEditAccountDetailsList();
+                fillEditAccountDetailsMenu();
                 break;
             case DETAILED:
                 AccountCategory currentAssets = new AccountCategory("Current Assets", AccountType.ASSET);
@@ -157,7 +157,7 @@ public class FundController implements Initializable, Book.AccountController {
                 book.getAccountCategories().add(longTermLiabilities);
                 book.getAccountCategories().add(retainedEarnings);
                 showBalanceSheet();
-                fillEditAccountDetailsList();
+                fillEditAccountDetailsMenu();
             default:
                 break; //close method sets this up
         }
@@ -178,7 +178,7 @@ public class FundController implements Initializable, Book.AccountController {
             book.setAccountController(this);
             displayDetails();
             book.setSaved(true);
-            fillEditAccountDetailsList();
+            fillEditAccountDetailsMenu();
         }
         Stage stgMain = (Stage)btnBookDetails.getScene().getWindow();
         stgMain.setTitle(book.getFilepath() != null? "Funds:\t\t" + book.getFilepath(): "Funds: \t\tunsaved book");
@@ -241,7 +241,7 @@ public class FundController implements Initializable, Book.AccountController {
             txtTotalLiabilities.setText(Double.toString(0.0));
             txtTotalEquity.setText(Double.toString(0.0));
             displayDetails();
-            fillEditAccountDetailsList();
+            fillEditAccountDetailsMenu();
             btnBookDetails.setText("Book Details");
             Stage stgMain = (Stage)btnBookDetails.getScene().getWindow();
             stgMain.setTitle("Funds");
@@ -302,6 +302,9 @@ public class FundController implements Initializable, Book.AccountController {
     
     
     
+    /**
+     * exports the book to a collection of json files positioned in a directory tree to preserve the structure of the book
+     */
     @FXML
     public void bookToJSON(){
         BookExport btj = new BookExport(book, ExportType.JSON);
@@ -342,30 +345,38 @@ public class FundController implements Initializable, Book.AccountController {
     
         /////////////////////////////////////////  ACCOUNT METHODS  ////////
     
+    /**
+     * method to launch the dialog to create a subcategory to organize accounts by
+     */
     @FXML
     public void newCategory(){
         AccountCategoryDetailsDialog temp = new AccountCategoryDetailsDialog(book, AccountType.ALL);
         book.setSaved(false);
-        fillEditAccountDetailsList();
+        fillEditAccountDetailsMenu();
         displayDetails();
     }//end newCategory()
     
     
     
     
+    /**
+     * method to launch the dialog to create a new account
+     */
     @FXML
     public void newAccount(){
         AccountDetailsDialog temp = new AccountDetailsDialog(book, AccountType.ALL);
         book.setSaved(false);
-        fillEditAccountDetailsList();
+        fillEditAccountDetailsMenu();
         displayDetails();
     }//end newAccount()
     
     
     
     
-    @FXML
-    public void fillEditAccountDetailsList(){
+    /**
+     * method to create the list of menu buttons to edit the details for an account: name, account number, routing number, description, etc.
+     */
+    public void fillEditAccountDetailsMenu(){
         mnEditAccountDetails.getItems().clear();
         for(int i = 0; i < book.getAssets().size(); i++){
             MenuItem miAsset = new MenuItem(book.getAssets().get(i).getName());
@@ -431,28 +442,33 @@ public class FundController implements Initializable, Book.AccountController {
                 mnEditAccountDetails.getItems().add(miEquity);
             }
         }
-    }//end fillEditAccountDetailsList()
+    }//end fillEditAccountDetailsMenu()
 
     
     
     
-    
+    /**
+     * opens the dialog to alter the order accounts appear on in the balance sheet and other listings
+     */
     @FXML
     public void modifyAccountsOrder(){
         ModifyAccountOrderDialog temp = new ModifyAccountOrderDialog(book, AccountType.ALL);
         book.setSaved(false);
-        fillEditAccountDetailsList();
+        fillEditAccountDetailsMenu();
         displayDetails();
     }//end modifyAccountOrder()
     
     
     
     
+    /**
+     * opens the dialog to select and remove accounts
+     */
     @FXML
     public void removeAccounts(){
         RemoveAccountDialog temp = new RemoveAccountDialog(book, AccountType.ALL);
         book.setSaved(false);
-        fillEditAccountDetailsList();
+        fillEditAccountDetailsMenu();
         displayDetails();
     }//end removeAccount()
     
@@ -465,6 +481,9 @@ public class FundController implements Initializable, Book.AccountController {
     
         ///////////////////////////////////////////  TOOL METHODS  ////////////
     
+    /**
+     * Starts the General Ledger Filtering Tool in a new tab in the main content area
+     */
     @FXML
     public void launchGeneralLedger(){
         ScrollPane scpContent = new ScrollPane(new LedgerPane(book));
@@ -474,6 +493,11 @@ public class FundController implements Initializable, Book.AccountController {
     }//end launchGeneralLedger()
     
     
+    
+    
+    /**
+     * Starts the revenue splitter tool in a new tab in the main content area
+     */
     @FXML
     public void launchRevenueSplitter(){
         ScrollPane scpContent = new ScrollPane(new RevenueSplitter(book));
@@ -715,7 +739,7 @@ public class FundController implements Initializable, Book.AccountController {
         book.getEquities().add(rev);
         book.getEquities().add(exp);
         book.setSaved(true);
-        fillEditAccountDetailsList();
+        fillEditAccountDetailsMenu();
         showBalanceSheet(); //holy cow... I finally did someting at startup...
     }//end initialize()
 
