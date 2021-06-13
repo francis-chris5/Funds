@@ -1,0 +1,139 @@
+
+*{
+    -fx-font-family: "Times New Roman";
+}
+
+/*.root, .menu-bar, .split-pane{
+    -fx-background-color: #f2f2d8;
+}
+
+.split-pane > .split-pane-divider{
+    -fx-background-color: #faebd2;
+}*/
+
+
+
+
+.table-view .column-header, .general-ledger > .label{
+    -fx-background-color: #618257;
+    -fx-border-color: #434343;
+}
+
+.table-view .column-header-background .label, .general-ledger .label{
+    -fx-text-fill: #c1d9ba;
+}
+
+
+.table-view .column-header-background .filler{
+    -fx-background-color: #618257;
+}
+
+
+.table-view .table-cell{
+    -fx-border-color: #737373;
+}
+
+.table-row-cell:odd, .account-list .list-cell:odd{
+    -fx-background-color: #ddfad4;
+}
+
+.table-row-cell:even, .account-list .list-cell:even{
+    -fx-background-color: #9bc78d;
+}
+
+.table-row-cell:selected, .account-list .list-cell:selected{
+    -fx-background-color: #f0f05ddd;
+    -fx-text-background-color: #b5a264;
+}
+
+.table-row-cell:odd .table-cell > .check-box > .box{
+    -fx-background-color: #ddfad4;
+    -fx-border-color: #9bc78d;
+}
+
+.table-row-cell:even .table-cell > .check-box > .box{
+    -fx-background-color: #9bc78d;
+    -fx-border-color: #ddfad4;
+}
+
+.general-ledger .check-box > .box, .general-ledger .text-field{
+    -fx-background-color: transparent;
+    -fx-border-color: #323232;
+}
+
+
+
+
+
+.ledger-input{
+    -fx-background-color: #f0f05ddd;
+    -fx-text-fill: #b5a264;
+    -fx-border-color: #434343;
+    -fx-prompt-text-fill: #FF0000a2;
+}
+
+.ledger-input .list-view .list-cell:hover, .ledger-input .list-view .list-cell:selected, .ledger-input .date-picker-popup > * > .day-cell:hover, .ledger-input .date-picker-popup > * > .selected{
+    -fx-background-color: #618257;
+}
+
+.ledger-input > .box{
+    -fx-background-color: #f0f05ddd;
+    -fx-border-color: #b5a264;
+}
+
+.ledger-input:selected > .box > .mark{
+    -fx-background-color: #b5a264;
+}
+
+
+.ledger-input .date-picker-popup{
+    -fx-background-color: #f0f05ddd;
+    -fx-border-color: #b5a264;
+}
+
+.ledger-input .date-picker-popup > .month-year-pane, .ledger-input .date-picker-popup > .calendar-grid{
+    -fx-background-color: #f0f05ddd;
+    -fx-border-color: #b5a264;
+    -fx-text-fill: #b5a264;
+}
+
+.ledger-input > .arrow-button > .arrow{
+    -fx-background-color: #b5a264;
+}
+
+.ledger-input > .arrow-button{
+    -fx-background-color: #f0f05ddd;
+    -fx-border-color: #b5a264;
+}
+
+.ledger-input .text-field{
+    -fx-background-color: #f0f05ddd;
+    -fx-text-fill: #b5a264;
+}
+
+
+.ledger-input .list-cell{
+    -fx-text-fill: #b5a264;
+}
+
+.ledger-input .list-view .list-cell{
+    -fx-text-fill: #232323;
+}
+
+
+/*.balance-sheet{
+    -fx-background-color: #ffffff;
+}
+
+.balance-sheet .tree-view{
+    -fx-border-color: #ffffff;
+}*/
+
+
+
+.revenue-splitter-item .text-field{
+    -fx-background-color: transparent;
+}
+
+
+
