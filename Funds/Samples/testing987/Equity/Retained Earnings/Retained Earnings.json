@@ -1,0 +1,72 @@
+{
+	"name": "Initial Capital",
+	"number": "null",
+	"routing": "null",
+	"code": "null",
+	"description": "null",
+	"type": "null",
+	"normalDebit": "false",
+	"transactions": [
+		{
+			"date": "2021-06-11",
+			"transactionID": "",
+			"description": "open",
+			"transfer": "Cash",
+			"reconcile": "false",
+			"debit": 0.0,
+			"credit": 123.0,
+			"ledgerID": 0
+		}
+	]
+}
+
+
+
+{
+	"name": "Revenue",
+	"number": "null",
+	"routing": "null",
+	"code": "null",
+	"description": "null",
+	"type": "null",
+	"normalDebit": "false",
+	"transactions": [
+	]
+}
+
+
+
+{
+	"name": "Expense",
+	"number": "null",
+	"routing": "null",
+	"code": "null",
+	"description": "null",
+	"type": "null",
+	"normalDebit": "true",
+	"transactions": [
+		{
+			"date": "2021-06-11",
+			"transactionID": "",
+			"description": "mcdonalds",
+			"transfer": "Credit Card",
+			"reconcile": "false",
+			"debit": 8.0,
+			"credit": 0.0,
+			"ledgerID": 1
+		},
+		{
+			"date": "2021-06-11",
+			"transactionID": "",
+			"description": "buy sandals",
+			"transfer": "Cash",
+			"reconcile": "false",
+			"debit": 19.0,
+			"credit": 0.0,
+			"ledgerID": 2
+		}
+	]
+}
+
+
+

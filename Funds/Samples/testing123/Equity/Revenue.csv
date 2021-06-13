@@ -1,0 +1,3 @@
+date,transactionID,description,transfer,reconcile,debit,credit,ledgerID
+2021-06-01,,open,Cash,false,0.0,123.0,0
+2021-06-09,,sally,Receivables,false,0.0,15.0,3

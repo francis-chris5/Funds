@@ -1,0 +1,12 @@
+category,name,number,routing,code,description,type,normalDebit
+CurrentAssets,Cash,null,null,null,null,null,true
+CurrentAssets,Accounts Receivable,null,null,null,null,null,true
+LongTermAssets,Property, Plant, and Equipment,,,,,Asset,true
+LongTermAssets,Real Estate,null,null,null,null,null,true
+Liability,IMBALANCE,null,null,null,null,null,false
+CurrentLiabilities,Credit Card,null,null,null,null,null,false
+CurrentLiabilities,Accounts Payable,null,null,null,null,null,false
+LongTermLiabilities,Notes Payable,null,null,null,null,null,false
+RetainedEarnings,Initial Capital,null,null,null,null,null,false
+RetainedEarnings,Revenue,null,null,null,null,null,false
+RetainedEarnings,Expense,null,null,null,null,null,true

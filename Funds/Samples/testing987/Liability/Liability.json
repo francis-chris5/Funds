@@ -1,0 +1,34 @@
+{
+	"name": "IMBALANCE",
+	"number": "null",
+	"routing": "null",
+	"code": "null",
+	"description": "null",
+	"type": "null",
+	"normalDebit": "false",
+	"transactions": [
+		{
+			"date": "2021-06-11",
+			"transactionID": "",
+			"description": "sally",
+			"transfer": "Accounts Receivable",
+			"reconcile": "false",
+			"debit": 0.0,
+			"credit": 15.0,
+			"ledgerID": 3
+		},
+		{
+			"date": "2021-06-11",
+			"transactionID": "",
+			"description": "bcky",
+			"transfer": "Accounts Payable",
+			"reconcile": "false",
+			"debit": 7.0,
+			"credit": 0.0,
+			"ledgerID": 4
+		}
+	]
+}
+
+
+
