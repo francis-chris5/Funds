@@ -2,10 +2,10 @@
 <Assets>
 	<Account>
 		<name>Cash</name>
-		<number>null</number>
-		<routing>null</routing>
-		<code>null</code>
-		<description>null</description>
+		<number></number>
+		<routing></routing>
+		<code></code>
+		<description></description>
 		<type>Asset</type>
 		<normalDebit>true</normalDebit>
 		<transactions>

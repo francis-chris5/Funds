@@ -1,9 +1,9 @@
 {
 	"name": "Cash",
-	"number": "null",
-	"routing": "null",
-	"code": "null",
-	"description": "null",
+	"number": "",
+	"routing": "",
+	"code": "",
+	"description": "",
 	"type": "Asset",
 	"normalDebit": "true",
 	"transactions": [
