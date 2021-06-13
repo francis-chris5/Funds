@@ -1,3 +1,0 @@
-name,number,routing,code,description,type,normalDebit
-Cash,null,null,null,null,null,true
-Receivables,,,,,Asset,true
