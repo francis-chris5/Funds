@@ -335,7 +335,10 @@ right clicking on a transaction entry in one of the ledgers opens that for editi
 ![pic_for_github_generalLedger](https://user-images.githubusercontent.com/50467171/121451429-91384600-c96b-11eb-8fd7-01fd522d42d6.jpg)
  
 <br><br>
-It's a start, still a long way to go... though I am looking for something rather simplistic here, so it may be ready to call version 1 in just a couple more days...
+
+   
+   
+I've got the basic structure and first couple tools wanted for keeping my own books here, so I'm calling it version 1 now and the first round of installers for windows, mac, and linux machines are ready, after a week or so of thorough testing I'll click the button to actually make it an official release.
 
 
    
