@@ -1,0 +1,6 @@
+
+
+The Funds.Tools package is for useful special purpose calculator sort of things I think might be useful here
+
+
+

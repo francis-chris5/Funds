@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="vbxContent" onKeyPressed="#checkKeyboardEvents" stylesheets="@../../Stylesheets/FundStyle.css" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="108.0" prefWidth="435.0" spacing="3.0">
+         <children>
+            <Label text="Filter By ...">
+               <HBox.margin>
+                  <Insets top="40.0" />
+               </HBox.margin>
+            </Label>
+            <VBox prefHeight="113.0" prefWidth="81.0" spacing="5.0">
+               <children>
+                  <Label text="Date" />
+                  <RadioButton fx:id="rdOn" mnemonicParsing="false" onAction="#activateDate2" selected="true" text="On">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="DateFilterToggleGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="rdBefore" mnemonicParsing="false" onAction="#activateDate2" text="Before" toggleGroup="$DateFilterToggleGroup">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </RadioButton>
+                  <RadioButton fx:id="rdAfter" mnemonicParsing="false" onAction="#activateDate2" text="After" toggleGroup="$DateFilterToggleGroup">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </RadioButton>
+                  <RadioButton fx:id="rdBetween" mnemonicParsing="false" onAction="#activateDate2" text="Between" toggleGroup="$DateFilterToggleGroup">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </RadioButton>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets left="36.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                     <children>
+                        <DatePicker fx:id="dtDate1">
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </DatePicker>
+                        <DatePicker fx:id="dtDate2" disable="true" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="108.0" prefWidth="216.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <Label text="Description" />
+                  <TextField fx:id="txtDescription">
+                     <VBox.margin>
+                        <Insets left="8.0" top="24.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+               <HBox.margin>
+                  <Insets left="36.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="24.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#applyFilters" text="Apply Filters" />
+                  <Button mnemonicParsing="false" onAction="#clearFilters" text="Clear Filters" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets left="36.0" top="24.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="12.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+      <HBox prefHeight="80.0" prefWidth="717.0">
+         <children>
+            <VBox prefHeight="100.0" prefWidth="70.0">
+               <children>
+                  <Label text="Num" />
+                  <TextField fx:id="txtTransactionID">
+                     <VBox.margin>
+                        <Insets left="8.0" top="9.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets left="112.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="100.0" prefWidth="109.0" spacing="3.0">
+               <children>
+                  <Label text="R" />
+                  <RadioButton fx:id="rdChecked" mnemonicParsing="false" text="Checked">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="ReconcileFilterToggleGroup" />
+                     </toggleGroup>
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </RadioButton>
+                  <RadioButton fx:id="rdUnchecked" mnemonicParsing="false" text="Unchedked" toggleGroup="$ReconcileFilterToggleGroup">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </RadioButton>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets left="18.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="100.0" prefWidth="181.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <Label text="Transfer" />
+                  <ComboBox fx:id="cmbTransfer" prefWidth="150.0">
+                     <VBox.margin>
+                        <Insets left="8.0" top="9.0" />
+                     </VBox.margin>
+                  </ComboBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="24.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="100.0" prefWidth="100.0">
+               <children>
+                  <Label text="Amount" />
+                  <TextField fx:id="txtAmount">
+                     <VBox.margin>
+                        <Insets left="8.0" top="9.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets left="64.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox styleClass="general-ledger">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="9.0">
+               <padding>
+                  <Insets bottom="8.0" top="8.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="95.0" text="Date">
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="40.0" text="Num" textOverrun="CLIP">
+               <padding>
+                  <Insets bottom="8.0" left="5.0" right="5.0" top="8.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="200.0" text="Description">
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="200.0" text="Transfer">
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="25.0" text="R">
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="75.0" text="Debit">
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="75.0" text="Credit">
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="15.0">
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <ListView fx:id="lstTransactions" styleClass="account-list" />
+   </children>
+</VBox>
