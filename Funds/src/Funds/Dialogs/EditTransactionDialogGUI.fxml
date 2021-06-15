@@ -15,7 +15,7 @@
          <children>
             <HBox>
                <children>
-                  <DatePicker fx:id="dtDate" prefWidth="75.0" styleClass="ledger-input" />
+                  <DatePicker fx:id="dtDate" prefWidth="95.0" styleClass="ledger-input" />
                   <TextField fx:id="txtTransactionID" prefWidth="40.0" styleClass="ledger-input" />
                   <TextField fx:id="txtDescription" prefWidth="200.0" styleClass="ledger-input" />
                   <ComboBox fx:id="cmbTransfer" prefWidth="200.0" styleClass="ledger-input" />

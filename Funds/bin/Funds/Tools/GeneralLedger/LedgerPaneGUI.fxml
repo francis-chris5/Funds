@@ -180,47 +180,47 @@
       </HBox>
       <HBox styleClass="general-ledger">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="7.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="9.0">
                <padding>
                   <Insets bottom="8.0" top="8.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="75.0" text="Date">
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="95.0" text="Date">
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="40.0" text="Num" textOverrun="CLIP">
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="40.0" text="Num" textOverrun="CLIP">
                <padding>
                   <Insets bottom="8.0" left="5.0" right="5.0" top="8.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="200.0" text="Description">
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="200.0" text="Description">
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="200.0" text="Transfer">
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="200.0" text="Transfer">
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="25.0" text="R">
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="25.0" text="R">
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="75.0" text="Debit">
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="75.0" text="Debit">
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="75.0" text="Credit">
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="75.0" text="Credit">
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="15.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefWidth="15.0">
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>

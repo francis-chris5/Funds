@@ -9,7 +9,7 @@
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../Stylesheets/FundStyle.css" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField fx:id="txtDate" editable="false" prefWidth="75.0" />
+      <TextField fx:id="txtDate" editable="false" minWidth="-Infinity" prefWidth="95.0" />
       <TextField fx:id="txtTransactionID" editable="false" prefWidth="40.0" />
       <TextField fx:id="txtDescription" editable="false" prefWidth="200.0" />
       <VBox prefHeight="42.0" prefWidth="200.0">
@@ -24,7 +24,7 @@
       </VBox>
       <VBox prefWidth="25.0">
          <children>
-            <CheckBox fx:id="chkReconcile" mnemonicParsing="false">
+            <CheckBox fx:id="chkReconcile" disable="true" mnemonicParsing="false">
                <padding>
                   <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                </padding>

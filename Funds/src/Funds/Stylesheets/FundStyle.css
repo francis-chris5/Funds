@@ -1,15 +1,13 @@
 
+
+@font-face{
+    
+    src: url("times.ttf");
+}
+
 *{
     -fx-font-family: "Times New Roman";
 }
-
-/*.root, .menu-bar, .split-pane{
-    -fx-background-color: #f2f2d8;
-}
-
-.split-pane > .split-pane-divider{
-    -fx-background-color: #faebd2;
-}*/
 
 
 
