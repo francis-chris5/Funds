@@ -54,6 +54,12 @@ public class LedgerPane extends Pane implements Initializable {
     @FXML
     ComboBox cmbTransfer;
     @FXML
+    RadioButton rdLess;
+    @FXML
+    RadioButton rdEqual;
+    @FXML
+    RadioButton rdMore;
+    @FXML
     TextField txtAmount;
     
     @FXML
@@ -298,9 +304,25 @@ public class LedgerPane extends Pane implements Initializable {
                     //not a number or number with dollar sign, just ignoring then
                 }
             }
-            if(amount != 0.0){
+            if(amount != 0.0 && rdLess.isSelected()){
+                for(int i = 0; i < transactions.size(); i++){
+                    if(transactions.get(i).getDebit() >= amount || transactions.get(i).getCredit() >= amount){
+                        transactions.remove(i);
+                        i--;
+                    }
+                }
+            }
+            if(amount != 0.0 && rdEqual.isSelected()){
                 for(int i = 0; i < transactions.size(); i++){
                     if(transactions.get(i).getDebit() != amount && transactions.get(i).getCredit() != amount){
+                        transactions.remove(i);
+                        i--;
+                    }
+                }
+            }
+            if(amount != 0.0 && rdMore.isSelected()){
+                for(int i = 0; i < transactions.size(); i++){
+                    if(transactions.get(i).getDebit() <= amount && transactions.get(i).getCredit() <= amount){
                         transactions.remove(i);
                         i--;
                     }
@@ -353,6 +375,7 @@ public class LedgerPane extends Pane implements Initializable {
         rdChecked.setSelected(false);
         rdUnchecked.setSelected(false);
         loadAccountList();
+        rdEqual.setSelected(true);
         txtAmount.clear();
         transactions.clear();
         observableTransactions.clear();

@@ -135,3 +135,7 @@
 
 
 
+.new-book-dialog .radio-button{
+    -fx-font-size: 1.3em;
+}
+

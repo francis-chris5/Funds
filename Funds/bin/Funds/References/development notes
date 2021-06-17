@@ -1,6 +1,6 @@
 
 
-
+There have been changes since the last build of installers
 
 
 
@@ -11,7 +11,7 @@
 ***********************************************************************************
 
 
-don't allow special characters in account names (regular file naming exclusions)
+don't allow special characters in account names (regular file naming exclusions) **affects data exports, maybe clean it up there instead
 
 
 

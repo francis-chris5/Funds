@@ -160,12 +160,40 @@
                   <Insets left="24.0" />
                </HBox.margin>
             </VBox>
-            <VBox prefHeight="100.0" prefWidth="100.0">
+            <VBox prefHeight="81.0" prefWidth="59.0" spacing="3.0">
                <children>
                   <Label text="Amount" />
+                  <RadioButton fx:id="rdLess" mnemonicParsing="false" text="&lt;">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="AmountComparisonToggleGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="rdEqual" mnemonicParsing="false" selected="true" text="=" toggleGroup="$AmountComparisonToggleGroup">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </RadioButton>
+                  <RadioButton fx:id="rdMore" mnemonicParsing="false" text="&gt;" toggleGroup="$AmountComparisonToggleGroup">
+                     <VBox.margin>
+                        <Insets left="8.0" />
+                     </VBox.margin>
+                  </RadioButton>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets left="24.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="74.0" prefWidth="97.0" spacing="3.0">
+               <children>
                   <TextField fx:id="txtAmount">
                      <VBox.margin>
-                        <Insets left="8.0" top="9.0" />
+                        <Insets top="18.0" />
                      </VBox.margin>
                   </TextField>
                </children>
@@ -173,7 +201,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
                <HBox.margin>
-                  <Insets left="64.0" />
+                  <Insets top="7.0" />
                </HBox.margin>
             </VBox>
          </children>
