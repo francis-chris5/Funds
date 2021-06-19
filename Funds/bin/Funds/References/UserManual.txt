@@ -165,6 +165,8 @@ General Ledger
 
     Click the "Clear Filters" button to reset the filter inputs and reload the general ledger with all transactions
 
+    Hover the mouse pointer over the labels for the debit or credit column to see some statistics about the currently displayed filtered list of transactions
+
 
 
 
