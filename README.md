@@ -333,7 +333,7 @@ right clicking on a transaction entry in one of the ledgers opens that for editi
 ![pic_for_github_edit_entry](https://user-images.githubusercontent.com/50467171/120716224-ba506680-c493-11eb-8e84-9204faecde0d.jpg)
 
    
- The first couple tools seem to be ready and made it through the rudimentary testing, a revenue splitter to divide an amount between an assortment of accounts based on percentages and a general ledger with date and description filters (no editing on the general ledger, the plan has a general journal coming eventually for that)
+ The first couple tools seem to be ready and made it through the rudimentary testing, a revenue splitter to divide an amount between an assortment of accounts based on percentages and a general ledger with date and description filters (no editing on the general ledger, only filtering viewing).
    
 ![pics_for_github_revenueSplit](https://user-images.githubusercontent.com/50467171/121172494-c5095380-c825-11eb-8e3a-e998fceb9437.jpg)
    
