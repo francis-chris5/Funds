@@ -10,6 +10,13 @@ So did not want a general purpose spreadsheet modified to fit my needs, there's 
 
 
 
+
+<h4>Installation</h4>
+To run from source files hit the green button here on github and download the files as a zip folder, then simply run the appropriate launcher for your system: .bat for Windows 10, .sh for Linux (tested and works with Chrostini Desktop on Chrombooks as well), or .zsh for Mac (use .sh file if you haven't updated your terminal to Zsh yet). The permissions should be set here but if not make sure the launcher is set to 755 or higher for Linux or Mac.
+Alternatively the files contian a folder labeled "Installers" which includes a self-contained standard installer for each system: Windows -simply launch the .exe file and walk through the wizard to install in Programs(x86) folder with desktop and start menu shortcuts, Mac -simply launch the .pkg file to install it to your Applications folder, Linux -obviously the source files are here, but I wanted to do something so there's a .deb file that throws the files in /opt and adds in a desktop entry.
+
+
+
 <h4>Design Details:</h4>
 
 It's open source software so if you are interested in customizing some accounting software to fit your exact needs the simplistic idea here may make an ideal starting point.
@@ -198,6 +205,8 @@ select the date or date range to see transactions from and click "Apply Filters"
 enter characters expected to be in a description in the description filter text field and click the "Apply Filters" button to remove all but the transactions which contain the entered characters in the order they are entered (it will find partial matches so the filter does not require the full description)
 
 Click the "Clear Filters" button to reset the filter inputs and reload the general ledger with all transactions
+   
+Hover your mouse over the label for the Debit or Credit columns to see some statistics about the currently displayed transactions before or after applying filters.
 
    
    <br><br>
@@ -280,15 +289,11 @@ Keyboard Shortcuts
 
 <h2>Project Progress</h2>
 
-I've got the ledger dialogs set up, and a start on the main gui. The first tab in the main content section of the GUI looks like a balance sheet (or it will when I get around to styling it), clicking on an account opens it in a ledger dialog to enter/edit/remove transactions. Total debits and credits are calculated correctly when transactions are entered and when transactions are edited (still an issue with the delete transaction button throwing the balance way off...)
-
-Finally got around to working in a couple menu operations, so can save and reopen files now along with a couple template options for new, and the rough drafts of a user manual and about file are available in a dialog launched from the help menu.
-
-Got subcategories going to organize the accounts better instead of throwing them all right in one of the three main types. Not updating the pictures here yet since there's nothing significant to see: the trees have more entries with arrows beside them... 
-
-In general everything seems to be moving along nicely with this, certianly still have a lot to do just to get the basics that should be required in accounting software... but creating, organizing, and removing accounts; filling in, editing, or removing items on the ledgers for those accounts; and automated double entry to balance out the books is working as intended at this early stage of the project.
+I've got the stuff I wanted for keeping my own books ready here, however, I have little doubt that over time there will be new tools and features work their way in. Below are some images captured while making the software to get a feel of what it looks like.
 
 
+   
+The main User-Interface is designed to mimick the appearance of a balance sheet so that the summary of accounts is always readily available. Clicking on an account listed on the balance sheet opens the account's ledger where transactions can be entered and edited.
 
 
 ![pic_for_github_main](https://user-images.githubusercontent.com/50467171/121451427-91384600-c96b-11eb-9566-216a5d2530f3.jpg)
