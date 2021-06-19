@@ -637,7 +637,7 @@ public class FundController implements Initializable, Book.AccountController {
         total += findNormalCreditSubtotal(book.getEquities());
         total += findNormalCreditSubtotal(book.getSubcategoryAccounts(AccountType.EQUITY));
         txtTotalEquity.setText(currencyFormat.format(total));
-    }//end displayTotals()
+    }//end displayFilteredStats()
     
     
     

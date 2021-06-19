@@ -5,6 +5,8 @@ import Funds.DataEnums.AccountType;
 import Funds.DataObjects.Book;
 import Funds.DataObjects.Transaction;
 import java.net.URL;
+import java.text.NumberFormat;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -18,6 +20,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
@@ -63,12 +66,19 @@ public class LedgerPane extends Pane implements Initializable {
     TextField txtAmount;
     
     @FXML
+    Tooltip ttDebit;
+    @FXML
+    Tooltip ttCredit;
+    
+    @FXML
     ListView lstTransactions;
     
     private Book book;
     private TableView<Transaction> tblLedger = new TableView<>();
     private LinkedList<Transaction> transactions = new LinkedList<>();
     private ObservableList<LedgerItemPane> observableTransactions = FXCollections.observableArrayList();
+    
+    private NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
     
     
     
@@ -96,6 +106,7 @@ public class LedgerPane extends Pane implements Initializable {
         fillList();
         loadAccountList();
         lstTransactions.getItems().addAll(observableTransactions);
+        displayFilteredStats();
     }//end one-arg constructor
     
     
@@ -355,6 +366,7 @@ public class LedgerPane extends Pane implements Initializable {
         }
         lstTransactions.getItems().clear();
         lstTransactions.getItems().addAll(observableTransactions);
+        displayFilteredStats();
     }//end applyFilters()
 
     
@@ -382,7 +394,102 @@ public class LedgerPane extends Pane implements Initializable {
         fillList();
         lstTransactions.getItems().clear();
         lstTransactions.getItems().addAll(observableTransactions);
+        displayFilteredStats();
     }//end clearFilters()
+    
+    
+    
+    
+    public void displayFilteredStats(){
+        if(transactions.size() > 0){
+                //totals
+            double debitTotal = 0.0, creditTotal = 0.0;
+            //int debits = 0, credits = 0;
+            LinkedList<Double> debits = new LinkedList<>();
+            LinkedList<Double> credits = new LinkedList<>();
+            double debitMin = -1.1, debitMax = 0.0, creditMin = -1.1, creditMax = 0.0;
+            double debitMedian = 0.0, creditMedian = 0.0;
+            for(int i = 0; i < transactions.size(); i++){
+                if(transactions.get(i).getDebit() != 0.0){
+                    debitTotal += transactions.get(i).getDebit();
+                    debits.add(transactions.get(i).getDebit());
+                    if(debitMin > transactions.get(i).getDebit() || debitMin == -1.1){
+                        debitMin = transactions.get(i).getDebit();
+                    }
+                    if(debitMax < transactions.get(i).getDebit()){
+                        debitMax = transactions.get(i).getDebit();
+                    }
+                }
+                else if(transactions.get(i).getCredit() != 0.0){
+                    creditTotal += transactions.get(i).getCredit();
+                    credits.add(transactions.get(i).getCredit());
+                    if(creditMin > transactions.get(i).getCredit() || creditMin == -1.1){
+                        creditMin = transactions.get(i).getCredit();
+                    }
+                    if(creditMax < transactions.get(i).getCredit()){
+                        creditMax = transactions.get(i).getCredit();
+                    }
+                }
+            }
+            Collections.sort(debits);
+            Collections.sort(credits);
+            
+                //average
+            double debitAverage = debitTotal/debits.size();
+            double creditAverage = creditTotal/credits.size();
+            
+                //get median and percentiles
+            if(debits.size() % 2 == 0){
+                int middle = debits.size() / 2 - 1;
+                debitMedian = (debits.get(middle) + debits.get(middle + 1)) / 2;
+            }
+            else{
+                int middle = debits.size() / 2;
+                debitMedian = debits.get(middle);
+            }
+            if(credits.size() % 2 == 0){
+                int middle = credits.size() / 2 - 1;
+                creditMedian = (credits.get(middle) + credits.get(middle + 1)) / 2;
+            }
+            else{
+                int middle = credits.size() / 2;
+                creditMedian = credits.get(middle);
+            }
+            
+                //standard deviation
+            double variance = 0.0;
+            for(int i = 0; i < debits.size(); i++){
+                variance += Math.pow((debits.get(i) - debitAverage), 2);
+            }
+            double debitStdDev = Math.sqrt(variance/debits.size());
+            variance = 0.0;
+            for(int i = 0; i < credits.size(); i++){
+                variance += Math.pow((credits.get(i) - creditAverage), 2);
+            }
+            double creditStdDev = Math.sqrt(variance/credits.size());
+            
+            
+                //debits
+            String debitStats = "Total:\t\t" + currencyFormat.format(debitTotal)  + "\n";
+            debitStats += "Average:\t\t" + currencyFormat.format(debitAverage) + "\n";
+            debitStats += "Median:\t\t" + currencyFormat.format(debitMedian) + "\n";
+            debitStats += "Std.Dev.:\t\t" + currencyFormat.format(debitStdDev) + "\n";
+            debitStats += "Minimum:\t" + currencyFormat.format(debitMin) + "\n";
+            debitStats += "Maximum:\t" + currencyFormat.format(debitMax) + "\n";
+            
+                //credits
+            String creditStats = "Total:\t\t" + currencyFormat.format(creditTotal) + "\n";
+            creditStats += "Average:\t\t" + currencyFormat.format(creditAverage) + "\n";
+            creditStats += "Median:\t\t" + currencyFormat.format(creditMedian) + "\n";
+            creditStats += "Std. Dev.:\t\t" + currencyFormat.format(creditStdDev) + "\n";
+            creditStats += "Minimum:\t" + currencyFormat.format(creditMin) + "\n";
+            creditStats += "Maximum:\t" + currencyFormat.format(creditMax) + "\n";
+
+                //display
+            ttDebit.setText(debitStats);
+            ttCredit.setText(creditStats);
+        }
+    }//end displayFilteredStats()
     
     
     
