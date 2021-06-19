@@ -24,7 +24,7 @@
 									<key>CHILDREN</key>
 									<array/>
 									<key>GID</key>
-									<integer>80</integer>
+									<integer>20</integer>
 									<key>PATH</key>
 									<string>/Users/chris/Documents/delete/Funds.app</string>
 									<key>PATH_TYPE</key>
@@ -34,7 +34,7 @@
 									<key>TYPE</key>
 									<integer>3</integer>
 									<key>UID</key>
-									<integer>0</integer>
+									<integer>502</integer>
 								</dict>
 							</array>
 							<key>GID</key>
@@ -472,12 +472,12 @@
 				<key>USE_HFS+_COMPRESSION</key>
 				<false/>
 				<key>VERSION</key>
-				<string>1.1.1</string>
+				<string>1.1.1_b</string>
 			</dict>
 			<key>TYPE</key>
 			<integer>0</integer>
 			<key>UUID</key>
-			<string>3C119489-12CF-41D2-AAF1-B4AA9AA536D5</string>
+			<string>80BE520B-D2A1-4FC9-95F5-F071AA03FD4D</string>
 		</dict>
 	</array>
 	<key>PROJECT</key>
@@ -621,15 +621,6 @@
 					</dict>
 				</array>
 			</dict>
-		</dict>
-		<key>PROJECT_REQUIREMENTS</key>
-		<dict>
-			<key>LIST</key>
-			<array/>
-			<key>RESOURCES</key>
-			<array/>
-			<key>ROOT_VOLUME_ONLY</key>
-			<false/>
 		</dict>
 		<key>PROJECT_SETTINGS</key>
 		<dict>
